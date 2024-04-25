@@ -2,6 +2,8 @@
 
 This is my first real game project, made with Godot and C#. The goal is to create a cooking roguelite, in which you will cook for increasly demanding clients while earning distinctions that will affect your gameplay and strategies.
 
+## Goal
+
 The goal is to have all of the following features:
 
 - A level builder, to build your own kitchen layout (done!)
@@ -13,3 +15,10 @@ The goal is to have all of the following features:
 - Playable with any input method (keyboard only, mouse + keyboard, controller) (done, for the moment!)
 
 All while making everything myself. This means no assets from internet, the goal is to learn all the necessary skills, because that's what's fun! Only exception to this rule are fonts. Additionally, most tools used should be open-source.
+
+## What I learned so far
+
+- Godot basics (love the node / scene / resource system!)
+- Being confortable with C# (easy enough, having worked in Java and C++ before)
+- Modeling with Blender (intimidating at first, but it's great)
+- Procedural materials in Blender and baking them to textures (math for artists)
