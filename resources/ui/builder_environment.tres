@@ -1,0 +1,23 @@
+[gd_resource type="Environment" load_steps=6 format=3 uid="uid://noglaxpngdp2"]
+
+[ext_resource type="Shader" path="res://resources/ui/builder_environment.gdshader" id="1_y8isq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wws8y"]
+noise_type = 3
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ihjim"]
+noise = SubResource("FastNoiseLite_wws8y")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y8yih"]
+shader = ExtResource("1_y8isq")
+shader_parameter/foreground_color = Color(0.470588, 0.160784, 0.0588235, 1)
+shader_parameter/background_color = Color(1, 0.490196, 0, 1)
+shader_parameter/pattern = SubResource("NoiseTexture2D_ihjim")
+
+[sub_resource type="Sky" id="Sky_gs58f"]
+sky_material = SubResource("ShaderMaterial_y8yih")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_gs58f")

@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://bi47llasks17r"]
+
+[ext_resource type="Script" path="res://scripts/grid/GridTile.cs" id="1_oq7bq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_amkml"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_er6oe"]
+load_path = "res://.godot/imported/Furniture_FloorColorMap.png-7a5ca3fc8c377056d2bd4e41743cdc94.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rmmj5"]
+load_path = "res://.godot/imported/Furniture_FloorRoughnessMap.png-0228503970dc8a968b895d1d0500a0ae.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_74o65"]
+load_path = "res://.godot/imported/Furniture_FloorNormalMap.png-965db3ee2fe4cf11cf7273be710116ff.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qykbn"]
+resource_name = "FloorMapped"
+cull_mode = 2
+albedo_texture = SubResource("CompressedTexture2D_er6oe")
+metallic_texture = SubResource("CompressedTexture2D_rmmj5")
+metallic_texture_channel = 2
+roughness_texture = SubResource("CompressedTexture2D_rmmj5")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_74o65")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ygne0"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1.00136e-05, 1.00001),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"name": "FloorMapped",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dmi4y"]
+resource_name = "Furniture_Plane_001"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1.00136e-05, 1.00001),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"material": SubResource("StandardMaterial3D_qykbn"),
+"name": "FloorMapped",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 191, 255, 255, 0, 0, 254, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ygne0")
+
+[node name="Floor" type="Area3D" node_paths=PackedStringArray("Placement")]
+script = ExtResource("1_oq7bq")
+Placement = NodePath("Placement")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_amkml")
+
+[node name="Placement" type="Marker3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_dmi4y")
+skeleton = NodePath("")

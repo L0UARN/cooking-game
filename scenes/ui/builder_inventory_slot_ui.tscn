@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4bbl1p748pbh"]
+
+[ext_resource type="Theme" uid="uid://cbkd658yhx6cu" path="res://resources/ui/ui_theme.tres" id="1_nby6g"]
+[ext_resource type="Texture2D" uid="uid://27n7qelx7eou" path="res://resources/ui/HotbarIcon.png" id="1_scbyy"]
+[ext_resource type="Script" path="res://scripts/ui/BuilderInventorySlotUi.cs" id="2_at24y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ejhg5"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="BuilderInventorySlotUi" type="PanelContainer" node_paths=PackedStringArray("Container", "NameLabel", "QuantityLabel", "IconTexture")]
+offset_right = 144.0
+offset_bottom = 142.0
+theme = ExtResource("1_nby6g")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ejhg5")
+script = ExtResource("2_at24y")
+Container = NodePath("MarginContainer/VBoxContainer")
+NameLabel = NodePath("MarginContainer/VBoxContainer/NameLabel")
+QuantityLabel = NodePath("MarginContainer/VBoxContainer/QuantityLabel")
+IconTexture = NodePath("MarginContainer/VBoxContainer/TextureRect")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Modular Table"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_scbyy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "x12"
+horizontal_alignment = 1

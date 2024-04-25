@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://w4yo8ae27v2r"]
+
+[ext_resource type="Script" path="res://scripts/ui/BuilderPreviewUi.cs" id="1_plr16"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b63xx"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="BuilderPreviewUi" type="CanvasLayer" node_paths=PackedStringArray("Camera")]
+script = ExtResource("1_plr16")
+Camera = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/CameraPivot")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b63xx")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(480, 480)
+render_target_update_mode = 4
+
+[node name="CameraPivot" type="Node3D" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 1.5)

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BuildableInventory" load_steps=7 format=3 uid="uid://3s1e5qobmtjn"]
+
+[ext_resource type="Script" path="res://scripts/buildable/BuildableInventory.cs" id="1_682rw"]
+[ext_resource type="Resource" uid="uid://cnhcc6tqklk21" path="res://resources/buildable/buildable_modular_table.tres" id="1_i8qnp"]
+[ext_resource type="Script" path="res://scripts/buildable/BuildableInventorySlot.cs" id="2_6suyp"]
+[ext_resource type="Resource" uid="uid://cdedw2otnhs6" path="res://resources/buildable/buildable_other_table.tres" id="3_em4u6"]
+
+[sub_resource type="Resource" id="Resource_wwlj6"]
+script = ExtResource("2_6suyp")
+Buildable = ExtResource("1_i8qnp")
+Quantity = 5
+
+[sub_resource type="Resource" id="Resource_v5abv"]
+script = ExtResource("2_6suyp")
+Buildable = ExtResource("3_em4u6")
+Quantity = 3
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_682rw")
+Slots = [SubResource("Resource_wwlj6"), SubResource("Resource_v5abv")]
