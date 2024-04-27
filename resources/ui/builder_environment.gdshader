@@ -6,7 +6,7 @@ uniform vec3 foreground_color : source_color;
 
 void sky() {
 	if (AT_CUBEMAP_PASS) {
-		COLOR = mix(vec3(0.5), vec3(1.0), EYEDIR.y);
+		COLOR = vec3(EYEDIR.y * 0.5 + 0.5) * 0.5;
 	} else {
 		vec2 screen_size = FRAGCOORD.xy / SCREEN_UV;
 		vec2 texture_size = vec2(textureSize(pattern, 0));
