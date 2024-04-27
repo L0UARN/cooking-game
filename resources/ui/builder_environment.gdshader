@@ -1,23 +1,23 @@
 shader_type sky;
 
-uniform vec3 foreground_color : source_color;
-uniform vec3 background_color : source_color;
 uniform sampler2D pattern : source_color;
-uniform sampler2D pattern_2 : source_color;
-
-float draw_curve(float y, float progress, float size, float fade_size) {
-	float half_size = size * 0.5;
-	return smoothstep(progress - fade_size, progress, y + half_size) - smoothstep(progress, progress + fade_size, y - half_size);
-}
+uniform vec3 background_color : source_color;
+uniform vec3 foreground_color : source_color;
 
 void sky() {
 	if (AT_CUBEMAP_PASS) {
 		COLOR = vec3(0.5);
 	} else {
-		float base_factor = texture(pattern, SCREEN_UV + TIME * 0.1).x;
-		float noise_factor = texture(pattern_2, SCREEN_UV).x;
+		vec2 screen_size = FRAGCOORD.xy / SCREEN_UV;
+		vec2 texture_size = vec2(textureSize(pattern, 0));
+		float texture_ratio = texture_size.y / texture_size.x;
+		vec2 new_texture_size = vec2(screen_size.y, screen_size.y * texture_ratio);
 		
+		vec2 texture_uv = FRAGCOORD.xy / new_texture_size;
+		vec2 corrected_screen_uv = vec2(texture_uv.x, SCREEN_UV.y);
+		vec4 pattern_color = texture(pattern, corrected_screen_uv * 4.0 + TIME * 0.1);
+		float pattern_level = pattern_color.a;
 		
-		COLOR = mix(background_color, foreground_color, mix(base_factor, noise_factor, 0.33));
+		COLOR = vec3(mix(background_color, foreground_color, pattern_level));
 	}
 }

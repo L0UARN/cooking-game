@@ -1,0 +1,4 @@
+4793AF (blue) / 377085 (darker)
+FFC470 (yellow)
+DD5746 (light red)
+8B322C (red)
