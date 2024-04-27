@@ -22,3 +22,4 @@ All while making everything myself. This means no assets from internet, the goal
 - Being confortable with C# (easy enough, having worked in Java and C++ before)
 - Modeling with Blender (intimidating at first, but it's great)
 - Procedural materials in Blender and baking them to textures (math for artists)
+- Making SVG icons with Inkscape
