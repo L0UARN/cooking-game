@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/buildable/Buildable.cs" id="1_1cp3s"]
 [ext_resource type="PackedScene" uid="uid://qtvqmi2qgpbu" path="res://scenes/buildable/modular_table.tscn" id="1_lj2f6"]
-[ext_resource type="Texture2D" uid="uid://27n7qelx7eou" path="res://resources/ui/HotbarIcon.png" id="1_ngxsj"]
+[ext_resource type="Texture2D" uid="uid://27n7qelx7eou" path="res://assets/fonts/HotbarIcon.png" id="1_ngxsj"]
 
 [resource]
 resource_local_to_scene = true

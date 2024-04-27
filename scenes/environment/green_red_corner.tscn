@@ -69,5 +69,6 @@ shadow_mesh = SubResource("ArrayMesh_ejsem")
 [node name="GreenRedCorner" type="Node3D"]
 
 [node name="WallGreen_001" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = SubResource("ArrayMesh_vksi0")
 skeleton = NodePath("")

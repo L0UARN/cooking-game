@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 8.4666665 8.4666666"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="knife.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     inkscape:zoom="33.439057"
+     inkscape:cx="15.087148"
+     inkscape:cy="15.326389"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3"
+       transform="translate(0.14020397,-0.19510074)">
+      <path
+         id="rect1"
+         style="fill:none;fill-opacity:0.497925;stroke:#ffffff;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+         d="m 4.7545878,0.72013304 c -0.732894,0 -1.322917,0.95662396 -1.322917,2.14488896 0,0.014856 0.00154,0.029205 0.00171,0.043987 v 2.8382078 h 1.321207 V 2.909009 Z" />
+      <path
+         id="rect2"
+         style="fill:none;fill-opacity:0.497925;stroke:#ffffff;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+         d="m 4.0342183,5.7472168 v 0.084233 A 0.36001438,1.194773 0 0 1 4.2621114,6.9419759 0.36001438,1.194773 0 0 1 4.0342183,8.0525024 V 8.136735 H 4.7545878 V 5.7472168 Z" />
+    </g>
+  </g>
+</svg>

@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbjardqx8c4eq"]
+[gd_scene load_steps=13 format=3 uid="uid://bbjardqx8c4eq"]
 
 [ext_resource type="PackedScene" uid="uid://bi47llasks17r" path="res://scenes/environment/floor.tscn" id="1_gf8ts"]
-[ext_resource type="Environment" uid="uid://noglaxpngdp2" path="res://resources/ui/builder_environment.tres" id="1_uwkwu"]
 [ext_resource type="PackedScene" uid="uid://ddjrpxfub3swj" path="res://scenes/environment/blue_wall.tscn" id="2_cor56"]
 [ext_resource type="PackedScene" uid="uid://cqgw8s2uhi2xp" path="res://scenes/environment/green_wall.tscn" id="3_2d0k2"]
 [ext_resource type="PackedScene" uid="uid://cmc7ug7h6u2s4" path="res://scenes/environment/red_wall.tscn" id="4_qyqk6"]
@@ -26,9 +25,9 @@ glow_enabled = true
 
 [node name="Testing" type="Node3D"]
 
-[node name="Wowie" type="Camera3D" parent="."]
+[node name="MainCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 4, 0.75)
-environment = ExtResource("1_uwkwu")
+cull_mask = 1048569
 projection = 1
 size = 8.0
 far = 20.0

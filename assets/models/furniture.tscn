@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://derryxyw8yugk"]
+
+[ext_resource type="PackedScene" uid="uid://dwvjxhlgt1muj" path="res://assets/models/Furniture.glb" id="1_55eir"]
+
+[node name="Furniture" type="Node3D"]
+
+[node name="Furniture" parent="." instance=ExtResource("1_55eir")]
+
+[editable path="Furniture"]
