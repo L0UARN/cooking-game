@@ -6,7 +6,7 @@ namespace CookingGame
 	public partial class BuildableInventorySlot : Resource
 	{
 		[Export]
-		public Buildable Buildable { get; set; } = null;
+		public StringName BuildableId { get; set; } = null;
 		[Export(PropertyHint.Range, "1,99,1")]
 		public int Quantity { get; set; } = 1;
 	}

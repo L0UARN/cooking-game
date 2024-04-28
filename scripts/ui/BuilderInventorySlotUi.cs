@@ -14,6 +14,7 @@ namespace CookingGame
 		[Export]
 		public TextureRect IconTexture = null;
 
+		private BuildableDb Buildables = null;
 		private StyleBoxFlat Style = null;
 		private Tween SlotTween = null;
 		private Tween SelectedTween = null;
@@ -43,9 +44,11 @@ namespace CookingGame
 			}
 			else
 			{
-				NameLabel.Text = Slot.Buildable.Name;
+				Buildable buildable = Buildables.GetById(Slot.BuildableId);
+
+				NameLabel.Text = buildable.Name;
 				QuantityLabel.Text = "x" + Slot.Quantity.ToString();
-				IconTexture.Texture = Slot.Buildable.Icon;
+				IconTexture.Texture = buildable.Icon;
 				Show();
 
 				PivotOffset = Size / 2;
@@ -106,6 +109,7 @@ namespace CookingGame
 		{
 			base._Ready();
 
+			Buildables = GetNode<BuildableDb>("/root/Buildables");
 			Style = GetThemeStylebox("panel").Duplicate() as StyleBoxFlat;
 			AddThemeStyleboxOverride("panel", Style);
 

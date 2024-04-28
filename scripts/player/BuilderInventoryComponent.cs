@@ -14,6 +14,14 @@ namespace CookingGame
 		[Signal]
 		public delegate void SlotChangedEventHandler(int slotIndex, BuildableInventorySlot slot);
 
+		private BuildableDb Buildables = null;
+
+		public override void _Ready()
+		{
+			base._Ready();
+			Buildables = GetNode<BuildableDb>("/root/Buildables");
+		}
+
 		private int _Selection = 0;
 		public int Selection
 		{
@@ -29,20 +37,29 @@ namespace CookingGame
 		{
 			for (int i = 0; i < Inventory.Slots.Count; i++)
 			{
-				if (Inventory.Slots[i].Buildable.Id == buildableId)
+				if (Inventory.Slots[i].BuildableId == buildableId)
 				{
 					Inventory.Slots[i].Quantity += quantity;
 					EmitSignal(SignalName.SlotChanged, i, Inventory.Slots[i]);
 					return;
 				}
 			}
+
+			Buildable target = Buildables.GetById(buildableId);
+			if (target == null)
+			{
+				return;
+			}
+
+			BuildableInventorySlot newSlot = new() { BuildableId = buildableId, Quantity = quantity };
+			Inventory.Slots.Add(newSlot);
 		}
 
 		public void Remove(StringName buildableId, int quantity)
 		{
 			for (int i = 0; i < Inventory.Slots.Count; i++)
 			{
-				if (Inventory.Slots[i].Buildable.Id == buildableId)
+				if (Inventory.Slots[i].BuildableId == buildableId)
 				{
 					Inventory.Slots[i].Quantity -= quantity;
 					EmitSignal(SignalName.SlotChanged, i, Inventory.Slots[i]);
@@ -86,7 +103,7 @@ namespace CookingGame
 		}
 
 		public BuildableInventorySlot SelectedSlot => Inventory.Slots[_Selection];
-		public Buildable SelectedBuildable => SelectedSlot.Buildable;
+		public StringName SelectedBuildableId => SelectedSlot.BuildableId;
 		public Array<BuildableInventorySlot> Slots => Inventory.Slots;
 	}
 }

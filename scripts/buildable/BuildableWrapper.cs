@@ -8,6 +8,7 @@ namespace CookingGame
 		[Export]
 		public StringName BuildableId { get; set; } = "buildable";
 
+		private BuildableDb Buildables = null;
 		private Tween ScaleTween = null;
 		private Tween RotateTween = null;
 
@@ -21,6 +22,16 @@ namespace CookingGame
 				ScaleTween.CustomStep(1.0f);
 				ScaleTween.Kill();
 			}
+
+			Buildables = GetNode<BuildableDb>("/root/Buildables");
+			Buildable buildable = Buildables.GetById(BuildableId);
+			if (buildable == null)
+			{
+				return;
+			}
+
+			Node buildableInstance = buildable.Scene.Instantiate();
+			AddChild(buildableInstance);
 
 			Scale = new Vector3(0.01f, 0.01f, 0.01f);
 			ScaleTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Elastic);

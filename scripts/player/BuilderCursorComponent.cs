@@ -33,13 +33,11 @@ namespace CookingGame
 			}
 
 			BuildableWrapper buildableWrapperInstance = BuildableWrapper.Instantiate<BuildableWrapper>();
-			buildableWrapperInstance.BuildableId = Inventory.SelectedBuildable.Id;
+			buildableWrapperInstance.BuildableId = Inventory.SelectedBuildableId;
 			buildableWrapperInstance.GlobalTransform = currentTile.Placement.GlobalTransform;
-			Node buildableInstance = Inventory.SelectedBuildable.Scene.Instantiate();
-			buildableWrapperInstance.AddChild(buildableInstance);
 			GetTree().Root.AddChild(buildableWrapperInstance);
 
-			Inventory.Remove(Inventory.SelectedBuildable.Id, 1);
+			Inventory.Remove(Inventory.SelectedBuildableId, 1);
 		}
 
 		public void Destroy()

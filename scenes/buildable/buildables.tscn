@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0iuqne8uoboe"]
+
+[ext_resource type="Script" path="res://scripts/buildable/BuildableDb.cs" id="1_a0od5"]
+[ext_resource type="Resource" uid="uid://cnhcc6tqklk21" path="res://resources/buildable/buildable_modular_table.tres" id="2_uof7l"]
+[ext_resource type="Resource" uid="uid://cdedw2otnhs6" path="res://resources/buildable/buildable_other_table.tres" id="3_ekwg6"]
+
+[node name="Buildables" type="Node"]
+script = ExtResource("1_a0od5")
+Buildables = [ExtResource("2_uof7l"), ExtResource("3_ekwg6")]
