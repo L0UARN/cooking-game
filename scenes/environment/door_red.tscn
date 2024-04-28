@@ -106,6 +106,7 @@ metallic_texture_channel = 2
 roughness_texture = ExtResource("7_008h0")
 roughness_texture_channel = 1
 refraction_enabled = true
+refraction_scale = 0.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_tn3g8"]
 _surfaces = [{

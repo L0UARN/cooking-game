@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Buildable" load_steps=4 format=3 uid="uid://cnhcc6tqklk21"]
 
 [ext_resource type="Script" path="res://scripts/buildable/Buildable.cs" id="1_1cp3s"]
+[ext_resource type="Texture2D" uid="uid://buq1tg6ban2nc" path="res://assets/icons/build_mode_64.png" id="1_hr1b8"]
 [ext_resource type="PackedScene" uid="uid://qtvqmi2qgpbu" path="res://scenes/buildable/modular_table.tscn" id="1_lj2f6"]
-[ext_resource type="Texture2D" uid="uid://27n7qelx7eou" path="res://assets/fonts/HotbarIcon.png" id="1_ngxsj"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_1cp3s")
 Id = &"modular_table"
 Name = "Modular Table"
-Icon = ExtResource("1_ngxsj")
+Icon = ExtResource("1_hr1b8")
 Scene = ExtResource("1_lj2f6")

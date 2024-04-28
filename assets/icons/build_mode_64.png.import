@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxmpr6418p2wj"
-path="res://.godot/imported/HotbarIconSelected.png-1bcc875de00a605d539310b00dd96c48.ctex"
+uid="uid://buq1tg6ban2nc"
+path="res://.godot/imported/build_mode_64.png-1efe35938100167a8b35bb1d0a6b3d3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fonts/HotbarIconSelected.png"
-dest_files=["res://.godot/imported/HotbarIconSelected.png-1bcc875de00a605d539310b00dd96c48.ctex"]
+source_file="res://assets/icons/build_mode_64.png"
+dest_files=["res://.godot/imported/build_mode_64.png-1efe35938100167a8b35bb1d0a6b3d3b.ctex"]
 
 [params]
 

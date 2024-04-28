@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://cyhcse50i554t"]
 
-[ext_resource type="Texture2D" uid="uid://27n7qelx7eou" path="res://assets/fonts/HotbarIcon.png" id="1_350qw"]
 [ext_resource type="Script" path="res://scripts/ui/BuilderInventoryUi.cs" id="1_c1h7o"]
 [ext_resource type="Theme" uid="uid://cbkd658yhx6cu" path="res://resources/ui/ui_theme.tres" id="1_cjyfn"]
 [ext_resource type="PackedScene" uid="uid://c4bbl1p748pbh" path="res://scenes/ui/builder_inventory_slot_ui.tscn" id="3_c8jjp"]
+[ext_resource type="Texture2D" uid="uid://buq1tg6ban2nc" path="res://assets/icons/build_mode_64.png" id="4_8fk1h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gebqm"]
 bg_color = Color(0, 0, 0, 1)
@@ -38,7 +38,7 @@ theme_override_constants/separation = 48
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("1_350qw")
+texture = ExtResource("4_8fk1h")
 expand_mode = 1
 stretch_mode = 5
 

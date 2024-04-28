@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4bbl1p748pbh"]
+[gd_scene load_steps=4 format=3 uid="uid://c4bbl1p748pbh"]
 
 [ext_resource type="Theme" uid="uid://cbkd658yhx6cu" path="res://resources/ui/ui_theme.tres" id="1_nby6g"]
-[ext_resource type="Texture2D" uid="uid://27n7qelx7eou" path="res://assets/fonts/HotbarIcon.png" id="1_scbyy"]
 [ext_resource type="Script" path="res://scripts/ui/BuilderInventorySlotUi.cs" id="2_at24y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ejhg5"]
@@ -31,17 +30,14 @@ theme_override_constants/separation = 8
 
 [node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Modular Table"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("1_scbyy")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="QuantityLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "x12"
 horizontal_alignment = 1
