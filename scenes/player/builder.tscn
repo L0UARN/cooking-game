@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2xnwv21wnqtp"]
+[gd_scene load_steps=13 format=3 uid="uid://c2xnwv21wnqtp"]
 
 [ext_resource type="Script" path="res://scripts/grid/GridNavigatorComponent.cs" id="1_jl5cy"]
 [ext_resource type="PackedScene" uid="uid://w4yo8ae27v2r" path="res://scenes/ui/builder_preview_ui.tscn" id="2_fxupq"]
@@ -8,14 +8,24 @@
 [ext_resource type="Script" path="res://scripts/player/BuilderInventoryComponent.cs" id="4_scqkw"]
 [ext_resource type="Resource" uid="uid://3s1e5qobmtjn" path="res://resources/buildable/buildable_inventory_default.tres" id="5_ep21w"]
 [ext_resource type="Script" path="res://scripts/player/BuilderCursorInputComponent.cs" id="6_i4gly"]
-[ext_resource type="Script" path="res://scripts/LerpTransformSmoother.cs" id="7_syo7q"]
 [ext_resource type="Script" path="res://scripts/player/BuilderInventoryInputComponent.cs" id="7_xbud4"]
+[ext_resource type="Environment" uid="uid://noglaxpngdp2" path="res://resources/ui/builder_environment.tres" id="11_0jc5k"]
+[ext_resource type="Script" path="res://scripts/player/TweenTransformSmoother.cs" id="11_j81vp"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_be5x1"]
 radius = 0.25
 height = 0.5
 
 [node name="Builder" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 4, 0.5)
+top_level = true
+cull_mask = 1048569
+environment = ExtResource("11_0jc5k")
+projection = 1
+size = 8.0
+far = 20.0
 
 [node name="BuilderInventoryUi" parent="." node_paths=PackedStringArray("Inventory") instance=ExtResource("4_2bwas")]
 Inventory = NodePath("../BuilderInventoryComponent")
@@ -98,13 +108,12 @@ collide_with_areas = true
 collide_with_bodies = false
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="LerpTransformSmoother" type="Node3D" parent="." node_paths=PackedStringArray("SmoothingDuration")]
-script = ExtResource("7_syo7q")
-SmoothingDuration = NodePath("SmoothingDuration")
+[node name="TweenTransformSmoother" type="Node3D" parent="."]
+script = ExtResource("11_j81vp")
+SmoothingDuration = 0.25
+EaseType = 1
+TransitionType = 5
 
-[node name="SmoothingDuration" type="Timer" parent="LerpTransformSmoother"]
-wait_time = 0.25
-one_shot = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LerpTransformSmoother"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TweenTransformSmoother"]
 mesh = SubResource("SphereMesh_be5x1")
+skeleton = NodePath("")

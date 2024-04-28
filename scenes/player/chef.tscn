@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq5gkvxy7wth2"]
+
+[ext_resource type="Script" path="res://scripts/grid/GridNavigatorComponent.cs" id="1_ktck4"]
+[ext_resource type="Script" path="res://scripts/player/ChefMovementComponent.cs" id="2_0i88y"]
+[ext_resource type="Script" path="res://scripts/player/ChefMovementInputComponent.cs" id="3_1f7sq"]
+[ext_resource type="Script" path="res://scripts/player/TweenTransformSmoother.cs" id="4_aq20u"]
+
+[node name="Chef" type="Node3D"]
+
+[node name="GridNavigatorComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "NextTileChecker", "CurrentTileChecker")]
+script = ExtResource("1_ktck4")
+Body = NodePath("..")
+NextTileChecker = NodePath("../NextTileChecker")
+CurrentTileChecker = NodePath("../CurrentTileChecker")
+
+[node name="NextTileChecker" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="CurrentTileChecker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="ChefMovementComponent" type="Node" parent="." node_paths=PackedStringArray("Navigator", "Body")]
+script = ExtResource("2_0i88y")
+Navigator = NodePath("../GridNavigatorComponent")
+Body = NodePath("..")
+
+[node name="ChefMovementInputComponent" type="Node" parent="." node_paths=PackedStringArray("Movement", "MovementCooldown")]
+script = ExtResource("3_1f7sq")
+Movement = NodePath("../ChefMovementComponent")
+MovementCooldown = NodePath("../Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.33
+one_shot = true
+
+[node name="TweenTransformSmoother" type="Node3D" parent="."]
+script = ExtResource("4_aq20u")
+SmoothingDuration = 0.33
+EaseType = 1
+TransitionType = 5
+
+[node name="Camera3D" type="Camera3D" parent="TweenTransformSmoother"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

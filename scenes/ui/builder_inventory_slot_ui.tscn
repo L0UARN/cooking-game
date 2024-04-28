@@ -7,6 +7,7 @@
 bg_color = Color(0, 0, 0, 1)
 
 [node name="BuilderInventorySlotUi" type="PanelContainer" node_paths=PackedStringArray("Container", "NameLabel", "QuantityLabel", "IconTexture")]
+custom_minimum_size = Vector2(128, 0)
 offset_right = 144.0
 offset_bottom = 142.0
 theme = ExtResource("1_nby6g")
