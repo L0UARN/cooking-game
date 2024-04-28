@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq5gkvxy7wth2"]
+[gd_scene load_steps=6 format=3 uid="uid://dq5gkvxy7wth2"]
 
 [ext_resource type="Script" path="res://scripts/grid/GridNavigatorComponent.cs" id="1_ktck4"]
+[ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_nwanl"]
 [ext_resource type="Script" path="res://scripts/player/ChefMovementComponent.cs" id="2_0i88y"]
 [ext_resource type="Script" path="res://scripts/player/ChefMovementInputComponent.cs" id="3_1f7sq"]
 [ext_resource type="Script" path="res://scripts/player/TweenTransformSmoother.cs" id="4_aq20u"]
 
 [node name="Chef" type="Node3D"]
+
+[node name="PlayerStateComponent" type="Node" parent="." node_paths=PackedStringArray("Container", "Camera")]
+script = ExtResource("1_nwanl")
+StateName = &"chef"
+Container = NodePath("..")
+Camera = NodePath("../TweenTransformSmoother/Camera3D")
 
 [node name="GridNavigatorComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "NextTileChecker", "CurrentTileChecker")]
 script = ExtResource("1_ktck4")

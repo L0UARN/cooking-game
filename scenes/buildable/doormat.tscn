@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyuj7ci26n4dt"]
+[gd_scene load_steps=8 format=3 uid="uid://cyuj7ci26n4dt"]
 
 [ext_resource type="Texture2D" uid="uid://cbc3lql3ynygp" path="res://assets/models/Furniture_DoormatColorMap.png" id="1_l5qrx"]
 [ext_resource type="Texture2D" uid="uid://rpxfi1tppuwr" path="res://assets/models/Furniture_DoormatRoughnessMap.png" id="2_ers2i"]
 [ext_resource type="Texture2D" uid="uid://dnarsircl4me6" path="res://assets/models/Furniture_DoormatNormaMap.png" id="3_16uad"]
+[ext_resource type="PackedScene" uid="uid://dq5gkvxy7wth2" path="res://scenes/player/chef.tscn" id="4_v7jn5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rjira"]
 resource_name = "DoormatMapped"
@@ -52,3 +53,5 @@ shadow_mesh = SubResource("ArrayMesh_rcn4t")
 [node name="Doormat" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_xgfse")
 skeleton = NodePath("")
+
+[node name="Chef" parent="." instance=ExtResource("4_v7jn5")]
