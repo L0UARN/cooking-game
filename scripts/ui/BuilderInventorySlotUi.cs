@@ -60,7 +60,7 @@ namespace CookingGame
 					SlotTween.Kill();
 				}
 
-				SlotTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Cubic);
+				SlotTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Linear);
 				SlotTween.TweenProperty(this, "scale", new Vector2(1.1f, 1.1f), .16f);
 				SlotTween.TweenProperty(this, "scale", new Vector2(1.0f, 1.0f), .16f);
 			}
@@ -89,7 +89,7 @@ namespace CookingGame
 				SelectedTween.Kill();
 			}
 
-			SelectedTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Sine);
+			SelectedTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Linear);
 
 			if (Selected)
 			{

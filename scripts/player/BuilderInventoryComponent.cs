@@ -79,7 +79,7 @@ namespace CookingGame
 			int newSelection = Selection;
 			for (int i = 0; i < Inventory.Slots.Count; i++)
 			{
-				newSelection = Mathf.Abs((newSelection + 1) % Inventory.Slots.Count);
+				newSelection = (newSelection + 1) % Inventory.Slots.Count;
 				if (Inventory.Slots[newSelection].Quantity > 0)
 				{
 					Selection = newSelection;
@@ -93,7 +93,7 @@ namespace CookingGame
 			int newSelection = Selection;
 			for (int i = 0; i < Inventory.Slots.Count; i++)
 			{
-				newSelection = Mathf.Abs((newSelection - 1) % Inventory.Slots.Count);
+				newSelection = newSelection == 0 ? Inventory.Slots.Count - 1 : (newSelection - 1) % Inventory.Slots.Count;
 				if (Inventory.Slots[newSelection].Quantity > 0)
 				{
 					Selection = newSelection;

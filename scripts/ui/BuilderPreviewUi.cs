@@ -35,7 +35,7 @@ namespace CookingGame
 				PositionTween.Kill();
 			}
 
-			PositionTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Cubic);
+			PositionTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
 			PositionTween.TweenProperty(Camera, "global_position", Focus.GlobalPosition, .5f);
 
 			LastFocusPosition = Focus.GlobalPosition;
