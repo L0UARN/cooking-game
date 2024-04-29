@@ -3,7 +3,7 @@ using Godot;
 namespace CookingGame
 {
 	[GlobalClass]
-	public partial class BuilderPreviewUi : CanvasLayer
+	public partial class BuilderPreviewUi : MarginContainer
 	{
 		[Export]
 		private Node3D Camera = null;

@@ -4,7 +4,7 @@ using Godot.Collections;
 namespace CookingGame
 {
 	[GlobalClass]
-	public partial class BuilderInventoryUi : CanvasLayer
+	public partial class BuilderInventoryUi : PanelContainer
 	{
 		[Export]
 		private BuilderInventoryComponent Inventory = null;

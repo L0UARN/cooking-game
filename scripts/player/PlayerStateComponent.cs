@@ -12,6 +12,8 @@ namespace CookingGame
 		[Export]
 		private Node3D Container = null;
 		[Export]
+		private CanvasLayer UiContainer = null;
+		[Export]
 		private Camera3D Camera = null;
 
 		public override void _Ready()
@@ -34,13 +36,15 @@ namespace CookingGame
 			// GetViewport().GetCamera3D().ClearCurrent(false);
 			Camera.MakeCurrent();
 			Container.ProcessMode = ProcessModeEnum.Inherit;
-			Container.Show();
+			Container?.Show();
+			UiContainer?.Show();
 		}
 
 		public void Deactivate()
 		{
 			Container.ProcessMode = ProcessModeEnum.Disabled;
-			Container.Hide();
+			Container?.Hide();
+			UiContainer?.Hide();
 		}
 	}
 }
