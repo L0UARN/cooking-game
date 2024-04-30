@@ -10,8 +10,22 @@ namespace CookingGame
 		[Export]
 		private RayCast3D NextTileChecker = null;
 		[Export]
+		private RayCast3D NextCollisionChecker = null;
+		[Export]
 		private RayCast3D CurrentTileChecker = null;
+
 		private bool ShouldDoInitialCheck = true;
+
+		public override void _Ready()
+		{
+			NextTileChecker.ProcessMode = ProcessModeEnum.Disabled;
+			CurrentTileChecker.ProcessMode = ProcessModeEnum.Disabled;
+
+			if (NextCollisionChecker != null)
+			{
+				NextCollisionChecker.ProcessMode = ProcessModeEnum.Disabled;
+			}
+		}
 
 		public override void _PhysicsProcess(double delta)
 		{
@@ -33,16 +47,28 @@ namespace CookingGame
 
 		private GridTile GetTarget()
 		{
+			if (NextCollisionChecker != null)
+			{
+				NextCollisionChecker.ProcessMode = ProcessModeEnum.Inherit;
+				NextCollisionChecker.ForceRaycastUpdate();
+				NextCollisionChecker.ProcessMode = ProcessModeEnum.Disabled;
+
+				if (NextCollisionChecker.IsColliding())
+				{
+					return null;
+				}
+			}
+
+			NextTileChecker.ProcessMode = ProcessModeEnum.Inherit;
 			NextTileChecker.ForceRaycastUpdate();
+			NextTileChecker.ProcessMode = ProcessModeEnum.Disabled;
 
 			if (NextTileChecker.GetCollider() is GridTile area)
 			{
 				return area;
 			}
-			else
-			{
-				return null;
-			}
+
+			return null;
 		}
 
 		private bool MoveToTarget()
@@ -59,6 +85,10 @@ namespace CookingGame
 
 		public GridTile GetTile()
 		{
+			CurrentTileChecker.ProcessMode = ProcessModeEnum.Inherit;
+			CurrentTileChecker.ForceRaycastUpdate();
+			CurrentTileChecker.ProcessMode = ProcessModeEnum.Disabled;
+
 			if (CurrentTileChecker.GetCollider() is GridTile tile)
 			{
 				return tile;
@@ -69,9 +99,9 @@ namespace CookingGame
 
 		public bool NavigateUp()
 		{
-			if (NextTileChecker == null)
+			if (NextCollisionChecker != null)
 			{
-				return false;
+				NextCollisionChecker.Basis = Basis.Identity;
 			}
 
 			NextTileChecker.Basis = Basis.Identity;
@@ -80,9 +110,10 @@ namespace CookingGame
 
 		public bool NavigateDown()
 		{
-			if (NextTileChecker == null)
+			if (NextCollisionChecker != null)
 			{
-				return false;
+				NextCollisionChecker.Basis = Basis.Identity;
+				NextCollisionChecker.RotateY(Mathf.Pi);
 			}
 
 			NextTileChecker.Basis = Basis.Identity;
@@ -92,9 +123,10 @@ namespace CookingGame
 
 		public bool NavigateLeft()
 		{
-			if (NextTileChecker == null)
+			if (NextCollisionChecker != null)
 			{
-				return false;
+				NextCollisionChecker.Basis = Basis.Identity;
+				NextCollisionChecker.RotateY(Mathf.Pi / 2);
 			}
 
 			NextTileChecker.Basis = Basis.Identity;
@@ -104,9 +136,10 @@ namespace CookingGame
 
 		public bool NavigateRight()
 		{
-			if (NextTileChecker == null)
+			if (NextCollisionChecker != null)
 			{
-				return false;
+				NextCollisionChecker.Basis = Basis.Identity;
+				NextCollisionChecker.RotateY(-Mathf.Pi / 2);
 			}
 
 			NextTileChecker.Basis = Basis.Identity;

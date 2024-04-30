@@ -14,14 +14,21 @@ StateName = &"chef"
 Container = NodePath("..")
 Camera = NodePath("../TweenTransformSmoother/Camera3D")
 
-[node name="GridNavigatorComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "NextTileChecker", "CurrentTileChecker")]
+[node name="GridNavigatorComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "NextTileChecker", "NextCollisionChecker", "CurrentTileChecker")]
 script = ExtResource("1_ktck4")
 Body = NodePath("..")
 NextTileChecker = NodePath("../NextTileChecker")
+NextCollisionChecker = NodePath("../NextCollisionChecker")
 CurrentTileChecker = NodePath("../CurrentTileChecker")
 
 [node name="NextTileChecker" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -1)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="NextCollisionChecker" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
