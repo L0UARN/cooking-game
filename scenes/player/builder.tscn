@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2xnwv21wnqtp"]
+[gd_scene load_steps=19 format=3 uid="uid://c2xnwv21wnqtp"]
 
 [ext_resource type="Script" path="res://scripts/grid/GridNavigatorComponent.cs" id="1_jl5cy"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_sn2b0"]
@@ -51,6 +51,68 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3mokr")
+
+[sub_resource type="Animation" id="Animation_hyvay"]
+resource_name = "cursor"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -6.28319, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0), Vector3(0, 0.1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tn5fu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jsc5h"]
+_data = {
+"RESET": SubResource("Animation_tn5fu"),
+"cursor": SubResource("Animation_hyvay")
+}
 
 [node name="Builder" type="Node3D"]
 
@@ -163,3 +225,9 @@ TransitionType = 5
 [node name="Cursor" type="MeshInstance3D" parent="TweenTransformSmoother"]
 mesh = SubResource("ArrayMesh_w251m")
 skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TweenTransformSmoother/Cursor"]
+libraries = {
+"": SubResource("AnimationLibrary_jsc5h")
+}
+autoplay = "cursor"

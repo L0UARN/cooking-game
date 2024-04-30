@@ -33,7 +33,6 @@ namespace CookingGame
 
 		public void Activate()
 		{
-			// GetViewport().GetCamera3D().ClearCurrent(false);
 			Camera.MakeCurrent();
 			Container.ProcessMode = ProcessModeEnum.Inherit;
 			Container?.Show();
