@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://vnxcdd32hch5"]
+[gd_scene load_steps=3 format=3 uid="uid://df2vleehiopwt"]
 
 [ext_resource type="Script" path="res://scripts/buildable/BuildableWrapper.cs" id="1_46he0"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wk3rp"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0qm21"]
 
 [node name="BuildableWrapper" type="Area3D"]
 collision_layer = 4
 collision_mask = 0
+input_ray_pickable = false
+monitoring = false
 script = ExtResource("1_46he0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_wk3rp")
+shape = SubResource("BoxShape3D_0qm21")

@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://c2xnwv21wnqtp"]
+[gd_scene load_steps=18 format=3 uid="uid://c2xnwv21wnqtp"]
 
 [ext_resource type="Script" path="res://scripts/grid/GridNavigatorComponent.cs" id="1_jl5cy"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_sn2b0"]
 [ext_resource type="PackedScene" uid="uid://w4yo8ae27v2r" path="res://scenes/ui/builder_preview_ui.tscn" id="2_fxupq"]
 [ext_resource type="Script" path="res://scripts/player/BuilderCursorComponent.cs" id="2_uskfl"]
-[ext_resource type="PackedScene" uid="uid://vnxcdd32hch5" path="res://scenes/buildable/buildable_wrapper.tscn" id="3_ojhoo"]
 [ext_resource type="PackedScene" uid="uid://cyhcse50i554t" path="res://scenes/ui/builder_inventory_ui.tscn" id="4_2bwas"]
 [ext_resource type="Script" path="res://scripts/player/BuilderInventoryComponent.cs" id="4_scqkw"]
 [ext_resource type="Resource" uid="uid://3s1e5qobmtjn" path="res://resources/buildable/buildable_inventory_default.tres" id="5_ep21w"]
@@ -52,6 +51,33 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3mokr")
 
+[sub_resource type="Animation" id="Animation_tn5fu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_hyvay"]
 resource_name = "cursor"
 length = 2.0
@@ -79,33 +105,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, -0.1, 0), Vector3(0, 0.1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_tn5fu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jsc5h"]
@@ -162,7 +161,6 @@ script = ExtResource("2_uskfl")
 Inventory = NodePath("../BuilderInventoryComponent")
 Navigator = NodePath("../GridNavigatorComponent")
 ExistingChecker = NodePath("../ExistingBuildableChecker")
-BuildableWrapper = ExtResource("3_ojhoo")
 
 [node name="ExistingBuildableChecker" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

@@ -8,8 +8,19 @@ namespace CookingGame
 		[Export]
 		public StringName BuildableId { get; set; } = "buildable";
 
-		private BuildableDb Buildables = null;
-		private Buildable Buildable = null;
+		[Signal]
+		public delegate void PlacedEventHandler();
+		[Signal]
+		public delegate void RotatedEventHandler();
+		[Signal]
+		public delegate void DestroyedEventHandler();
+
+		[Signal]
+		public delegate void SuccessfullyPlacedEventHandler();
+		[Signal]
+		public delegate void SuccessfullyRotatedEventHandler();
+		[Signal]
+		public delegate void SuccessfullyDestroyedEventHandler();
 
 		private Tween ScaleTween = null;
 		private Tween RotateTween = null;
@@ -17,7 +28,11 @@ namespace CookingGame
 		public override void _Ready()
 		{
 			base._Ready();
+			EmitSignal(SignalName.Placed);
+		}
 
+		public void ConfirmPlace()
+		{
 			if (ScaleTween?.IsRunning() == true)
 			{
 				ScaleTween.Pause();
@@ -25,28 +40,20 @@ namespace CookingGame
 				ScaleTween.Kill();
 			}
 
-			Buildables = GetNode<BuildableDb>("/root/Buildables");
-			Buildable = Buildables.GetById(BuildableId);
-			if (Buildable == null)
-			{
-				return;
-			}
-
-			Node buildableInstance = Buildable.Scene.Instantiate();
-			AddChild(buildableInstance);
-
 			Scale = new Vector3(0.01f, 0.01f, 0.01f);
 			ScaleTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
 			ScaleTween.TweenProperty(this, "scale", Vector3.One, .5f);
+
+			EmitSignal(SignalName.SuccessfullyPlaced);
 		}
 
 		public void Rotate()
 		{
-			if (!Buildable.Rotatable)
-			{
-				return;
-			}
+			EmitSignal(SignalName.Rotated);
+		}
 
+		public void ConfirmRotate(float angle)
+		{
 			if (RotateTween?.IsRunning() == true)
 			{
 				RotateTween.Pause();
@@ -55,16 +62,18 @@ namespace CookingGame
 			}
 
 			RotateTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
-			RotateTween.TweenProperty(this, "rotation:y", Rotation.Y - Mathf.Pi / 2, .5f);
+			RotateTween.TweenProperty(this, "rotation:y", angle, .5f);
+
+			EmitSignal(SignalName.SuccessfullyRotated);
 		}
 
 		public void Destroy()
 		{
-			if (!Buildable.Removable)
-			{
-				return;
-			}
+			EmitSignal(SignalName.Destroyed);
+		}
 
+		public void ConfirmDestroy()
+		{
 			CollisionLayer = 0;
 			CollisionMask = 0;
 
@@ -78,6 +87,9 @@ namespace CookingGame
 			ScaleTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
 			ScaleTween.TweenProperty(this, "scale", new Vector3(0.01f, 0.01f, 0.01f), .5f);
 			ScaleTween.TweenCallback(Callable.From(QueueFree));
+
+			GD.Print("Buildable destroyed.");
+			EmitSignal(SignalName.SuccessfullyDestroyed);
 		}
 	}
 }

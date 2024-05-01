@@ -13,10 +13,5 @@ namespace CookingGame
 		public Texture2D Icon { get; set; } = null;
 		[Export]
 		public PackedScene Scene { get; set; } = null;
-
-		[Export]
-		public bool Rotatable { get; set; } = true;
-		[Export]
-		public bool Removable { get; set; } = true;
 	}
 }

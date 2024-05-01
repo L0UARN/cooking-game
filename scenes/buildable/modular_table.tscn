@@ -1,6 +1,8 @@
-[gd_scene load_steps=56 format=3 uid="uid://qtvqmi2qgpbu"]
+[gd_scene load_steps=58 format=3 uid="uid://p5afmpn3r2g5"]
 
 [ext_resource type="Script" path="res://scripts/buildable/ModularTableComponent.cs" id="1_7l20r"]
+[ext_resource type="PackedScene" uid="uid://df2vleehiopwt" path="res://scenes/buildable/buildable_wrapper.tscn" id="1_uof4d"]
+[ext_resource type="Script" path="res://scripts/buildable/BuildablePlacementComponent.cs" id="2_23j0t"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2eung"]
 load_path = "res://.godot/imported/Furniture_CountertopDColorMap.png-2747a150769481d715e572efe43f5b2f.s3tc.ctex"
@@ -33,7 +35,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_46tb1"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_de8e3"]
 resource_name = "Furniture_Cube_016"
 _surfaces = [{
 "aabb": AABB(-0.49, 0.45, -0.49, 0.98, 0.05, 0.99001),
@@ -83,7 +85,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_uiifv"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_c0wgl"]
 resource_name = "Furniture_Cube_015"
 _surfaces = [{
 "aabb": AABB(-0.49, 0.45, -0.5, 0.98, 0.05, 1),
@@ -133,7 +135,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_arwwv"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_krvg4"]
 resource_name = "Furniture_Cube_014"
 _surfaces = [{
 "aabb": AABB(-0.5, 0.45, -0.49, 0.99, 0.05, 0.99001),
@@ -183,7 +185,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_t2h84"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0jjgr"]
 resource_name = "Furniture_Cube_017"
 _surfaces = [{
 "aabb": AABB(-0.49, 0.45, -0.49, 0.98, 0.05001, 0.98),
@@ -233,7 +235,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_xc362"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_wsew3"]
 resource_name = "Furniture_Cube_001"
 _surfaces = [{
 "aabb": AABB(-0.5, 0.45, -0.5, 0.99, 0.05, 1),
@@ -283,7 +285,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_02bsc"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_7rsrq"]
 resource_name = "Furniture_Cube"
 _surfaces = [{
 "aabb": AABB(-0.5, 0.45, -0.5, 1, 0.05, 1),
@@ -337,7 +339,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8b3qd"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_c7re6"]
 resource_name = "Furniture_Cube_018"
 _surfaces = [{
 "aabb": AABB(-0.45, -0.5, -0.45, 0.9, 0.95001, 0.935),
@@ -391,7 +393,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_5saom"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0jo4w"]
 resource_name = "Furniture_Cube_012"
 _surfaces = [{
 "aabb": AABB(-0.45, -0.5, -0.45, 0.9, 0.95001, 0.935),
@@ -445,7 +447,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ey0vl"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_mvhyd"]
 resource_name = "Furniture_Cube_020"
 _surfaces = [{
 "aabb": AABB(-0.45, -0.5, -0.45, 0.9, 0.95001, 0.9),
@@ -498,7 +500,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_r663q"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_vv4nf"]
 resource_name = "Furniture_Cube_002"
 _surfaces = [{
 "aabb": AABB(-0.45, -0.5, -0.45, 0.9, 0.95001, 0.9),
@@ -516,9 +518,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_us2un")
 
-[node name="ModularTable" type="Node3D"]
+[node name="ModularTable" instance=ExtResource("1_uof4d")]
+BuildableId = &"modular_table"
 
-[node name="ModularTableComponent" type="Node" parent="." node_paths=PackedStringArray("UpDetector", "DownDetector", "LeftDetector", "RightDetector", "XTop", "TTop", "LTop", "ITop", "DTop", "OTop", "Bases")]
+[node name="BuildablePlacementComponent" type="Node" parent="." index="1" node_paths=PackedStringArray("Buildable")]
+script = ExtResource("2_23j0t")
+Buildable = NodePath("..")
+
+[node name="ModularTableComponent" type="Node" parent="." index="2" node_paths=PackedStringArray("UpDetector", "DownDetector", "LeftDetector", "RightDetector", "XTop", "TTop", "LTop", "ITop", "DTop", "OTop", "Bases")]
 script = ExtResource("1_7l20r")
 UpDetector = NodePath("../Detectors/UpDetector")
 DownDetector = NodePath("../Detectors/DownDetector")
@@ -532,79 +539,79 @@ DTop = NodePath("../Countertops/CountertopD")
 OTop = NodePath("../Countertops/CountertopO")
 Bases = [NodePath("../Bases/BaseCabinet"), NodePath("../Bases/BaseDrawer"), NodePath("../Bases/BaseShelf"), NodePath("../Bases/BaseSimple")]
 
-[node name="Countertops" type="Node3D" parent="."]
+[node name="Countertops" type="Node3D" parent="." index="3"]
 
-[node name="CountertopD" type="MeshInstance3D" parent="Countertops"]
+[node name="CountertopD" type="MeshInstance3D" parent="Countertops" index="0"]
 visible = false
-mesh = SubResource("ArrayMesh_46tb1")
+mesh = SubResource("ArrayMesh_de8e3")
 skeleton = NodePath("")
 
-[node name="CountertopI" type="MeshInstance3D" parent="Countertops"]
+[node name="CountertopI" type="MeshInstance3D" parent="Countertops" index="1"]
 visible = false
-mesh = SubResource("ArrayMesh_uiifv")
+mesh = SubResource("ArrayMesh_c0wgl")
 skeleton = NodePath("")
 
-[node name="CountertopL" type="MeshInstance3D" parent="Countertops"]
+[node name="CountertopL" type="MeshInstance3D" parent="Countertops" index="2"]
 visible = false
-mesh = SubResource("ArrayMesh_arwwv")
+mesh = SubResource("ArrayMesh_krvg4")
 skeleton = NodePath("")
 
-[node name="CountertopO" type="MeshInstance3D" parent="Countertops"]
+[node name="CountertopO" type="MeshInstance3D" parent="Countertops" index="3"]
 visible = false
-mesh = SubResource("ArrayMesh_t2h84")
+mesh = SubResource("ArrayMesh_0jjgr")
 skeleton = NodePath("")
 
-[node name="CountertopT" type="MeshInstance3D" parent="Countertops"]
+[node name="CountertopT" type="MeshInstance3D" parent="Countertops" index="4"]
 visible = false
-mesh = SubResource("ArrayMesh_xc362")
+mesh = SubResource("ArrayMesh_wsew3")
 skeleton = NodePath("")
 
-[node name="CountertopX" type="MeshInstance3D" parent="Countertops"]
-mesh = SubResource("ArrayMesh_02bsc")
+[node name="CountertopX" type="MeshInstance3D" parent="Countertops" index="5"]
+mesh = SubResource("ArrayMesh_7rsrq")
 skeleton = NodePath("")
 
-[node name="Bases" type="Node3D" parent="."]
+[node name="Bases" type="Node3D" parent="." index="4"]
 
-[node name="BaseCabinet" type="MeshInstance3D" parent="Bases"]
+[node name="BaseCabinet" type="MeshInstance3D" parent="Bases" index="0"]
 visible = false
-mesh = SubResource("ArrayMesh_8b3qd")
+mesh = SubResource("ArrayMesh_c7re6")
 skeleton = NodePath("")
 
-[node name="BaseDrawer" type="MeshInstance3D" parent="Bases"]
+[node name="BaseDrawer" type="MeshInstance3D" parent="Bases" index="1"]
 visible = false
-mesh = SubResource("ArrayMesh_5saom")
+mesh = SubResource("ArrayMesh_0jo4w")
 skeleton = NodePath("")
 
-[node name="BaseShelf" type="MeshInstance3D" parent="Bases"]
+[node name="BaseShelf" type="MeshInstance3D" parent="Bases" index="2"]
 visible = false
-mesh = SubResource("ArrayMesh_ey0vl")
+mesh = SubResource("ArrayMesh_mvhyd")
 skeleton = NodePath("")
 
-[node name="BaseSimple" type="MeshInstance3D" parent="Bases"]
-mesh = SubResource("ArrayMesh_r663q")
+[node name="BaseSimple" type="MeshInstance3D" parent="Bases" index="3"]
+mesh = SubResource("ArrayMesh_vv4nf")
 skeleton = NodePath("")
 
-[node name="Detectors" type="Node3D" parent="."]
+[node name="Detectors" type="Node3D" parent="." index="5"]
 
-[node name="UpDetector" type="RayCast3D" parent="Detectors"]
+[node name="UpDetector" type="RayCast3D" parent="Detectors" index="0"]
 target_position = Vector3(0, 0, -1)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="DownDetector" type="RayCast3D" parent="Detectors"]
+[node name="DownDetector" type="RayCast3D" parent="Detectors" index="1"]
 target_position = Vector3(0, 0, 1)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="LeftDetector" type="RayCast3D" parent="Detectors"]
+[node name="LeftDetector" type="RayCast3D" parent="Detectors" index="2"]
 target_position = Vector3(-1, 0, 0)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="RightDetector" type="RayCast3D" parent="Detectors"]
+[node name="RightDetector" type="RayCast3D" parent="Detectors" index="3"]
 target_position = Vector3(1, 0, 0)
 collision_mask = 4
 collide_with_areas = true

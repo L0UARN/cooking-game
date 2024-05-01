@@ -1,19 +1,14 @@
-[gd_resource type="Resource" script_class="BuildableInventory" load_steps=6 format=3 uid="uid://3s1e5qobmtjn"]
+[gd_resource type="Resource" script_class="BuildableInventory" load_steps=5 format=3 uid="uid://3s1e5qobmtjn"]
 
 [ext_resource type="Script" path="res://scripts/buildable/BuildableInventory.cs" id="1_682rw"]
 [ext_resource type="Script" path="res://scripts/buildable/BuildableInventorySlot.cs" id="2_6suyp"]
 
-[sub_resource type="Resource" id="Resource_62fr5"]
+[sub_resource type="Resource" id="Resource_2ejsu"]
 script = ExtResource("2_6suyp")
 BuildableId = &"modular_table"
 Quantity = 5
 
-[sub_resource type="Resource" id="Resource_up3k1"]
-script = ExtResource("2_6suyp")
-BuildableId = &"other_table"
-Quantity = 3
-
-[sub_resource type="Resource" id="Resource_xlkkp"]
+[sub_resource type="Resource" id="Resource_ljehx"]
 script = ExtResource("2_6suyp")
 BuildableId = &"doormat"
 Quantity = 1
@@ -21,4 +16,4 @@ Quantity = 1
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_682rw")
-Slots = [SubResource("Resource_62fr5"), SubResource("Resource_up3k1"), SubResource("Resource_xlkkp")]
+Slots = [SubResource("Resource_2ejsu"), SubResource("Resource_ljehx")]
