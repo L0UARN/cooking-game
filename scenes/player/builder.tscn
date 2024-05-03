@@ -216,11 +216,11 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="TweenTransformSmoother" type="Node3D" parent="."]
 script = ExtResource("11_j81vp")
-SmoothingDuration = 0.25
 EaseType = 1
 TransitionType = 5
 
 [node name="Cursor" type="MeshInstance3D" parent="TweenTransformSmoother"]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_w251m")
 skeleton = NodePath("")
 

@@ -24,6 +24,7 @@ namespace CookingGame
 
 		private Tween ScaleTween = null;
 		private Tween RotateTween = null;
+		private Tween PositionTween = null;
 
 		public override void _Ready()
 		{
@@ -88,8 +89,35 @@ namespace CookingGame
 			ScaleTween.TweenProperty(this, "scale", new Vector3(0.01f, 0.01f, 0.01f), .5f);
 			ScaleTween.TweenCallback(Callable.From(QueueFree));
 
-			GD.Print("Buildable destroyed.");
 			EmitSignal(SignalName.SuccessfullyDestroyed);
+		}
+
+		private bool _Selected = false;
+		public bool Selected
+		{
+			get => _Selected;
+			set
+			{
+				if (PositionTween?.IsRunning() == true)
+				{
+					PositionTween.Pause();
+					PositionTween.CustomStep(1.0f);
+					PositionTween.Kill();
+				}
+
+				if (value)
+				{
+					PositionTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
+					PositionTween.TweenProperty(this, "position:y", Position.Y + 0.5f, .5f);
+				}
+				else
+				{
+					PositionTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
+					PositionTween.TweenProperty(this, "position:y", Position.Y - 0.5f, .5f);
+				}
+
+				_Selected = value;
+			}
 		}
 	}
 }

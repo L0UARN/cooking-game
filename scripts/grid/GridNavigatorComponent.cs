@@ -14,6 +14,9 @@ namespace CookingGame
 		[Export]
 		private RayCast3D CurrentTileChecker = null;
 
+		[Signal]
+		public delegate void NavigatedEventHandler();
+
 		private bool ShouldDoInitialCheck = true;
 
 		public override void _Ready()
@@ -80,6 +83,7 @@ namespace CookingGame
 			}
 
 			Body.GlobalPosition = target.Placement.GlobalPosition;
+			EmitSignal(SignalName.Navigated);
 			return true;
 		}
 
@@ -150,6 +154,7 @@ namespace CookingGame
 		public void MoveTo(GridTile tile)
 		{
 			Body.GlobalPosition = tile.Placement.GlobalPosition;
+			EmitSignal(SignalName.Navigated);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace Prototypes
+namespace CookingGame
 {
 	[GlobalClass]
 	public partial class ModularTableComponent : Node
@@ -16,49 +16,23 @@ namespace Prototypes
 		private RayCast3D RightDetector = null;
 
 		[Export]
-		private Node3D XTop = null;
+		private MeshInstance3D XTop = null;
 		[Export]
-		private Node3D TTop = null;
+		private MeshInstance3D TTop = null;
 		[Export]
-		private Node3D LTop = null;
+		private MeshInstance3D LTop = null;
 		[Export]
-		private Node3D ITop = null;
+		private MeshInstance3D ITop = null;
 		[Export]
-		private Node3D DTop = null;
+		private MeshInstance3D DTop = null;
 		[Export]
-		private Node3D OTop = null;
+		private MeshInstance3D OTop = null;
 
 		[Export]
-		private Godot.Collections.Array<Node3D> Bases = new();
+		private Godot.Collections.Array<MeshInstance3D> Bases = new();
 
 		private int LastDetectionCount = 0;
 		private Vector3 LastUpVector = Vector3.Zero;
-
-		public override void _Ready()
-		{
-			base._Ready();
-
-			// Show only the OTop
-			EnableOTop();
-
-			// Select a random base to show
-			Random random = new();
-			int chosenBase = random.Next(Bases.Count);
-
-			for (int i = 0; i < Bases.Count; i++)
-			{
-				if (i == chosenBase)
-				{
-					Bases[i].Show();
-					Bases[i].ProcessMode = ProcessModeEnum.Inherit;
-				}
-				else
-				{
-					Bases[i].Hide();
-					Bases[i].ProcessMode = ProcessModeEnum.Disabled;
-				}
-			}
-		}
 
 		private int GetDetectionCount()
 		{
@@ -84,20 +58,28 @@ namespace Prototypes
 			return detectionCount;
 		}
 
+		private void EnableMesh(MeshInstance3D mesh, bool enable)
+		{
+			if (enable)
+			{
+				mesh.Show();
+				mesh.ProcessMode = ProcessModeEnum.Inherit;
+			}
+			else
+			{
+				mesh.Hide();
+				mesh.ProcessMode = ProcessModeEnum.Disabled;
+			}
+		}
+
 		private void EnableXTop()
 		{
-			XTop.Show();
-			XTop.ProcessMode = ProcessModeEnum.Inherit;
-			TTop.Hide();
-			TTop.ProcessMode = ProcessModeEnum.Disabled;
-			LTop.Hide();
-			LTop.ProcessMode = ProcessModeEnum.Disabled;
-			ITop.Hide();
-			ITop.ProcessMode = ProcessModeEnum.Disabled;
-			DTop.Hide();
-			DTop.ProcessMode = ProcessModeEnum.Disabled;
-			OTop.Hide();
-			OTop.ProcessMode = ProcessModeEnum.Disabled;
+			EnableMesh(XTop, true);
+			EnableMesh(TTop, false);
+			EnableMesh(LTop, false);
+			EnableMesh(ITop, false);
+			EnableMesh(DTop, false);
+			EnableMesh(OTop, false);
 		}
 
 		private void EnableTTop()
@@ -120,18 +102,12 @@ namespace Prototypes
 				TTop.RotateY(Mathf.Pi * -1.5f);
 			}
 
-			XTop.Hide();
-			XTop.ProcessMode = ProcessModeEnum.Disabled;
-			TTop.Show();
-			TTop.ProcessMode = ProcessModeEnum.Inherit;
-			LTop.Hide();
-			LTop.ProcessMode = ProcessModeEnum.Disabled;
-			ITop.Hide();
-			ITop.ProcessMode = ProcessModeEnum.Disabled;
-			DTop.Hide();
-			DTop.ProcessMode = ProcessModeEnum.Disabled;
-			OTop.Hide();
-			OTop.ProcessMode = ProcessModeEnum.Disabled;
+			EnableMesh(XTop, false);
+			EnableMesh(TTop, true);
+			EnableMesh(LTop, false);
+			EnableMesh(ITop, false);
+			EnableMesh(DTop, false);
+			EnableMesh(OTop, false);
 		}
 
 		private void EnableLTop()
@@ -154,18 +130,12 @@ namespace Prototypes
 				LTop.RotateY(Mathf.Pi * -1.5f);
 			}
 
-			XTop.Hide();
-			XTop.ProcessMode = ProcessModeEnum.Disabled;
-			TTop.Hide();
-			TTop.ProcessMode = ProcessModeEnum.Disabled;
-			LTop.Show();
-			LTop.ProcessMode = ProcessModeEnum.Inherit;
-			ITop.Hide();
-			ITop.ProcessMode = ProcessModeEnum.Disabled;
-			DTop.Hide();
-			DTop.ProcessMode = ProcessModeEnum.Disabled;
-			OTop.Hide();
-			OTop.ProcessMode = ProcessModeEnum.Disabled;
+			EnableMesh(XTop, false);
+			EnableMesh(TTop, false);
+			EnableMesh(LTop, true);
+			EnableMesh(ITop, false);
+			EnableMesh(DTop, false);
+			EnableMesh(OTop, false);
 		}
 
 		private void EnableITop()
@@ -180,18 +150,12 @@ namespace Prototypes
 				ITop.RotateY(Mathf.Pi * -0.5f);
 			}
 
-			XTop.Hide();
-			XTop.ProcessMode = ProcessModeEnum.Disabled;
-			TTop.Hide();
-			TTop.ProcessMode = ProcessModeEnum.Disabled;
-			LTop.Hide();
-			LTop.ProcessMode = ProcessModeEnum.Disabled;
-			ITop.Show();
-			ITop.ProcessMode = ProcessModeEnum.Inherit;
-			DTop.Hide();
-			DTop.ProcessMode = ProcessModeEnum.Disabled;
-			OTop.Hide();
-			OTop.ProcessMode = ProcessModeEnum.Disabled;
+			EnableMesh(XTop, false);
+			EnableMesh(TTop, false);
+			EnableMesh(LTop, false);
+			EnableMesh(ITop, true);
+			EnableMesh(DTop, false);
+			EnableMesh(OTop, false);
 		}
 
 		private void EnableDTop()
@@ -214,34 +178,22 @@ namespace Prototypes
 				DTop.RotateY(Mathf.Pi * -1.5f);
 			}
 
-			XTop.Hide();
-			XTop.ProcessMode = ProcessModeEnum.Disabled;
-			TTop.Hide();
-			TTop.ProcessMode = ProcessModeEnum.Disabled;
-			LTop.Hide();
-			LTop.ProcessMode = ProcessModeEnum.Disabled;
-			ITop.Hide();
-			ITop.ProcessMode = ProcessModeEnum.Disabled;
-			DTop.Show();
-			DTop.ProcessMode = ProcessModeEnum.Inherit;
-			OTop.Hide();
-			OTop.ProcessMode = ProcessModeEnum.Disabled;
+			EnableMesh(XTop, false);
+			EnableMesh(TTop, false);
+			EnableMesh(LTop, false);
+			EnableMesh(ITop, false);
+			EnableMesh(DTop, true);
+			EnableMesh(OTop, false);
 		}
 
 		private void EnableOTop()
 		{
-			XTop.Hide();
-			XTop.ProcessMode = ProcessModeEnum.Disabled;
-			TTop.Hide();
-			TTop.ProcessMode = ProcessModeEnum.Disabled;
-			LTop.Hide();
-			LTop.ProcessMode = ProcessModeEnum.Disabled;
-			ITop.Hide();
-			ITop.ProcessMode = ProcessModeEnum.Disabled;
-			DTop.Hide();
-			DTop.ProcessMode = ProcessModeEnum.Disabled;
-			OTop.Show();
-			OTop.ProcessMode = ProcessModeEnum.Inherit;
+			EnableMesh(XTop, false);
+			EnableMesh(TTop, false);
+			EnableMesh(LTop, false);
+			EnableMesh(ITop, false);
+			EnableMesh(DTop, false);
+			EnableMesh(OTop, true);
 		}
 
 		private void EnableLOrITop()
@@ -254,6 +206,35 @@ namespace Prototypes
 			{
 				EnableLTop();
 			}
+		}
+
+		private void EnableRandomBase()
+		{
+			Random random = new();
+			int chosenBase = random.Next(Bases.Count);
+
+			for (int i = 0; i < Bases.Count; i++)
+			{
+				if (i == chosenBase)
+				{
+					EnableMesh(Bases[i], true);
+				}
+				else
+				{
+					EnableMesh(Bases[i], false);
+				}
+			}
+		}
+
+		public override void _Ready()
+		{
+			base._Ready();
+
+			// Show only the OTop
+			EnableOTop();
+
+			// Select a random base to show
+			EnableRandomBase();
 		}
 
 		public override void _PhysicsProcess(double delta)
