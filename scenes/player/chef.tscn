@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/grid/GridNavigatorComponent.cs" id="1_ktck4"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_nwanl"]
-[ext_resource type="Script" path="res://scripts/player/ChefMovementComponent.cs" id="2_0i88y"]
-[ext_resource type="Script" path="res://scripts/player/ChefMovementInputComponent.cs" id="3_1f7sq"]
+[ext_resource type="Script" path="res://scripts/player/chef/ChefMovementComponent.cs" id="2_0i88y"]
+[ext_resource type="Script" path="res://scripts/player/chef/ChefMovementInputComponent.cs" id="3_1f7sq"]
 [ext_resource type="Script" path="res://scripts/player/TweenTransformSmoother.cs" id="4_aq20u"]
 
 [node name="Chef" type="Node3D"]
