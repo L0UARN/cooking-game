@@ -25,6 +25,7 @@ namespace CookingGame
 			{
 				CurrentBuildableWall = null;
 				DefaultWall.Show();
+				DefaultWall.ProcessMode = ProcessModeEnum.Inherit;
 				return;
 			}
 
@@ -33,6 +34,7 @@ namespace CookingGame
 			{
 				CurrentBuildableWall = null;
 				DefaultWall.Show();
+				DefaultWall.ProcessMode = ProcessModeEnum.Inherit;
 				return;
 			}
 
@@ -40,10 +42,12 @@ namespace CookingGame
 			{
 				CurrentBuildableWall = null;
 				DefaultWall.Show();
+				DefaultWall.ProcessMode = ProcessModeEnum.Inherit;
 				return;
 			}
 
 			DefaultWall.Hide();
+			DefaultWall.ProcessMode = ProcessModeEnum.Disabled;
 			CurrentBuildableWall = targetBuildable.AdjacentWall.Instantiate<Node3D>();
 			WallContainer.AddChild(CurrentBuildableWall);
 		}
