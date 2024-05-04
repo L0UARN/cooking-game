@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://c2xnwv21wnqtp"]
 
-[ext_resource type="Script" path="res://scripts/grid/GridNavigatorComponent.cs" id="1_jl5cy"]
+[ext_resource type="Script" path="res://scripts/player/GridNavigatorComponent.cs" id="1_jl5cy"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_sn2b0"]
 [ext_resource type="PackedScene" uid="uid://w4yo8ae27v2r" path="res://scenes/ui/builder_preview_ui.tscn" id="2_fxupq"]
 [ext_resource type="Script" path="res://scripts/player/builder/BuilderCursorComponent.cs" id="2_uskfl"]

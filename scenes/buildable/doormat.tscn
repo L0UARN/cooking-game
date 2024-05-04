@@ -69,3 +69,4 @@ mesh = SubResource("ArrayMesh_gb4sy")
 skeleton = NodePath("")
 
 [node name="Chef" parent="." index="4" instance=ExtResource("4_v7jn5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

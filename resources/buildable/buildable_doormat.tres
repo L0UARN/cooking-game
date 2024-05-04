@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Buildable" load_steps=4 format=3 uid="uid://k2fdhkb45eow"]
+[gd_resource type="Resource" script_class="Buildable" load_steps=5 format=3 uid="uid://k2fdhkb45eow"]
 
+[ext_resource type="PackedScene" uid="uid://b55l5p842tmfb" path="res://scenes/environment/door_red.tscn" id="1_py66g"]
 [ext_resource type="Script" path="res://scripts/buildable/data/Buildable.cs" id="1_slbgp"]
 [ext_resource type="Texture2D" uid="uid://buq1tg6ban2nc" path="res://assets/icons/build_mode_64.png" id="1_yhmdd"]
 [ext_resource type="PackedScene" uid="uid://bvlp3pr4emqr6" path="res://scenes/buildable/doormat.tscn" id="2_xhsqx"]
@@ -10,3 +11,4 @@ Id = &"doormat"
 Name = "Doormat"
 Icon = ExtResource("1_yhmdd")
 Scene = ExtResource("2_xhsqx")
+AdjacentWall = ExtResource("1_py66g")

@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcpd4jhw5ueuq"]
+[gd_scene load_steps=5 format=3 uid="uid://bcpd4jhw5ueuq"]
+
+[ext_resource type="Script" path="res://scripts/environment/WallComponent.cs" id="1_e6lwr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s57mf"]
 resource_name = "WallRed"
@@ -44,3 +46,15 @@ shadow_mesh = SubResource("ArrayMesh_bne04")
 layers = 2
 mesh = SubResource("ArrayMesh_imiva")
 skeleton = NodePath("")
+
+[node name="WallComponent" type="Node" parent="." node_paths=PackedStringArray("BuildableChecker", "DefaultWall", "WallContainer")]
+script = ExtResource("1_e6lwr")
+BuildableChecker = NodePath("../BuildableChecker")
+DefaultWall = NodePath("../WallRed")
+WallContainer = NodePath("..")
+
+[node name="BuildableChecker" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
