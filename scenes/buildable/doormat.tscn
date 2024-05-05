@@ -50,9 +50,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rbsic")
 
-[node name="Doormat" instance=ExtResource("1_1u1d4")]
+[node name="Doormat" node_paths=PackedStringArray("Meshes") instance=ExtResource("1_1u1d4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 BuildableId = &"doormat"
+Meshes = NodePath("Doormat")
 
 [node name="Doormat" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

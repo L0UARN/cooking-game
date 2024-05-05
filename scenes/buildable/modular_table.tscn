@@ -470,8 +470,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_o3bah")
 
-[node name="ModularTable" instance=ExtResource("1_uof4d")]
+[node name="ModularTable" node_paths=PackedStringArray("Meshes") instance=ExtResource("1_uof4d")]
 BuildableId = &"modular_table"
+Meshes = NodePath("Meshes")
 
 [node name="BuildablePlacementComponent" type="Node" parent="." index="1" node_paths=PackedStringArray("Buildable")]
 script = ExtResource("2_23j0t")
@@ -483,67 +484,69 @@ UpDetector = NodePath("../Detectors/UpDetector")
 DownDetector = NodePath("../Detectors/DownDetector")
 LeftDetector = NodePath("../Detectors/LeftDetector")
 RightDetector = NodePath("../Detectors/RightDetector")
-XTop = NodePath("../Countertops/CountertopX")
-TTop = NodePath("../Countertops/CountertopT")
-LTop = NodePath("../Countertops/CountertopL")
-ITop = NodePath("../Countertops/CountertopI")
-DTop = NodePath("../Countertops/CountertopD")
-OTop = NodePath("../Countertops/CountertopO")
-Bases = [NodePath("../Bases/BaseCabinet"), NodePath("../Bases/BaseDrawer"), NodePath("../Bases/BaseShelf"), NodePath("../Bases/BaseSimple")]
+XTop = NodePath("../Meshes/Countertops/CountertopX")
+TTop = NodePath("../Meshes/Countertops/CountertopT")
+LTop = NodePath("../Meshes/Countertops/CountertopL")
+ITop = NodePath("../Meshes/Countertops/CountertopI")
+DTop = NodePath("../Meshes/Countertops/CountertopD")
+OTop = NodePath("../Meshes/Countertops/CountertopO")
+Bases = [NodePath("../Meshes/Bases/BaseCabinet"), NodePath("../Meshes/Bases/BaseDrawer"), NodePath("../Meshes/Bases/BaseShelf"), NodePath("../Meshes/Bases/BaseSimple")]
 
-[node name="Countertops" type="Node3D" parent="." index="3"]
+[node name="Meshes" type="Node3D" parent="." index="3"]
 
-[node name="CountertopD" type="MeshInstance3D" parent="Countertops" index="0"]
+[node name="Countertops" type="Node3D" parent="Meshes" index="0"]
+
+[node name="CountertopD" type="MeshInstance3D" parent="Meshes/Countertops" index="0"]
 visible = false
 mesh = SubResource("ArrayMesh_peul4")
 skeleton = NodePath("")
 
-[node name="CountertopI" type="MeshInstance3D" parent="Countertops" index="1"]
+[node name="CountertopI" type="MeshInstance3D" parent="Meshes/Countertops" index="1"]
 visible = false
 mesh = SubResource("ArrayMesh_v4ljs")
 skeleton = NodePath("")
 
-[node name="CountertopL" type="MeshInstance3D" parent="Countertops" index="2"]
+[node name="CountertopL" type="MeshInstance3D" parent="Meshes/Countertops" index="2"]
 visible = false
 mesh = SubResource("ArrayMesh_ks78i")
 skeleton = NodePath("")
 
-[node name="CountertopO" type="MeshInstance3D" parent="Countertops" index="3"]
+[node name="CountertopO" type="MeshInstance3D" parent="Meshes/Countertops" index="3"]
 visible = false
 mesh = SubResource("ArrayMesh_aj42d")
 skeleton = NodePath("")
 
-[node name="CountertopT" type="MeshInstance3D" parent="Countertops" index="4"]
+[node name="CountertopT" type="MeshInstance3D" parent="Meshes/Countertops" index="4"]
 visible = false
 mesh = SubResource("ArrayMesh_yveld")
 skeleton = NodePath("")
 
-[node name="CountertopX" type="MeshInstance3D" parent="Countertops" index="5"]
+[node name="CountertopX" type="MeshInstance3D" parent="Meshes/Countertops" index="5"]
 mesh = SubResource("ArrayMesh_xryax")
 skeleton = NodePath("")
 
-[node name="Bases" type="Node3D" parent="." index="4"]
+[node name="Bases" type="Node3D" parent="Meshes" index="1"]
 
-[node name="BaseCabinet" type="MeshInstance3D" parent="Bases" index="0"]
+[node name="BaseCabinet" type="MeshInstance3D" parent="Meshes/Bases" index="0"]
 visible = false
 mesh = SubResource("ArrayMesh_i5pdd")
 skeleton = NodePath("")
 
-[node name="BaseDrawer" type="MeshInstance3D" parent="Bases" index="1"]
+[node name="BaseDrawer" type="MeshInstance3D" parent="Meshes/Bases" index="1"]
 visible = false
 mesh = SubResource("ArrayMesh_ishs6")
 skeleton = NodePath("")
 
-[node name="BaseShelf" type="MeshInstance3D" parent="Bases" index="2"]
+[node name="BaseShelf" type="MeshInstance3D" parent="Meshes/Bases" index="2"]
 visible = false
 mesh = SubResource("ArrayMesh_c1lq7")
 skeleton = NodePath("")
 
-[node name="BaseSimple" type="MeshInstance3D" parent="Bases" index="3"]
+[node name="BaseSimple" type="MeshInstance3D" parent="Meshes/Bases" index="3"]
 mesh = SubResource("ArrayMesh_a8855")
 skeleton = NodePath("")
 
-[node name="Detectors" type="Node3D" parent="." index="5"]
+[node name="Detectors" type="Node3D" parent="." index="4"]
 
 [node name="UpDetector" type="RayCast3D" parent="Detectors" index="0"]
 target_position = Vector3(0, 0, -1)

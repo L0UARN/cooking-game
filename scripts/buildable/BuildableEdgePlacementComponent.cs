@@ -18,7 +18,7 @@ namespace CookingGame
 		{
 			TileChecker.ProcessMode = ProcessModeEnum.Inherit;
 
-			float[] rotationsToCheck = { 0, Mathf.Pi / 2, Mathf.Pi, -Mathf.Pi / 2 };
+			float[] rotationsToCheck = { 0, Mathf.Pi * 0.5f, Mathf.Pi, Mathf.Pi * 1.5f };
 			foreach (float rotation in rotationsToCheck)
 			{
 				TileChecker.Basis = Basis.Identity.Rotated(Vector3.Up, rotation);

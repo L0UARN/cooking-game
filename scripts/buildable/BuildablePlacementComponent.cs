@@ -8,6 +8,9 @@ namespace CookingGame
 		[Export]
 		private BuildableWrapper Buildable = null;
 
+		private float[] PossibleRotations = new float[] { 0.0f, Mathf.Pi * 0.5f, Mathf.Pi, Mathf.Pi * 1.5f };
+		private int CurrentRotationIndex = 0;
+
 		private void HandlePlaced()
 		{
 			Buildable.ConfirmPlace();
@@ -15,7 +18,8 @@ namespace CookingGame
 
 		private void HandleRotated()
 		{
-			Buildable.ConfirmRotate(Buildable.Rotation.Y + Mathf.Pi / 2.0f);
+			CurrentRotationIndex = (CurrentRotationIndex + 1) % PossibleRotations.Length;
+			Buildable.ConfirmRotate(PossibleRotations[CurrentRotationIndex]);
 		}
 
 		private void HandleDestroyed()

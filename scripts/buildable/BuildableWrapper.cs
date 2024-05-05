@@ -7,6 +7,8 @@ namespace CookingGame
 	{
 		[Export]
 		public StringName BuildableId { get; set; } = "buildable";
+		[Export]
+		private Node3D Meshes = null;
 
 		[Signal]
 		public delegate void PlacedEventHandler();
@@ -41,9 +43,9 @@ namespace CookingGame
 				ScaleTween.Kill();
 			}
 
-			Scale = new Vector3(0.01f, 0.01f, 0.01f);
+			Meshes.Scale = new Vector3(0.01f, 0.01f, 0.01f);
 			ScaleTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
-			ScaleTween.TweenProperty(this, "scale", Vector3.One, .5f);
+			ScaleTween.TweenProperty(Meshes, "scale", Vector3.One, .5f);
 
 			EmitSignal(SignalName.SuccessfullyPlaced);
 		}
@@ -86,7 +88,7 @@ namespace CookingGame
 			}
 
 			ScaleTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
-			ScaleTween.TweenProperty(this, "scale", new Vector3(0.01f, 0.01f, 0.01f), .5f);
+			ScaleTween.TweenProperty(Meshes, "scale", new Vector3(0.01f, 0.01f, 0.01f), .5f);
 			ScaleTween.TweenCallback(Callable.From(QueueFree));
 
 			EmitSignal(SignalName.SuccessfullyDestroyed);
@@ -108,12 +110,12 @@ namespace CookingGame
 				if (value)
 				{
 					PositionTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
-					PositionTween.TweenProperty(this, "position:y", Position.Y + 0.5f, .5f);
+					PositionTween.TweenProperty(Meshes, "position:y", Meshes.Position.Y + 0.5f, .5f);
 				}
 				else
 				{
 					PositionTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
-					PositionTween.TweenProperty(this, "position:y", Position.Y - 0.5f, .5f);
+					PositionTween.TweenProperty(Meshes, "position:y", Meshes.Position.Y - 0.5f, .5f);
 				}
 
 				_Selected = value;
