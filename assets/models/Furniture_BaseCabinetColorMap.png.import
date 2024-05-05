@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dht4tmml4b0d7"
-path.s3tc="res://.godot/imported/Furniture_BaseCabinetColorMap.png-7a5bdaed3403536ff9487af8e203834d.s3tc.ctex"
+uid="uid://bn5iayht4qjt1"
+path="res://.godot/imported/Furniture_BaseCabinetColorMap.png-7a5bdaed3403536ff9487af8e203834d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_BaseCabinetColorMap.png"
-dest_files=["res://.godot/imported/Furniture_BaseCabinetColorMap.png-7a5bdaed3403536ff9487af8e203834d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_BaseCabinetColorMap.png-7a5bdaed3403536ff9487af8e203834d.ctex"]
 
 [params]
 

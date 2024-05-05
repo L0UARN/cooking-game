@@ -14,11 +14,11 @@ namespace CookingGame
 		[Export]
 		private Node3D ZVariant = null;
 
-		private float LastRotation = 0.0f;
+		private float LastRotation = float.NaN;
 
 		private void HandleVariantChange()
 		{
-			Vector3 forward = Body.Transform.Basis.Z;
+			Vector3 forward = Body.GlobalBasis.Z;
 			Array<Vector3> possibleDirections = new() { Vector3.Forward, Vector3.Left, Vector3.Back, Vector3.Right };
 			Vector3 closestDirection = possibleDirections.MaxBy(direction => forward.Dot(direction));
 
@@ -28,6 +28,8 @@ namespace CookingGame
 				XVariant.ProcessMode = ProcessModeEnum.Disabled;
 				ZVariant.Show();
 				ZVariant.ProcessMode = ProcessModeEnum.Inherit;
+
+				GD.Print(GetPath(), " is facing Z");
 			}
 			else
 			{
@@ -35,17 +37,27 @@ namespace CookingGame
 				XVariant.ProcessMode = ProcessModeEnum.Inherit;
 				ZVariant.Hide();
 				ZVariant.ProcessMode = ProcessModeEnum.Disabled;
+
+				GD.Print(GetPath(), " is facing X");
 			}
+		}
+
+		public override void _Ready()
+		{
+			base._Ready();
+
+			LastRotation = Body.GlobalRotation.Y;
+			HandleVariantChange();
 		}
 
 		public override void _PhysicsProcess(double delta)
 		{
 			base._PhysicsProcess(delta);
 
-			if (Body.Rotation.Y != LastRotation)
+			if (Body.GlobalRotation.Y != LastRotation)
 			{
 				HandleVariantChange();
-				LastRotation = Body.Rotation.Y;
+				LastRotation = Body.GlobalRotation.Y;
 			}
 		}
 	}

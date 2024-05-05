@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8ss2o8qmxsbv"
-path.s3tc="res://.godot/imported/Furniture_CountertopTColorMap.png-770e3ae9f6b0995d87c70926e810869f.s3tc.ctex"
+uid="uid://bbmc84hx74oca"
+path="res://.godot/imported/Furniture_CountertopTColorMap.png-770e3ae9f6b0995d87c70926e810869f.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_CountertopTColorMap.png"
-dest_files=["res://.godot/imported/Furniture_CountertopTColorMap.png-770e3ae9f6b0995d87c70926e810869f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_CountertopTColorMap.png-770e3ae9f6b0995d87c70926e810869f.ctex"]
 
 [params]
 

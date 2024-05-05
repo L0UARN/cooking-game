@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvy5iaywqcrt5"
-path.s3tc="res://.godot/imported/Furniture_BaseDrawerColorMap.png-46253bac380cecfbff2b7015ec51564d.s3tc.ctex"
+uid="uid://gm4hnshygskt"
+path="res://.godot/imported/Furniture_BaseDrawerColorMap.png-46253bac380cecfbff2b7015ec51564d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_BaseDrawerColorMap.png"
-dest_files=["res://.godot/imported/Furniture_BaseDrawerColorMap.png-46253bac380cecfbff2b7015ec51564d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_BaseDrawerColorMap.png-46253bac380cecfbff2b7015ec51564d.ctex"]
 
 [params]
 

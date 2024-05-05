@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdrvofd57yemj"
-path.s3tc="res://.godot/imported/Furniture_CountertopMetallicMap-CountertopTRoughnessMap.png-29b11be3fdc2a42fa6b9963ac2124678.s3tc.ctex"
+uid="uid://cfek3uv08bnlf"
+path="res://.godot/imported/Furniture_CountertopMetallicMap-CountertopTRoughnessMap.png-29b11be3fdc2a42fa6b9963ac2124678.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_CountertopMetallicMap-CountertopTRoughnessMap.png"
-dest_files=["res://.godot/imported/Furniture_CountertopMetallicMap-CountertopTRoughnessMap.png-29b11be3fdc2a42fa6b9963ac2124678.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_CountertopMetallicMap-CountertopTRoughnessMap.png-29b11be3fdc2a42fa6b9963ac2124678.ctex"]
 
 [params]
 

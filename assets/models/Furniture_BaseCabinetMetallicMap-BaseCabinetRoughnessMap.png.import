@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df8b7ovxvv1mc"
-path.s3tc="res://.godot/imported/Furniture_BaseCabinetMetallicMap-BaseCabinetRoughnessMap.png-869ac037733bbbee23596b4af8a013f5.s3tc.ctex"
+uid="uid://bwblq883a4u0u"
+path="res://.godot/imported/Furniture_BaseCabinetMetallicMap-BaseCabinetRoughnessMap.png-869ac037733bbbee23596b4af8a013f5.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_BaseCabinetMetallicMap-BaseCabinetRoughnessMap.png"
-dest_files=["res://.godot/imported/Furniture_BaseCabinetMetallicMap-BaseCabinetRoughnessMap.png-869ac037733bbbee23596b4af8a013f5.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_BaseCabinetMetallicMap-BaseCabinetRoughnessMap.png-869ac037733bbbee23596b4af8a013f5.ctex"]
 
 [params]
 

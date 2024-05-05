@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxk2p0tnwtix0"
-path.s3tc="res://.godot/imported/Furniture_DoorFrameNormalMap.png-655f28bfc8434b7bdce9365008db120e.s3tc.ctex"
+uid="uid://bcyikle31t1s1"
+path="res://.godot/imported/Furniture_DoorFrameNormalMap.png-655f28bfc8434b7bdce9365008db120e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_DoorFrameNormalMap.png"
-dest_files=["res://.godot/imported/Furniture_DoorFrameNormalMap.png-655f28bfc8434b7bdce9365008db120e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_DoorFrameNormalMap.png-655f28bfc8434b7bdce9365008db120e.ctex"]
 
 [params]
 

@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b85vp6b8w86ml"
-path.s3tc="res://.godot/imported/Furniture_BaseCabinetNormalMap.png-ff7a9372c8471c861c5635400ef8f48a.s3tc.ctex"
+uid="uid://i6ka0x5racsx"
+path="res://.godot/imported/Furniture_BaseCabinetNormalMap.png-ff7a9372c8471c861c5635400ef8f48a.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_BaseCabinetNormalMap.png"
-dest_files=["res://.godot/imported/Furniture_BaseCabinetNormalMap.png-ff7a9372c8471c861c5635400ef8f48a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_BaseCabinetNormalMap.png-ff7a9372c8471c861c5635400ef8f48a.ctex"]
 
 [params]
 

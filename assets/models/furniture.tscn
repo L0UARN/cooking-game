@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://r2fieuwkw7th"]
 
-[ext_resource type="PackedScene" uid="uid://bpl3ul5wh0x2m" path="res://assets/models/Furniture.glb" id="1_8vrm0"]
+[ext_resource type="PackedScene" uid="uid://dltr6aqw6b4t0" path="res://assets/models/Furniture.glb" id="1_8vrm0"]
 
 [node name="Furniture" type="Node3D"]
 

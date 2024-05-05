@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4dvtx68e8vqv"
-path.s3tc="res://.godot/imported/Furniture_DoorFrameRoughnessMap.png-7b86651b6d3d94f2f859ca419fed8649.s3tc.ctex"
+uid="uid://bp3c70b1efo23"
+path="res://.godot/imported/Furniture_DoorFrameRoughnessMap.png-7b86651b6d3d94f2f859ca419fed8649.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_DoorFrameRoughnessMap.png"
-dest_files=["res://.godot/imported/Furniture_DoorFrameRoughnessMap.png-7b86651b6d3d94f2f859ca419fed8649.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_DoorFrameRoughnessMap.png-7b86651b6d3d94f2f859ca419fed8649.ctex"]
 
 [params]
 

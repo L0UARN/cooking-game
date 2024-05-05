@@ -14,6 +14,6 @@ namespace CookingGame
 		[Export]
 		public PackedScene Scene { get; set; } = null;
 		[Export]
-		public PackedScene AdjacentWall { get; set; } = null;
+		public PackedScene AdjascentWall { get; set; } = null;
 	}
 }

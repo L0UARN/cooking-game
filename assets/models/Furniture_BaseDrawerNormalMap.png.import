@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gom184rwhais"
-path.s3tc="res://.godot/imported/Furniture_BaseDrawerNormalMap.png-a15da57b934e50e9b36583efd227923a.s3tc.ctex"
+uid="uid://clr8mtsevkgdc"
+path="res://.godot/imported/Furniture_BaseDrawerNormalMap.png-a15da57b934e50e9b36583efd227923a.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_BaseDrawerNormalMap.png"
-dest_files=["res://.godot/imported/Furniture_BaseDrawerNormalMap.png-a15da57b934e50e9b36583efd227923a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_BaseDrawerNormalMap.png-a15da57b934e50e9b36583efd227923a.ctex"]
 
 [params]
 

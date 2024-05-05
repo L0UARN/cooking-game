@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvdr37o33fwjd"
-path.s3tc="res://.godot/imported/Furniture_DoorColorMap.png-82ffeb4c7c0393e02fca2dbfa041e826.s3tc.ctex"
+uid="uid://b641bwlurcf3b"
+path="res://.godot/imported/Furniture_DoorColorMap.png-82ffeb4c7c0393e02fca2dbfa041e826.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_DoorColorMap.png"
-dest_files=["res://.godot/imported/Furniture_DoorColorMap.png-82ffeb4c7c0393e02fca2dbfa041e826.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_DoorColorMap.png-82ffeb4c7c0393e02fca2dbfa041e826.ctex"]
 
 [params]
 

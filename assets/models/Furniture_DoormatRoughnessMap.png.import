@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rpxfi1tppuwr"
-path.s3tc="res://.godot/imported/Furniture_DoormatRoughnessMap.png-58f7bd6f5bb64125396ba4be050c79a4.s3tc.ctex"
+uid="uid://bfpaveteeowy3"
+path="res://.godot/imported/Furniture_DoormatRoughnessMap.png-58f7bd6f5bb64125396ba4be050c79a4.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/models/Furniture_DoormatRoughnessMap.png"
-dest_files=["res://.godot/imported/Furniture_DoormatRoughnessMap.png-58f7bd6f5bb64125396ba4be050c79a4.s3tc.ctex"]
+dest_files=["res://.godot/imported/Furniture_DoormatRoughnessMap.png-58f7bd6f5bb64125396ba4be050c79a4.ctex"]
 
 [params]
 
