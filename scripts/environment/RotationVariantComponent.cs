@@ -28,8 +28,6 @@ namespace CookingGame
 				XVariant.ProcessMode = ProcessModeEnum.Disabled;
 				ZVariant.Show();
 				ZVariant.ProcessMode = ProcessModeEnum.Inherit;
-
-				GD.Print(GetPath(), " is facing Z");
 			}
 			else
 			{
@@ -37,8 +35,6 @@ namespace CookingGame
 				XVariant.ProcessMode = ProcessModeEnum.Inherit;
 				ZVariant.Hide();
 				ZVariant.ProcessMode = ProcessModeEnum.Disabled;
-
-				GD.Print(GetPath(), " is facing X");
 			}
 		}
 

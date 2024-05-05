@@ -187,18 +187,22 @@ shadow_mesh = SubResource("ArrayMesh_gkkq6")
 [node name="Door" type="Node3D"]
 
 [node name="DoorFrameBlue" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = SubResource("ArrayMesh_77cjb")
 skeleton = NodePath("")
 
 [node name="DoorFrameRed" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = SubResource("ArrayMesh_r54sy")
 skeleton = NodePath("")
 
 [node name="Door" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = SubResource("ArrayMesh_xh56k")
 skeleton = NodePath("")
 
 [node name="DoorWindow" type="MeshInstance3D" parent="."]
+layers = 2
 mesh = SubResource("ArrayMesh_idol8")
 skeleton = NodePath("")
 

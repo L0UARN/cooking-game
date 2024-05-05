@@ -110,7 +110,7 @@ Focus = NodePath("../..")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 4, 0.5)
 top_level = true
-cull_mask = 1048569
+cull_mask = 1
 environment = ExtResource("11_0jc5k")
 projection = 1
 size = 8.0

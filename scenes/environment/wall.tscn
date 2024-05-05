@@ -90,10 +90,12 @@ ZVariant = NodePath("../DefaultWalls/WallBlue")
 [node name="DefaultWalls" type="Node3D" parent="."]
 
 [node name="WallRed" type="MeshInstance3D" parent="DefaultWalls"]
+layers = 2
 mesh = SubResource("ArrayMesh_088gw")
 skeleton = NodePath("")
 
 [node name="WallBlue" type="MeshInstance3D" parent="DefaultWalls"]
+layers = 2
 mesh = SubResource("ArrayMesh_ksto7")
 skeleton = NodePath("")
 

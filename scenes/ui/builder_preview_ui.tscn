@@ -55,5 +55,5 @@ TransitionType = 5
 
 [node name="Camera3D" type="Camera3D" parent="HBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/CameraPivot/TweenTransformSmoother"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 1.5)
-cull_mask = 1048569
+cull_mask = 1
 environment = ExtResource("2_o5f6s")

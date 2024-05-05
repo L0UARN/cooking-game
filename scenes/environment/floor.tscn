@@ -60,5 +60,6 @@ shape = SubResource("BoxShape3D_amkml")
 [node name="Placement" type="Marker3D" parent="."]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
+layers = 3
 mesh = SubResource("ArrayMesh_p08yi")
 skeleton = NodePath("")
