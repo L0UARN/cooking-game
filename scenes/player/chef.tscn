@@ -58,4 +58,4 @@ EaseType = 1
 TransitionType = 5
 
 [node name="Camera3D" type="Camera3D" parent="TweenTransformSmoother"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

@@ -23,25 +23,30 @@ namespace CookingGame
 
 			if (IsDefaultState)
 			{
-				playerStates.Switch(StateName);
-			}
-			else
-			{
-				Deactivate();
+				playerStates.SwitchProcess(StateName);
+				playerStates.SwitchVisuals(StateName);
 			}
 		}
 
-		public void Activate()
+		public void ActivateProcess()
+		{
+			Container.ProcessMode = ProcessModeEnum.Inherit;
+		}
+
+		public void DeactivateProcess()
+		{
+			Container.ProcessMode = ProcessModeEnum.Disabled;
+		}
+
+		public void ActivateVisuals()
 		{
 			Camera.MakeCurrent();
-			Container.ProcessMode = ProcessModeEnum.Inherit;
 			Container?.Show();
 			UiContainer?.Show();
 		}
 
-		public void Deactivate()
+		public void DeactivateVisuals()
 		{
-			Container.ProcessMode = ProcessModeEnum.Disabled;
 			Container?.Hide();
 			UiContainer?.Hide();
 		}

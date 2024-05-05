@@ -9,10 +9,11 @@ namespace CookingGame
 		{
 			base._Input(inputEvent);
 
-			if (inputEvent.IsAction("Switch"))
+			if (inputEvent.IsActionPressed("Switch"))
 			{
 				PlayerStateManager playerStates = GetNode<PlayerStateManager>("/root/PlayerStates");
-				playerStates.Switch("chef");
+				playerStates.Transition("chef");
+				GD.Print("Switching to chef state");
 			}
 		}
 	}

@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://mfh4u5boltps"]
+
+[ext_resource type="Shader" path="res://resources/ui/transition.gdshader" id="1_pw6tj"]
+
+[resource]
+shader = ExtResource("1_pw6tj")
+shader_parameter/radius = 1.0

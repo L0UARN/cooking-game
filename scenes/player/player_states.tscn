@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck3m0c8214f57"]
+[gd_scene load_steps=3 format=3 uid="uid://ck3m0c8214f57"]
 
 [ext_resource type="Script" path="res://scripts/player/PlayerStateManager.cs" id="1_d8wse"]
+[ext_resource type="Material" uid="uid://mfh4u5boltps" path="res://resources/ui/transition.tres" id="2_s5wd1"]
 
-[node name="PlayerStates" type="Node"]
+[node name="PlayerStates" type="Node" node_paths=PackedStringArray("TransitionScreen")]
 script = ExtResource("1_d8wse")
+TransitionScreen = NodePath("CanvasLayer/ColorRect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = 1
+z_as_relative = false
+material = ExtResource("2_s5wd1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
