@@ -26,6 +26,11 @@ namespace CookingGame
 				playerStates.SwitchProcess(StateName);
 				playerStates.SwitchVisuals(StateName);
 			}
+			else
+			{
+				DeactivateProcess();
+				DeactivateVisuals();
+			}
 		}
 
 		public void ActivateProcess()
