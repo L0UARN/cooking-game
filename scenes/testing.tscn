@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbjardqx8c4eq"]
+[gd_scene load_steps=6 format=3 uid="uid://bbjardqx8c4eq"]
 
 [ext_resource type="PackedScene" uid="uid://bi47llasks17r" path="res://scenes/environment/floor.tscn" id="1_gf8ts"]
+[ext_resource type="PackedScene" uid="uid://b7vx3o5dxrst1" path="res://scenes/environment/corner.tscn" id="5_3d7uu"]
 [ext_resource type="PackedScene" uid="uid://c2xnwv21wnqtp" path="res://scenes/player/builder.tscn" id="5_6k1ox"]
 [ext_resource type="Script" path="res://scripts/player/TempStateSwitcher.cs" id="9_b7jqi"]
 [ext_resource type="PackedScene" uid="uid://hyqu13qc2beb" path="res://scenes/environment/wall.tscn" id="9_tab6j"]
@@ -152,6 +153,18 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0,
 
 [node name="Wall20" parent="Room/Walls" instance=ExtResource("9_tab6j")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, -2)
+
+[node name="Corner" parent="Room/Walls" instance=ExtResource("5_3d7uu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="Corner3" parent="Room/Walls" instance=ExtResource("5_3d7uu")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, -3)
+
+[node name="Corner4" parent="Room/Walls" instance=ExtResource("5_3d7uu")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, -3)
+
+[node name="Corner2" parent="Room/Walls" instance=ExtResource("5_3d7uu")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, 3)
 
 [node name="TempStateSwitcher" type="Node" parent="."]
 script = ExtResource("9_b7jqi")

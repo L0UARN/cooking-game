@@ -13,7 +13,6 @@ namespace CookingGame
 			{
 				PlayerStateManager playerStates = GetNode<PlayerStateManager>("/root/PlayerStates");
 				playerStates.Transition("chef");
-				GD.Print("Switching to chef state");
 			}
 		}
 	}

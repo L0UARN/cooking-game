@@ -12,3 +12,4 @@ Name = "Doormat"
 Icon = ExtResource("1_yhmdd")
 Scene = ExtResource("2_xhsqx")
 AdjascentWall = ExtResource("1_dxfba")
+IsSolid = false

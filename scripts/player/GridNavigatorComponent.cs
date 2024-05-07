@@ -18,6 +18,7 @@ namespace CookingGame
 		public delegate void NavigatedEventHandler();
 
 		private bool ShouldDoInitialCheck = true;
+		private BuildableDb Buildables = null;
 
 		public override void _Ready()
 		{
@@ -27,6 +28,7 @@ namespace CookingGame
 			if (NextCollisionChecker != null)
 			{
 				NextCollisionChecker.ProcessMode = ProcessModeEnum.Disabled;
+				Buildables = GetNode<BuildableDb>("/root/Buildables");
 			}
 		}
 
@@ -56,9 +58,13 @@ namespace CookingGame
 				NextCollisionChecker.ForceRaycastUpdate();
 				NextCollisionChecker.ProcessMode = ProcessModeEnum.Disabled;
 
-				if (NextCollisionChecker.IsColliding())
+				if (NextCollisionChecker.GetCollider() is BuildableWrapper buildable)
 				{
-					return null;
+					Buildable targetBuildable = Buildables.GetById(buildable.BuildableId);
+					if (targetBuildable != null && targetBuildable.IsSolid)
+					{
+						return null;
+					}
 				}
 			}
 
