@@ -187,6 +187,7 @@ Switch={
 3d_physics/layer_1="Floor"
 3d_physics/layer_2="Walls"
 3d_physics/layer_3="Buildables"
+3d_physics/layer_4="Point of views"
 
 [physics]
 

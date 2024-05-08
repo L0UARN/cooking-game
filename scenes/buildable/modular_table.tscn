@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://p5afmpn3r2g5"]
+[gd_scene load_steps=60 format=3 uid="uid://p5afmpn3r2g5"]
 
 [ext_resource type="Script" path="res://scripts/buildable/ModularTableComponent.cs" id="1_7l20r"]
 [ext_resource type="PackedScene" uid="uid://df2vleehiopwt" path="res://scenes/buildable/buildable_wrapper.tscn" id="1_uof4d"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://cbsdl46hvkec" path="res://assets/models/Furniture_BaseSimpleColorMap.png" id="25_goopk"]
 [ext_resource type="Texture2D" uid="uid://kwvakx45h25x" path="res://assets/models/Furniture_BaseSimpleMetallicMap-BaseSimpleRoughnessMap.png" id="26_hvls6"]
 [ext_resource type="Texture2D" uid="uid://bwi5foat6vxk5" path="res://assets/models/Furniture_BaseSimpleNormalMap.png" id="27_wwk0s"]
+[ext_resource type="Script" path="res://scripts/environment/PointOfView.cs" id="28_cc4ik"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkor1"]
 resource_name = "CountertopDMapped"
@@ -470,6 +471,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_o3bah")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_rooqe"]
+size = Vector3(0.8, 1, 0.1)
+
 [node name="ModularTable" node_paths=PackedStringArray("Meshes") instance=ExtResource("1_uof4d")]
 BuildableId = &"modular_table"
 Meshes = NodePath("Meshes")
@@ -571,3 +575,55 @@ target_position = Vector3(1, 0, 0)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="PointOfViewFront" type="Area3D" parent="." index="5" node_paths=PackedStringArray("Placement")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.45)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("28_cc4ik")
+Placement = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewFront" index="0"]
+shape = SubResource("BoxShape3D_rooqe")
+
+[node name="Marker3D" type="Marker3D" parent="PointOfViewFront" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
+
+[node name="PointOfViewLeft" type="Area3D" parent="." index="6" node_paths=PackedStringArray("Placement")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.45, 1, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("28_cc4ik")
+Placement = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewLeft" index="0"]
+shape = SubResource("BoxShape3D_rooqe")
+
+[node name="Marker3D" type="Marker3D" parent="PointOfViewLeft" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
+
+[node name="PointOfViewBack" type="Area3D" parent="." index="7" node_paths=PackedStringArray("Placement")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, -0.45)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("28_cc4ik")
+Placement = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewBack" index="0"]
+shape = SubResource("BoxShape3D_rooqe")
+
+[node name="Marker3D" type="Marker3D" parent="PointOfViewBack" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
+
+[node name="PointOfViewRight" type="Area3D" parent="." index="8" node_paths=PackedStringArray("Placement")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0.45, 1, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("28_cc4ik")
+Placement = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewRight" index="0"]
+shape = SubResource("BoxShape3D_rooqe")
+
+[node name="Marker3D" type="Marker3D" parent="PointOfViewRight" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)

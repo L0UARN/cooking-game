@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq5gkvxy7wth2"]
+[gd_scene load_steps=7 format=3 uid="uid://dq5gkvxy7wth2"]
 
 [ext_resource type="Script" path="res://scripts/player/GridNavigatorComponent.cs" id="1_ktck4"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_nwanl"]
 [ext_resource type="Script" path="res://scripts/player/chef/ChefMovementComponent.cs" id="2_0i88y"]
 [ext_resource type="Script" path="res://scripts/player/chef/ChefMovementInputComponent.cs" id="3_1f7sq"]
 [ext_resource type="Script" path="res://scripts/player/TweenTransformSmoother.cs" id="4_aq20u"]
+[ext_resource type="Script" path="res://scripts/player/chef/ChefViewComponent.cs" id="6_o7s07"]
 
 [node name="Chef" type="Node3D"]
 
@@ -12,7 +13,7 @@
 script = ExtResource("1_nwanl")
 StateName = &"chef"
 Container = NodePath("..")
-Camera = NodePath("../TweenTransformSmoother/Camera3D")
+Camera = NodePath("../HeadContainer/Head/TweenTransformSmoother/Camera3D")
 
 [node name="GridNavigatorComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "NextTileChecker", "NextCollisionChecker", "CurrentTileChecker")]
 script = ExtResource("1_ktck4")
@@ -51,11 +52,27 @@ MovementCooldown = NodePath("../Timer")
 wait_time = 0.33
 one_shot = true
 
-[node name="TweenTransformSmoother" type="Node3D" parent="."]
+[node name="HeadContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="ChefViewComponent" type="Node" parent="HeadContainer" node_paths=PackedStringArray("Head", "PointOfViewChecker", "Movement")]
+script = ExtResource("6_o7s07")
+Head = NodePath("../Head")
+PointOfViewChecker = NodePath("../PointOfViewChecker")
+Movement = NodePath("../../ChefMovementComponent")
+
+[node name="PointOfViewChecker" type="RayCast3D" parent="HeadContainer"]
+target_position = Vector3(0, 0, -1)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Head" type="Node3D" parent="HeadContainer"]
+
+[node name="TweenTransformSmoother" type="Node3D" parent="HeadContainer/Head"]
 script = ExtResource("4_aq20u")
 SmoothingDuration = 0.33
 EaseType = 1
 TransitionType = 5
 
-[node name="Camera3D" type="Camera3D" parent="TweenTransformSmoother"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="Camera3D" type="Camera3D" parent="HeadContainer/Head/TweenTransformSmoother"]

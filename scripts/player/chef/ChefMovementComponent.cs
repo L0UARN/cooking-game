@@ -10,24 +10,35 @@ namespace CookingGame
 		[Export]
 		private Node3D Body = null;
 
+		[Signal]
+		public delegate void MovedEventHandler();
+
 		public void MoveForward()
 		{
-			Navigator.NavigateUp();
+			if (Navigator.NavigateUp())
+			{
+				EmitSignal(SignalName.Moved);
+			}
 		}
 
 		public void MoveBackward()
 		{
-			Navigator.NavigateDown();
+			if (Navigator.NavigateDown())
+			{
+				EmitSignal(SignalName.Moved);
+			}
 		}
 
 		public void RotateLeft()
 		{
 			Body.Rotate(Vector3.Up, Mathf.Pi / 2);
+			EmitSignal(SignalName.Moved);
 		}
 
 		public void RotateRight()
 		{
 			Body.Rotate(Vector3.Up, -Mathf.Pi / 2);
+			EmitSignal(SignalName.Moved);
 		}
 	}
 }
