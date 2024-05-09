@@ -12,6 +12,9 @@ namespace CookingGame
 		[Export]
 		private ChefMovementComponent Movement = null;
 
+		[Signal]
+		public delegate void ViewChangedEventHandler(PointOfView pointOfView);
+
 		private void HandleView()
 		{
 			PointOfViewChecker.ProcessMode = ProcessModeEnum.Inherit;
@@ -21,10 +24,12 @@ namespace CookingGame
 			if (PointOfViewChecker.GetCollider() is PointOfView pointOfView)
 			{
 				Head.GlobalTransform = pointOfView.Placement.GlobalTransform;
+				EmitSignal(SignalName.ViewChanged, pointOfView);
 			}
 			else
 			{
 				Head.Transform = Transform3D.Identity;
+				EmitSignal(SignalName.ViewChanged, null);
 			}
 		}
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq5gkvxy7wth2"]
+[gd_scene load_steps=9 format=3 uid="uid://dq5gkvxy7wth2"]
 
 [ext_resource type="Script" path="res://scripts/player/GridNavigatorComponent.cs" id="1_ktck4"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_nwanl"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/player/chef/ChefMovementInputComponent.cs" id="3_1f7sq"]
 [ext_resource type="Script" path="res://scripts/player/TweenTransformSmoother.cs" id="4_aq20u"]
 [ext_resource type="Script" path="res://scripts/player/chef/ChefViewComponent.cs" id="6_o7s07"]
+[ext_resource type="Script" path="res://scripts/player/chef/ChefInteractorComponent.cs" id="6_t3y2i"]
+[ext_resource type="Script" path="res://scripts/player/chef/ChefInteractorInputComponent.cs" id="7_psh7e"]
 
 [node name="Chef" type="Node3D"]
 
@@ -46,9 +48,9 @@ Body = NodePath("..")
 [node name="ChefMovementInputComponent" type="Node" parent="." node_paths=PackedStringArray("Movement", "MovementCooldown")]
 script = ExtResource("3_1f7sq")
 Movement = NodePath("../ChefMovementComponent")
-MovementCooldown = NodePath("../Timer")
+MovementCooldown = NodePath("../MovementCooldown")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="MovementCooldown" type="Timer" parent="."]
 wait_time = 0.33
 one_shot = true
 
@@ -64,6 +66,31 @@ Movement = NodePath("../../ChefMovementComponent")
 [node name="PointOfViewChecker" type="RayCast3D" parent="HeadContainer"]
 target_position = Vector3(0, 0, -1)
 collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="ChefInteractorComponent" type="Node" parent="HeadContainer" node_paths=PackedStringArray("View")]
+script = ExtResource("6_t3y2i")
+View = NodePath("../ChefViewComponent")
+
+[node name="ChefInteractorInputComponent" type="Node" parent="HeadContainer" node_paths=PackedStringArray("Interactor", "SelectCooldown", "InteractCooldown", "MouseSelectRay")]
+script = ExtResource("7_psh7e")
+Interactor = NodePath("../ChefInteractorComponent")
+SelectCooldown = NodePath("../SelectCooldown")
+InteractCooldown = NodePath("../InteractCooldown")
+MouseSelectRay = NodePath("../MouseSelectRay")
+
+[node name="SelectCooldown" type="Timer" parent="HeadContainer"]
+wait_time = 0.33
+one_shot = true
+
+[node name="InteractCooldown" type="Timer" parent="HeadContainer"]
+wait_time = 0.33
+one_shot = true
+
+[node name="MouseSelectRay" type="RayCast3D" parent="HeadContainer"]
+target_position = Vector3(0, 0, -1)
+collision_mask = 16
 collide_with_areas = true
 collide_with_bodies = false
 

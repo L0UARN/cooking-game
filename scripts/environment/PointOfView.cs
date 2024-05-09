@@ -7,5 +7,7 @@ namespace CookingGame
 	{
 		[Export]
 		public Node3D Placement { get; set; } = null;
+		[Export]
+		public Interactable DefaultInteractable { get; set; } = null;
 	}
 }
