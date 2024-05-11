@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://rphm8mone5xn"]
+
+[ext_resource type="Script" path="res://scripts/items/Item.cs" id="1_v8t1v"]
+
+[resource]
+script = ExtResource("1_v8t1v")
+Id = &"potato"
+Name = "Potato"

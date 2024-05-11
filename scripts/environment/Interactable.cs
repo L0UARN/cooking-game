@@ -15,11 +15,11 @@ namespace CookingGame
 		public Interactable Right { get; set; } = null;
 
 		[Signal]
-		public delegate void InteractedEventHandler();
+		public delegate void InteractedEventHandler(ChefInventoryComponent inventory, StringName slot);
 
-		public void Interact()
+		public void Interact(ChefInventoryComponent inventory, StringName slot)
 		{
-			EmitSignal(SignalName.Interacted);
+			EmitSignal(SignalName.Interacted, inventory, slot);
 		}
 	}
 }

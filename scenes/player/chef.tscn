@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq5gkvxy7wth2"]
+[gd_scene load_steps=10 format=3 uid="uid://dq5gkvxy7wth2"]
 
 [ext_resource type="Script" path="res://scripts/player/GridNavigatorComponent.cs" id="1_ktck4"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_nwanl"]
 [ext_resource type="Script" path="res://scripts/player/chef/ChefMovementComponent.cs" id="2_0i88y"]
 [ext_resource type="Script" path="res://scripts/player/chef/ChefMovementInputComponent.cs" id="3_1f7sq"]
 [ext_resource type="Script" path="res://scripts/player/TweenTransformSmoother.cs" id="4_aq20u"]
+[ext_resource type="Script" path="res://scripts/player/chef/ChefInventoryComponent.cs" id="5_augjt"]
 [ext_resource type="Script" path="res://scripts/player/chef/ChefViewComponent.cs" id="6_o7s07"]
 [ext_resource type="Script" path="res://scripts/player/chef/ChefInteractorComponent.cs" id="6_t3y2i"]
 [ext_resource type="Script" path="res://scripts/player/chef/ChefInteractorInputComponent.cs" id="7_psh7e"]
@@ -53,6 +54,9 @@ MovementCooldown = NodePath("../MovementCooldown")
 [node name="MovementCooldown" type="Timer" parent="."]
 wait_time = 0.33
 one_shot = true
+
+[node name="ChefInventoryComponent" type="Node" parent="."]
+script = ExtResource("5_augjt")
 
 [node name="HeadContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

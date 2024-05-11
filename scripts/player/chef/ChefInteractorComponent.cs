@@ -7,6 +7,8 @@ namespace CookingGame
 	{
 		[Export]
 		private ChefViewComponent View = null;
+		[Export]
+		private ChefInventoryComponent Inventory = null;
 
 		private Interactable _Selection = null;
 		public Interactable Selection
@@ -65,6 +67,19 @@ namespace CookingGame
 			}
 
 			return false;
+		}
+
+		public void Interact(StringName slot)
+		{
+			if (Selection == null)
+			{
+				return;
+			}
+
+			if (Selection is Interactable interactable)
+			{
+				interactable.Interact(Inventory, slot);
+			}
 		}
 
 		private void HandleView(PointOfView pointOfView)

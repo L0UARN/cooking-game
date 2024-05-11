@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://klf78q73lvjx"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_crrqn"]
+radius = 0.05
+height = 0.1
+
+[node name="Potato" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_crrqn")
