@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqwd3ea0symqi"]
+
+[ext_resource type="Script" path="res://scripts/environment/Interactable.cs" id="1_kxfui"]
+[ext_resource type="Script" path="res://scripts/items/ItemDisplay.cs" id="2_ayvi0"]
+[ext_resource type="Script" path="res://scripts/items/ItemContainerComponent.cs" id="3_tm6y2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_45j5m"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="ItemInteractable" type="Area3D"]
+script = ExtResource("1_kxfui")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_45j5m")
+
+[node name="ItemDisplay" type="Node3D" parent="."]
+script = ExtResource("2_ayvi0")
+
+[node name="ItemContainerComponent" type="Node" parent="." node_paths=PackedStringArray("Interactable", "ItemDisplay")]
+script = ExtResource("3_tm6y2")
+Interactable = NodePath("..")
+ItemDisplay = NodePath("../ItemDisplay")

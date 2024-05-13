@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://p5afmpn3r2g5"]
+[gd_scene load_steps=61 format=3 uid="uid://p5afmpn3r2g5"]
 
 [ext_resource type="Script" path="res://scripts/buildable/ModularTableComponent.cs" id="1_7l20r"]
 [ext_resource type="PackedScene" uid="uid://df2vleehiopwt" path="res://scenes/buildable/buildable_wrapper.tscn" id="1_uof4d"]
@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://kwvakx45h25x" path="res://assets/models/Furniture_BaseSimpleMetallicMap-BaseSimpleRoughnessMap.png" id="26_hvls6"]
 [ext_resource type="Texture2D" uid="uid://bwi5foat6vxk5" path="res://assets/models/Furniture_BaseSimpleNormalMap.png" id="27_wwk0s"]
 [ext_resource type="Script" path="res://scripts/environment/PointOfView.cs" id="28_cc4ik"]
-[ext_resource type="Script" path="res://scripts/environment/Interactable.cs" id="29_enolk"]
+[ext_resource type="PackedScene" uid="uid://cqwd3ea0symqi" path="res://scenes/items/item_interactable.tscn" id="29_73jb1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkor1"]
 resource_name = "CountertopDMapped"
@@ -475,13 +475,6 @@ shadow_mesh = SubResource("ArrayMesh_o3bah")
 [sub_resource type="BoxShape3D" id="BoxShape3D_rooqe"]
 size = Vector3(0.8, 1, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tp7w3"]
-size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_4ir8t"]
-radius = 0.05
-height = 0.1
-
 [node name="ModularTable" node_paths=PackedStringArray("Meshes") instance=ExtResource("1_uof4d")]
 BuildableId = &"modular_table"
 Meshes = NodePath("Meshes")
@@ -590,7 +583,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("28_cc4ik")
 Placement = NodePath("Marker3D")
-DefaultInteractable = NodePath("../TempInteractables/InteractableCenter")
+DefaultInteractable = NodePath("../TempInteractables/Left")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewFront" index="0"]
 shape = SubResource("BoxShape3D_rooqe")
@@ -604,7 +597,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("28_cc4ik")
 Placement = NodePath("Marker3D")
-DefaultInteractable = NodePath("../TempInteractables/InteractableCenter")
+DefaultInteractable = NodePath("../TempInteractables/Left")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewLeft" index="0"]
 shape = SubResource("BoxShape3D_rooqe")
@@ -618,7 +611,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("28_cc4ik")
 Placement = NodePath("Marker3D")
-DefaultInteractable = NodePath("../TempInteractables/InteractableCenter")
+DefaultInteractable = NodePath("../TempInteractables/Left")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewBack" index="0"]
 shape = SubResource("BoxShape3D_rooqe")
@@ -632,7 +625,7 @@ collision_layer = 8
 collision_mask = 0
 script = ExtResource("28_cc4ik")
 Placement = NodePath("Marker3D")
-DefaultInteractable = NodePath("../TempInteractables/InteractableCenter")
+DefaultInteractable = NodePath("../TempInteractables/Left")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewRight" index="0"]
 shape = SubResource("BoxShape3D_rooqe")
@@ -643,59 +636,10 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="TempInteractables" type="Node3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="InteractableCenter" type="Area3D" parent="TempInteractables" index="0" node_paths=PackedStringArray("Up", "Down", "Left")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0501058, 0)
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("29_enolk")
-Up = NodePath("../InteractableUpLeft")
-Down = NodePath("../InteractableDown")
-Left = NodePath("../InteractableUpLeft")
+[node name="Left" parent="TempInteractables" index="0" node_paths=PackedStringArray("Right") instance=ExtResource("29_73jb1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.05, 0)
+Right = NodePath("../Right")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TempInteractables/InteractableCenter" index="0"]
-shape = SubResource("BoxShape3D_tp7w3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TempInteractables/InteractableCenter" index="1"]
-mesh = SubResource("SphereMesh_4ir8t")
-
-[node name="InteractableDown" type="Area3D" parent="TempInteractables" index="1" node_paths=PackedStringArray("Up", "Left")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0501058, 0.224468)
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("29_enolk")
-Up = NodePath("../InteractableCenter")
-Left = NodePath("../InteractableDownLeft")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TempInteractables/InteractableDown" index="0"]
-shape = SubResource("BoxShape3D_tp7w3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TempInteractables/InteractableDown" index="1"]
-mesh = SubResource("SphereMesh_4ir8t")
-
-[node name="InteractableDownLeft" type="Area3D" parent="TempInteractables" index="2" node_paths=PackedStringArray("Up", "Right")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231242, 0.0501058, 0.224468)
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("29_enolk")
-Up = NodePath("../InteractableUpLeft")
-Right = NodePath("../InteractableDown")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TempInteractables/InteractableDownLeft" index="0"]
-shape = SubResource("BoxShape3D_tp7w3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TempInteractables/InteractableDownLeft" index="1"]
-mesh = SubResource("SphereMesh_4ir8t")
-
-[node name="InteractableUpLeft" type="Area3D" parent="TempInteractables" index="3" node_paths=PackedStringArray("Down", "Right")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231242, 0.0501058, -0.260122)
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("29_enolk")
-Down = NodePath("../InteractableDownLeft")
-Right = NodePath("../InteractableCenter")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TempInteractables/InteractableUpLeft" index="0"]
-shape = SubResource("BoxShape3D_tp7w3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TempInteractables/InteractableUpLeft" index="1"]
-mesh = SubResource("SphereMesh_4ir8t")
+[node name="Right" parent="TempInteractables" index="1" node_paths=PackedStringArray("Left") instance=ExtResource("29_73jb1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.05, 0)
+Left = NodePath("../Left")
