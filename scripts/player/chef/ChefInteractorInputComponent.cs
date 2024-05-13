@@ -42,22 +42,26 @@ namespace CookingGame
 			Vector2[] possibleDirections = { Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right };
 			Vector2 closestDirection = possibleDirections.MaxBy(d => direction.Dot(d)).Normalized();
 
-			if (closestDirection.IsEqualApprox(Vector2.Up))
+			Camera3D camera = GetViewport().GetCamera3D();
+			float offset = Mathf.AngleDifference(Interactor.Selection.GlobalRotation.Y, camera.GlobalRotation.Y);
+			Vector2 adjustedDirection = closestDirection.Rotated(-offset);
+
+			if (adjustedDirection.IsEqualApprox(Vector2.Up))
 			{
 				Interactor.SelectUp();
 				SelectCooldown.Start();
 			}
-			else if (closestDirection.IsEqualApprox(Vector2.Down))
+			else if (adjustedDirection.IsEqualApprox(Vector2.Down))
 			{
 				Interactor.SelectDown();
 				SelectCooldown.Start();
 			}
-			else if (closestDirection.IsEqualApprox(Vector2.Left))
+			else if (adjustedDirection.IsEqualApprox(Vector2.Left))
 			{
 				Interactor.SelectLeft();
 				SelectCooldown.Start();
 			}
-			else if (closestDirection.IsEqualApprox(Vector2.Right))
+			else if (adjustedDirection.IsEqualApprox(Vector2.Right))
 			{
 				Interactor.SelectRight();
 				SelectCooldown.Start();
