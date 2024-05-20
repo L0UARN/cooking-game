@@ -1,54 +1,52 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi47llasks17r"]
+[gd_scene load_steps=8 format=3 uid="uid://bi47llasks17r"]
 
 [ext_resource type="Script" path="res://scripts/environment/GridTile.cs" id="1_oq7bq"]
-[ext_resource type="Texture2D" uid="uid://cdikbssyotsrf" path="res://assets/models/Furniture_FloorColorMap.png" id="2_k2n46"]
-[ext_resource type="Texture2D" uid="uid://dnxxaqpdbh52q" path="res://assets/models/Furniture_FloorRoughnessMap.png" id="3_4m6ue"]
-[ext_resource type="Texture2D" uid="uid://wdvad38hv1tl" path="res://assets/models/Furniture_FloorNormalMap.png" id="4_pk7q6"]
+[ext_resource type="Texture2D" uid="uid://byhhmhfyjylrw" path="res://assets/new_models/general_FloorColorMap.png" id="2_dh5wv"]
+[ext_resource type="Texture2D" uid="uid://ciddy24jmh7l3" path="res://assets/new_models/general_FloorRoughnessMap.png" id="3_w1lqb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_amkml"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pdce4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygxjt"]
 resource_name = "FloorMapped"
-cull_mode = 2
-albedo_texture = ExtResource("2_k2n46")
-metallic_texture = ExtResource("3_4m6ue")
+albedo_texture = ExtResource("2_dh5wv")
+metallic_texture = ExtResource("3_w1lqb")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("3_4m6ue")
+roughness_texture = ExtResource("3_w1lqb")
 roughness_texture_channel = 1
-normal_enabled = true
-normal_texture = ExtResource("4_pk7q6")
+texture_filter = 2
+texture_repeat = false
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_2bcir"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_u0s3j"]
 _surfaces = [{
-"aabb": AABB(-0.5, -0.5, -0.5, 1, 1.00136e-05, 1.00001),
+"aabb": AABB(-0.5, -0.6, -0.5, 1, 0.10001, 1.00001),
 "format": 34896613377,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"index_count": 30,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0, 3, 0, 5, 0, 6, 0, 3, 0, 1, 0, 5, 0, 2, 0, 6, 0, 7, 0, 2, 0, 3, 0, 6, 0, 1, 0, 4, 0, 5, 0, 1, 0, 0, 0, 4, 0, 0, 0, 7, 0, 4, 0, 0, 0, 2, 0, 7, 0),
 "name": "FloorMapped",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0)
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 248, 255, 254, 255, 0, 0, 0, 0, 248, 255, 0, 0, 0, 0, 255, 255, 248, 255, 254, 255, 0, 0, 255, 255, 248, 255, 0, 0, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0)
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_p08yi"]
-resource_name = "Furniture_Plane_001"
+[sub_resource type="ArrayMesh" id="ArrayMesh_ouvjb"]
+resource_name = "general_Cube"
 _surfaces = [{
-"aabb": AABB(-0.5, -0.5, -0.5, 1, 1.00136e-05, 1.00001),
-"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0),
+"aabb": AABB(-0.5, -0.6, -0.5, 1, 0.10001, 1.00001),
+"attribute_data": PackedByteArray(200, 218, 165, 75, 152, 237, 150, 255, 104, 0, 150, 255, 200, 218, 150, 255, 42, 181, 165, 75, 104, 0, 165, 75, 152, 237, 165, 75, 89, 180, 150, 255, 249, 199, 150, 255, 42, 181, 150, 255, 89, 180, 165, 75, 249, 199, 165, 75, 199, 236, 165, 75, 150, 255, 150, 255, 199, 236, 150, 255, 41, 199, 165, 75, 41, 199, 150, 255, 248, 217, 165, 75, 150, 255, 165, 75, 248, 217, 150, 255),
 "format": 34896613399,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
-"material": SubResource("StandardMaterial3D_pdce4"),
+"index_count": 30,
+"index_data": PackedByteArray(10, 0, 2, 0, 5, 0, 10, 0, 7, 0, 2, 0, 9, 0, 15, 0, 16, 0, 9, 0, 4, 0, 15, 0, 8, 0, 17, 0, 19, 0, 8, 0, 11, 0, 17, 0, 3, 0, 12, 0, 14, 0, 3, 0, 0, 0, 12, 0, 1, 0, 18, 0, 13, 0, 1, 0, 6, 0, 18, 0),
+"material": SubResource("StandardMaterial3D_ygxjt"),
 "name": "FloorMapped",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 191, 255, 255, 0, 0, 254, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+"vertex_count": 20,
+"vertex_data": PackedByteArray(0, 0, 248, 255, 254, 255, 84, 213, 0, 0, 248, 255, 254, 255, 255, 191, 0, 0, 248, 255, 254, 255, 255, 191, 0, 0, 248, 255, 0, 0, 84, 213, 0, 0, 248, 255, 0, 0, 255, 255, 0, 0, 248, 255, 0, 0, 255, 191, 255, 255, 248, 255, 254, 255, 255, 191, 255, 255, 248, 255, 254, 255, 255, 191, 255, 255, 248, 255, 254, 255, 84, 213, 255, 255, 248, 255, 0, 0, 255, 255, 255, 255, 248, 255, 0, 0, 255, 191, 255, 255, 248, 255, 0, 0, 84, 213, 0, 0, 0, 0, 254, 255, 84, 213, 0, 0, 0, 0, 254, 255, 255, 191, 0, 0, 0, 0, 0, 0, 84, 213, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 84, 213, 255, 255, 0, 0, 254, 255, 255, 191, 255, 255, 0, 0, 254, 255, 84, 213, 84, 85, 170, 170, 255, 127, 255, 127, 255, 255, 255, 127, 84, 85, 170, 170, 255, 63, 255, 191, 255, 255, 255, 127, 255, 127, 255, 127, 255, 255, 255, 127, 170, 170, 84, 85, 255, 63, 255, 191, 255, 255, 255, 127, 170, 170, 84, 85, 84, 85, 170, 170, 255, 127, 255, 127, 84, 85, 170, 170, 255, 63, 255, 191, 255, 63, 255, 191, 170, 170, 84, 85, 255, 127, 255, 127, 170, 170, 84, 85)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_2bcir")
+shadow_mesh = SubResource("ArrayMesh_u0s3j")
 
 [node name="Floor" type="Area3D" node_paths=PackedStringArray("Placement")]
 script = ExtResource("1_oq7bq")
@@ -61,5 +59,5 @@ shape = SubResource("BoxShape3D_amkml")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 layers = 3
-mesh = SubResource("ArrayMesh_p08yi")
+mesh = SubResource("ArrayMesh_ouvjb")
 skeleton = NodePath("")

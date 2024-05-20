@@ -16,6 +16,8 @@ namespace CookingGame
 		private RayCast3D RightDetector = null;
 
 		[Export]
+		private Node3D TopContainer = null;
+		[Export]
 		private MeshInstance3D XTop = null;
 		[Export]
 		private MeshInstance3D TTop = null;
@@ -24,10 +26,12 @@ namespace CookingGame
 		[Export]
 		private MeshInstance3D ITop = null;
 		[Export]
-		private MeshInstance3D DTop = null;
+		private MeshInstance3D UTop = null;
 		[Export]
 		private MeshInstance3D OTop = null;
 
+		[Export]
+		private Node3D BaseContainer = null;
 		[Export]
 		private Godot.Collections.Array<MeshInstance3D> Bases = new();
 
@@ -58,88 +62,105 @@ namespace CookingGame
 			return detectionCount;
 		}
 
-		private void EnableMesh(MeshInstance3D mesh, bool enable)
+		private void EnableBase(MeshInstance3D mesh, bool enable)
 		{
-			if (enable)
+			if (enable && mesh.GetParent() == null)
 			{
-				mesh.Show();
-				mesh.ProcessMode = ProcessModeEnum.Inherit;
+				BaseContainer.AddChild(mesh);
 			}
-			else
+			else if (!enable && mesh.GetParent() == BaseContainer)
 			{
-				mesh.Hide();
-				mesh.ProcessMode = ProcessModeEnum.Disabled;
+				BaseContainer.RemoveChild(mesh);
+			}
+		}
+
+		private void EnableTop(MeshInstance3D mesh, bool enable)
+		{
+			if (enable && mesh.GetParent() == null)
+			{
+				TopContainer.AddChild(mesh);
+			}
+			else if (!enable && mesh.GetParent() == TopContainer)
+			{
+				TopContainer.RemoveChild(mesh);
 			}
 		}
 
 		private void EnableXTop()
 		{
-			EnableMesh(XTop, true);
-			EnableMesh(TTop, false);
-			EnableMesh(LTop, false);
-			EnableMesh(ITop, false);
-			EnableMesh(DTop, false);
-			EnableMesh(OTop, false);
+			EnableTop(XTop, true);
+			EnableTop(TTop, false);
+			EnableTop(LTop, false);
+			EnableTop(ITop, false);
+			EnableTop(UTop, false);
+			EnableTop(OTop, false);
 		}
 
 		private void EnableTTop()
 		{
+			EnableTop(XTop, false);
+			EnableTop(TTop, true);
+			EnableTop(LTop, false);
+			EnableTop(ITop, false);
+			EnableTop(UTop, false);
+			EnableTop(OTop, false);
+
 			TTop.Basis = Basis.Identity;
-			if (!RightDetector.IsColliding())
+			if (!LeftDetector.IsColliding())
 			{
 				TTop.RotateY(0);
 			}
-			else if (!DownDetector.IsColliding())
+			else if (!UpDetector.IsColliding())
 			{
 				TTop.RotateY(Mathf.Pi * -0.5f);
 			}
-			else if (!LeftDetector.IsColliding())
+			else if (!RightDetector.IsColliding())
 			{
 				TTop.RotateY(Mathf.Pi * -1.0f);
 			}
-			else if (!UpDetector.IsColliding())
+			else if (!DownDetector.IsColliding())
 			{
 				TTop.RotateY(Mathf.Pi * -1.5f);
 			}
-
-			EnableMesh(XTop, false);
-			EnableMesh(TTop, true);
-			EnableMesh(LTop, false);
-			EnableMesh(ITop, false);
-			EnableMesh(DTop, false);
-			EnableMesh(OTop, false);
 		}
 
 		private void EnableLTop()
 		{
+			EnableTop(XTop, false);
+			EnableTop(TTop, false);
+			EnableTop(LTop, true);
+			EnableTop(ITop, false);
+			EnableTop(UTop, false);
+			EnableTop(OTop, false);
+
 			LTop.Basis = Basis.Identity;
-			if (DownDetector.IsColliding() && LeftDetector.IsColliding())
+			if (UpDetector.IsColliding() && RightDetector.IsColliding())
 			{
 				LTop.RotateY(0);
 			}
-			else if (LeftDetector.IsColliding() && UpDetector.IsColliding())
+			else if (DownDetector.IsColliding() && RightDetector.IsColliding())
 			{
 				LTop.RotateY(Mathf.Pi * -0.5f);
 			}
-			else if (UpDetector.IsColliding() && RightDetector.IsColliding())
+			else if (DownDetector.IsColliding() && LeftDetector.IsColliding())
 			{
 				LTop.RotateY(Mathf.Pi * -1.0f);
 			}
-			else if (RightDetector.IsColliding() && DownDetector.IsColliding())
+			else if (UpDetector.IsColliding() && LeftDetector.IsColliding())
 			{
 				LTop.RotateY(Mathf.Pi * -1.5f);
 			}
-
-			EnableMesh(XTop, false);
-			EnableMesh(TTop, false);
-			EnableMesh(LTop, true);
-			EnableMesh(ITop, false);
-			EnableMesh(DTop, false);
-			EnableMesh(OTop, false);
 		}
 
 		private void EnableITop()
 		{
+			EnableTop(XTop, false);
+			EnableTop(TTop, false);
+			EnableTop(LTop, false);
+			EnableTop(ITop, true);
+			EnableTop(UTop, false);
+			EnableTop(OTop, false);
+
 			ITop.Basis = Basis.Identity;
 			if (UpDetector.IsColliding() && DownDetector.IsColliding())
 			{
@@ -149,51 +170,44 @@ namespace CookingGame
 			{
 				ITop.RotateY(Mathf.Pi * -0.5f);
 			}
-
-			EnableMesh(XTop, false);
-			EnableMesh(TTop, false);
-			EnableMesh(LTop, false);
-			EnableMesh(ITop, true);
-			EnableMesh(DTop, false);
-			EnableMesh(OTop, false);
 		}
 
-		private void EnableDTop()
+		private void EnableUTop()
 		{
-			DTop.Basis = Basis.Identity;
-			if (DownDetector.IsColliding())
+			EnableTop(XTop, false);
+			EnableTop(TTop, false);
+			EnableTop(LTop, false);
+			EnableTop(ITop, false);
+			EnableTop(UTop, true);
+			EnableTop(OTop, false);
+
+			UTop.Basis = Basis.Identity;
+			if (UpDetector.IsColliding())
 			{
-				DTop.RotateY(0);
-			}
-			else if (LeftDetector.IsColliding())
-			{
-				DTop.RotateY(Mathf.Pi * -0.5f);
-			}
-			else if (UpDetector.IsColliding())
-			{
-				DTop.RotateY(Mathf.Pi * -1.0f);
+				UTop.RotateY(0);
 			}
 			else if (RightDetector.IsColliding())
 			{
-				DTop.RotateY(Mathf.Pi * -1.5f);
+				UTop.RotateY(Mathf.Pi * -0.5f);
 			}
-
-			EnableMesh(XTop, false);
-			EnableMesh(TTop, false);
-			EnableMesh(LTop, false);
-			EnableMesh(ITop, false);
-			EnableMesh(DTop, true);
-			EnableMesh(OTop, false);
+			else if (DownDetector.IsColliding())
+			{
+				UTop.RotateY(Mathf.Pi * -1.0f);
+			}
+			else if (LeftDetector.IsColliding())
+			{
+				UTop.RotateY(Mathf.Pi * -1.5f);
+			}
 		}
 
 		private void EnableOTop()
 		{
-			EnableMesh(XTop, false);
-			EnableMesh(TTop, false);
-			EnableMesh(LTop, false);
-			EnableMesh(ITop, false);
-			EnableMesh(DTop, false);
-			EnableMesh(OTop, true);
+			EnableTop(XTop, false);
+			EnableTop(TTop, false);
+			EnableTop(LTop, false);
+			EnableTop(ITop, false);
+			EnableTop(UTop, false);
+			EnableTop(OTop, true);
 		}
 
 		private void EnableLOrITop()
@@ -217,11 +231,11 @@ namespace CookingGame
 			{
 				if (i == chosenBase)
 				{
-					EnableMesh(Bases[i], true);
+					EnableBase(Bases[i], true);
 				}
 				else
 				{
-					EnableMesh(Bases[i], false);
+					EnableBase(Bases[i], false);
 				}
 			}
 		}
@@ -253,7 +267,7 @@ namespace CookingGame
 			}
 			else if (detectionCount == 1)
 			{
-				EnableDTop();
+				EnableUTop();
 			}
 			else if (detectionCount == 2)
 			{

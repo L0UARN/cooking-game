@@ -16,6 +16,18 @@ namespace CookingGame
 		private BuildableWrapper CurrentBuildable = null;
 		private Node3D CurrentBuildableWall = null;
 
+		private void EnableDefaultWall(bool enable)
+		{
+			if (enable && DefaultWall.GetParent() == null)
+			{
+				WallContainer.AddChild(DefaultWall);
+			}
+			else if (!enable && DefaultWall.GetParent() == WallContainer)
+			{
+				WallContainer.RemoveChild(DefaultWall);
+			}
+		}
+
 		private void HandleChangeBuildable(BuildableWrapper buildable)
 		{
 			CurrentBuildableWall?.QueueFree();
@@ -24,8 +36,7 @@ namespace CookingGame
 			if (buildable == null)
 			{
 				CurrentBuildableWall = null;
-				DefaultWall.Show();
-				DefaultWall.ProcessMode = ProcessModeEnum.Inherit;
+				EnableDefaultWall(true);
 				return;
 			}
 
@@ -33,21 +44,18 @@ namespace CookingGame
 			if (targetBuildable == null)
 			{
 				CurrentBuildableWall = null;
-				DefaultWall.Show();
-				DefaultWall.ProcessMode = ProcessModeEnum.Inherit;
+				EnableDefaultWall(true);
 				return;
 			}
 
 			if (targetBuildable.AdjascentWall == null)
 			{
 				CurrentBuildableWall = null;
-				DefaultWall.Show();
-				DefaultWall.ProcessMode = ProcessModeEnum.Inherit;
+				EnableDefaultWall(true);
 				return;
 			}
 
-			DefaultWall.Hide();
-			DefaultWall.ProcessMode = ProcessModeEnum.Disabled;
+			EnableDefaultWall(false);
 			CurrentBuildableWall = targetBuildable.AdjascentWall.Instantiate<Node3D>();
 			WallContainer.AddChild(CurrentBuildableWall);
 		}

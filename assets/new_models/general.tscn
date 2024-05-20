@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b87rfjvm2jopo"]
+
+[ext_resource type="PackedScene" uid="uid://728t5pe7wi6o" path="res://assets/new_models/general.glb" id="1_3lqvj"]
+
+[node name="General" type="Node3D"]
+
+[node name="general" parent="." instance=ExtResource("1_3lqvj")]
+
+[editable path="general"]
