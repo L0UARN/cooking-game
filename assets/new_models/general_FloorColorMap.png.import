@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://byhhmhfyjylrw"
-path="res://.godot/imported/general_FloorColorMap.png-f600c103ee7ef334f7cf0d6a6aed27d0.ctex"
+path.s3tc="res://.godot/imported/general_FloorColorMap.png-f600c103ee7ef334f7cf0d6a6aed27d0.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={}
 
 [deps]
 
 source_file="res://assets/new_models/general_FloorColorMap.png"
-dest_files=["res://.godot/imported/general_FloorColorMap.png-f600c103ee7ef334f7cf0d6a6aed27d0.ctex"]
+dest_files=["res://.godot/imported/general_FloorColorMap.png-f600c103ee7ef334f7cf0d6a6aed27d0.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -32,4 +33,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

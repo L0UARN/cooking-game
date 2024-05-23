@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://myax3pm68fll"]
+
+[ext_resource type="Shader" path="res://resources/ui/highlight.gdshader" id="1_aoeqe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvgbb"]
+render_priority = 0
+shader = ExtResource("1_aoeqe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akesq"]
+next_pass = SubResource("ShaderMaterial_fvgbb")
+albedo_color = Color(0.694118, 0.196078, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4a2i8"]
+material = SubResource("StandardMaterial3D_akesq")
+
+[node name="HighlightTest" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_4a2i8")

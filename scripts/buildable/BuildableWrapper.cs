@@ -9,6 +9,8 @@ namespace CookingGame
 		public StringName BuildableId { get; set; } = "buildable";
 		[Export]
 		private Node3D Meshes = null;
+		[Export]
+		private HighlighterComponent Highlighter = null;
 
 		[Signal]
 		public delegate void PlacedEventHandler();
@@ -26,7 +28,6 @@ namespace CookingGame
 
 		private Tween ScaleTween = null;
 		private Tween RotateTween = null;
-		private Tween PositionTween = null;
 
 		public override void _Ready()
 		{
@@ -100,22 +101,9 @@ namespace CookingGame
 			get => _Selected;
 			set
 			{
-				if (PositionTween?.IsRunning() == true)
+				if (Highlighter != null)
 				{
-					PositionTween.Pause();
-					PositionTween.CustomStep(1.0f);
-					PositionTween.Kill();
-				}
-
-				if (value)
-				{
-					PositionTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
-					PositionTween.TweenProperty(Meshes, "position:y", Meshes.Position.Y + 0.5f, .5f);
-				}
-				else
-				{
-					PositionTween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo);
-					PositionTween.TweenProperty(Meshes, "position:y", Meshes.Position.Y - 0.5f, .5f);
+					Highlighter.Enabled = value;
 				}
 
 				_Selected = value;

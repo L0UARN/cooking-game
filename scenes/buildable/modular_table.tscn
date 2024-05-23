@@ -1,8 +1,10 @@
-[gd_scene load_steps=52 format=3 uid="uid://p5afmpn3r2g5"]
+[gd_scene load_steps=54 format=3 uid="uid://p5afmpn3r2g5"]
 
 [ext_resource type="Script" path="res://scripts/buildable/ModularTableComponent.cs" id="1_7l20r"]
 [ext_resource type="PackedScene" uid="uid://df2vleehiopwt" path="res://scenes/buildable/buildable_wrapper.tscn" id="1_uof4d"]
 [ext_resource type="Script" path="res://scripts/buildable/BuildablePlacementComponent.cs" id="2_23j0t"]
+[ext_resource type="Script" path="res://scripts/environment/HighlighterComponent.cs" id="4_7i2ah"]
+[ext_resource type="Material" uid="uid://cbvqokkpsmqhw" path="res://resources/ui/highlight.tres" id="5_cjukg"]
 [ext_resource type="Texture2D" uid="uid://bu74bsutxslk5" path="res://assets/new_models/general_BaseCabinetColorAoMap.png" id="16_3bd3j"]
 [ext_resource type="Texture2D" uid="uid://b65bvt2blwmr7" path="res://assets/new_models/general_CountertopXColorAoMap.png" id="16_e0fpp"]
 [ext_resource type="Texture2D" uid="uid://cv5gi8ru7beqn" path="res://assets/new_models/general_BaseCabinetMetallicMap-BaseCabinetRoughnessMap.png" id="17_3vwar"]
@@ -419,9 +421,10 @@ shadow_mesh = SubResource("ArrayMesh_ptbvt")
 [sub_resource type="BoxShape3D" id="BoxShape3D_rooqe"]
 size = Vector3(0.8, 1, 0.1)
 
-[node name="ModularTable" node_paths=PackedStringArray("Meshes") instance=ExtResource("1_uof4d")]
+[node name="ModularTable" node_paths=PackedStringArray("Meshes", "Highlighter") instance=ExtResource("1_uof4d")]
 BuildableId = &"modular_table"
 Meshes = NodePath("Meshes")
+Highlighter = NodePath("HighlighterComponent")
 
 [node name="BuildablePlacementComponent" type="Node" parent="." index="1" node_paths=PackedStringArray("Buildable")]
 script = ExtResource("2_23j0t")
@@ -443,7 +446,12 @@ OTop = NodePath("../Meshes/Countertops/CountertopO")
 BaseContainer = NodePath("../Meshes/Bases")
 Bases = [NodePath("../Meshes/Bases/BaseCabinet"), NodePath("../Meshes/Bases/BaseDrawers"), NodePath("../Meshes/Bases/BaseShelf")]
 
-[node name="Meshes" type="Node3D" parent="." index="3"]
+[node name="HighlighterComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("Highlightables")]
+script = ExtResource("4_7i2ah")
+Highlightables = [NodePath("../Meshes/Countertops/CountertopX"), NodePath("../Meshes/Countertops/CountertopO"), NodePath("../Meshes/Countertops/CountertopI"), NodePath("../Meshes/Countertops/CountertopU"), NodePath("../Meshes/Countertops/CountertopL"), NodePath("../Meshes/Countertops/CountertopT"), NodePath("../Meshes/Bases/BaseCabinet"), NodePath("../Meshes/Bases/BaseDrawers"), NodePath("../Meshes/Bases/BaseShelf")]
+HighlightMaterial = ExtResource("5_cjukg")
+
+[node name="Meshes" type="Node3D" parent="." index="4"]
 
 [node name="Countertops" type="Node3D" parent="Meshes" index="0"]
 
@@ -494,7 +502,7 @@ layers = 3
 mesh = SubResource("ArrayMesh_xld7q")
 skeleton = NodePath("")
 
-[node name="Detectors" type="Node3D" parent="." index="4"]
+[node name="Detectors" type="Node3D" parent="." index="5"]
 
 [node name="UpDetector" type="RayCast3D" parent="Detectors" index="0"]
 target_position = Vector3(0, 0, -1)
@@ -520,7 +528,7 @@ collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="PointOfViewFront" type="Area3D" parent="." index="5" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
+[node name="PointOfViewFront" type="Area3D" parent="." index="6" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.45)
 collision_layer = 8
 collision_mask = 0
@@ -534,7 +542,7 @@ shape = SubResource("BoxShape3D_rooqe")
 [node name="Marker3D" type="Marker3D" parent="PointOfViewFront" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
 
-[node name="PointOfViewLeft" type="Area3D" parent="." index="6" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
+[node name="PointOfViewLeft" type="Area3D" parent="." index="7" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.45, 1, 0)
 collision_layer = 8
 collision_mask = 0
@@ -548,7 +556,7 @@ shape = SubResource("BoxShape3D_rooqe")
 [node name="Marker3D" type="Marker3D" parent="PointOfViewLeft" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
 
-[node name="PointOfViewBack" type="Area3D" parent="." index="7" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
+[node name="PointOfViewBack" type="Area3D" parent="." index="8" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, -0.45)
 collision_layer = 8
 collision_mask = 0
@@ -562,7 +570,7 @@ shape = SubResource("BoxShape3D_rooqe")
 [node name="Marker3D" type="Marker3D" parent="PointOfViewBack" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
 
-[node name="PointOfViewRight" type="Area3D" parent="." index="8" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
+[node name="PointOfViewRight" type="Area3D" parent="." index="9" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0.45, 1, 0)
 collision_layer = 8
 collision_mask = 0
@@ -576,7 +584,7 @@ shape = SubResource("BoxShape3D_rooqe")
 [node name="Marker3D" type="Marker3D" parent="PointOfViewRight" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
 
-[node name="TempInteractables" type="Node3D" parent="." index="9"]
+[node name="TempInteractables" type="Node3D" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Left" parent="TempInteractables" index="0" node_paths=PackedStringArray("Right") instance=ExtResource("29_73jb1")]
