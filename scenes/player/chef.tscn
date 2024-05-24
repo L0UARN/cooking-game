@@ -26,6 +26,7 @@ NextCollisionChecker = NodePath("../NextCollisionChecker")
 CurrentTileChecker = NodePath("../CurrentTileChecker")
 
 [node name="NextTileChecker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 target_position = Vector3(0, 0, -1)
 collide_with_areas = true
 collide_with_bodies = false
@@ -37,7 +38,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="CurrentTileChecker" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collide_with_areas = true
 collide_with_bodies = false
 

@@ -18,6 +18,10 @@ namespace CookingGame
 		[Export]
 		private BuilderInventoryComponent Inventory = null;
 		[Export]
+		private Node3D CameraPivot = null;
+		[Export]
+		private Timer ViewCooldown = null;
+		[Export]
 		private RayCast3D MouseNavigationRay = null;
 
 		private InputInstance InputInstance = null;
@@ -38,7 +42,7 @@ namespace CookingGame
 				return;
 			}
 
-			Vector2 inputDirection = InputInstance.GetVector("NavigateLeft", "NavigateRight", "NavigateUp", "NavigateDown");
+			Vector2 inputDirection = InputInstance.GetVector("BuilderNavigateLeft", "BuilderNavigateRight", "BuilderNavigateUp", "BuilderNavigateDown");
 			if (inputDirection.Length() < 0.5f)
 			{
 				return;
@@ -79,19 +83,35 @@ namespace CookingGame
 			Vector2 mousePosition = GetViewport().GetMousePosition();
 			Camera3D camera = GetViewport().GetCamera3D();
 			Vector3 from = camera.ProjectRayOrigin(mousePosition);
-			Vector3 to = Vector3.Down * 10.0f;
+			Vector3 to = from + camera.ProjectRayNormal(mousePosition) * 500.0f;
 
 			MouseNavigationRay.ProcessMode = ProcessModeEnum.Inherit;
 			MouseNavigationRay.GlobalPosition = from;
 			MouseNavigationRay.TargetPosition = to;
 			MouseNavigationRay.ForceRaycastUpdate();
+			MouseNavigationRay.ProcessMode = ProcessModeEnum.Disabled;
 
 			if (MouseNavigationRay.GetCollider() is GridTile tile)
 			{
 				Navigator.MoveTo(tile);
 			}
+			else if (MouseNavigationRay.GetCollider() is BuildableWrapper buildable)
+			{
+				from = buildable.GlobalPosition;
+				to = from + Vector3.Down * 2.0f;
 
-			MouseNavigationRay.ProcessMode = ProcessModeEnum.Disabled;
+				MouseNavigationRay.ProcessMode = ProcessModeEnum.Inherit;
+				MouseNavigationRay.GlobalPosition = from;
+				MouseNavigationRay.TargetPosition = to;
+				MouseNavigationRay.ForceRaycastUpdate();
+				MouseNavigationRay.ProcessMode = ProcessModeEnum.Disabled;
+
+				if (MouseNavigationRay.GetCollider() is GridTile tileUnderBuildable)
+				{
+					Navigator.MoveTo(tileUnderBuildable);
+				}
+			}
+
 			ShouldDoMouseNavigation = false;
 		}
 
@@ -102,20 +122,39 @@ namespace CookingGame
 				return;
 			}
 
-			if (InputInstance.GetActionStrength("Build") >= 0.5f)
+			if (InputInstance.GetActionStrength("BuilderBuild") >= 0.5f)
 			{
 				Cursor.Build();
 				BuildCooldown.Start();
 			}
-			else if (InputInstance.GetActionStrength("Destroy") >= 0.5f)
+			else if (InputInstance.GetActionStrength("BuilderDestroy") >= 0.5f)
 			{
 				Cursor.Destroy();
 				BuildCooldown.Start();
 			}
-			else if (InputInstance.GetActionStrength("Rotate") >= 0.5f)
+			else if (InputInstance.GetActionStrength("BuilderRotate") >= 0.5f)
 			{
 				Cursor.Rotate();
 				BuildCooldown.Start();
+			}
+		}
+
+		private void HandleView()
+		{
+			if (!ViewCooldown.IsStopped())
+			{
+				return;
+			}
+
+			if (InputInstance.GetActionStrength("BuilderViewLeft") >= 0.5f)
+			{
+				CameraPivot.Rotate(Vector3.Up, -Mathf.Pi * 0.5f);
+				ViewCooldown.Start();
+			}
+			else if (InputInstance.GetActionStrength("BuilderViewRight") >= 0.5f)
+			{
+				CameraPivot.Rotate(Vector3.Up, Mathf.Pi * 0.5f);
+				ViewCooldown.Start();
 			}
 		}
 
@@ -125,6 +164,7 @@ namespace CookingGame
 
 			HandleNavigation();
 			HandleMouseNavigation();
+			HandleView();
 			HandleBuild();
 		}
 

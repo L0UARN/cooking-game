@@ -33,7 +33,7 @@ namespace CookingGame
 				return;
 			}
 
-			Vector2 direction = InputInstance.GetVector("SelectLeft", "SelectRight", "SelectUp", "SelectDown");
+			Vector2 direction = InputInstance.GetVector("ChefSelectLeft", "ChefSelectRight", "ChefSelectUp", "ChefSelectDown");
 			if (direction.Length() < 0.5f)
 			{
 				return;

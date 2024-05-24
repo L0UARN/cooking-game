@@ -60,9 +60,13 @@ namespace CookingGame
 				return;
 			}
 
-			SelectedBuildable.SuccessfullyDestroyed += () => Inventory.Add(SelectedBuildable.BuildableId, 1);
+			SelectedBuildable.SuccessfullyDestroyed += () => {
+				Inventory.Add(SelectedBuildable.BuildableId, 1);
+				SelectedBuildable.Selected = false;
+				SelectedBuildable = null;
+			};
+
 			SelectedBuildable.Destroy();
-			SelectedBuildable = null;
 		}
 
 		public void Rotate()

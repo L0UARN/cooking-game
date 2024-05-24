@@ -27,22 +27,22 @@ namespace CookingGame
 				return;
 			}
 
-			if (InputInstance.GetActionStrength("MoveForward") >= 0.5f)
+			if (InputInstance.GetActionStrength("ChefMoveForward") >= 0.5f)
 			{
 				Movement.MoveForward();
 				MovementCooldown.Start();
 			}
-			else if (InputInstance.GetActionStrength("MoveBackward") >= 0.5f)
+			else if (InputInstance.GetActionStrength("ChefMoveBackward") >= 0.5f)
 			{
 				Movement.MoveBackward();
 				MovementCooldown.Start();
 			}
-			else if (InputInstance.GetActionStrength("RotateLeft") >= 0.5f)
+			else if (InputInstance.GetActionStrength("ChefRotateLeft") >= 0.5f)
 			{
 				Movement.RotateLeft();
 				MovementCooldown.Start();
 			}
-			else if (InputInstance.GetActionStrength("RotateRight") >= 0.5f)
+			else if (InputInstance.GetActionStrength("ChefRotateRight") >= 0.5f)
 			{
 				Movement.RotateRight();
 				MovementCooldown.Start();

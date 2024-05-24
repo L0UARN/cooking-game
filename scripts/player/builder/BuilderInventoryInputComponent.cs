@@ -25,12 +25,12 @@ namespace CookingGame
 
 		private void HandleCycleHoldDetection()
 		{
-			if (InputInstance.IsActionJustPressed("CycleNext") || InputInstance.IsActionJustPressed("CyclePrevious"))
+			if (InputInstance.IsActionJustPressed("BuilderInventoryCycleNext") || InputInstance.IsActionJustPressed("BuilderInventoryCyclePrevious"))
 			{
 				HoldCycleDelay.Start();
 				IsHoldingCycle = true;
 			}
-			else if (InputInstance.IsActionJustReleased("CycleNext") || InputInstance.IsActionJustReleased("CyclePrevious"))
+			else if (InputInstance.IsActionJustReleased("BuilderInventoryCycleNext") || InputInstance.IsActionJustReleased("BuilderInventoryCyclePrevious"))
 			{
 				HoldCycleDelay.Stop();
 				IsHoldingCycle = false;
@@ -50,12 +50,12 @@ namespace CookingGame
 				return;
 			}
 
-			if (InputInstance.GetActionStrength("CycleNext") >= 0.5f)
+			if (InputInstance.GetActionStrength("BuilderInventoryCycleNext") >= 0.5f)
 			{
 				Inventory.CycleNextAvailable();
 				cooldown.Start();
 			}
-			else if (InputInstance.GetActionStrength("CyclePrevious") >= 0.5f)
+			else if (InputInstance.GetActionStrength("BuilderInventoryCyclePrevious") >= 0.5f)
 			{
 				Inventory.CyclePreviousAvailable();
 				cooldown.Start();
@@ -64,39 +64,39 @@ namespace CookingGame
 
 		private void HandleSwitching()
 		{
-			if (InputInstance.IsActionPressed("Slot1"))
+			if (InputInstance.IsActionPressed("BuilderInventorySlot1"))
 			{
 				Inventory.Selection = Mathf.Min(0, Inventory.Slots.Count - 1);
 			}
-			else if (InputInstance.IsActionPressed("Slot2"))
+			else if (InputInstance.IsActionPressed("BuilderInventorySlot2"))
 			{
 				Inventory.Selection = Mathf.Min(1, Inventory.Slots.Count - 1);
 			}
-			else if (InputInstance.IsActionPressed("Slot3"))
+			else if (InputInstance.IsActionPressed("BuilderInventorySlot3"))
 			{
 				Inventory.Selection = Mathf.Min(2, Inventory.Slots.Count - 1);
 			}
-			else if (InputInstance.IsActionPressed("Slot4"))
+			else if (InputInstance.IsActionPressed("BuilderInventorySlot4"))
 			{
 				Inventory.Selection = Mathf.Min(3, Inventory.Slots.Count - 1);
 			}
-			else if (InputInstance.IsActionPressed("Slot5"))
+			else if (InputInstance.IsActionPressed("BuilderInventorySlot5"))
 			{
 				Inventory.Selection = Mathf.Min(4, Inventory.Slots.Count - 1);
 			}
-			else if (InputInstance.IsActionPressed("Slot6"))
+			else if (InputInstance.IsActionPressed("BuilderInventorySlot6"))
 			{
 				Inventory.Selection = Mathf.Min(5, Inventory.Slots.Count - 1);
 			}
-			else if (InputInstance.IsActionPressed("Slot7"))
+			else if (InputInstance.IsActionPressed("BuilderInventorySlot7"))
 			{
 				Inventory.Selection = Mathf.Min(6, Inventory.Slots.Count - 1);
 			}
-			else if (InputInstance.IsActionPressed("Slot8"))
+			else if (InputInstance.IsActionPressed("BuilderInventorySlot8"))
 			{
 				Inventory.Selection = Mathf.Min(7, Inventory.Slots.Count - 1);
 			}
-			else if (InputInstance.IsActionPressed("Slot9"))
+			else if (InputInstance.IsActionPressed("BuilderInventorySlot9"))
 			{
 				Inventory.Selection = Mathf.Min(8, Inventory.Slots.Count - 1);
 			}

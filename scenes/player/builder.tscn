@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2xnwv21wnqtp"]
+[gd_scene load_steps=17 format=3 uid="uid://c2xnwv21wnqtp"]
 
 [ext_resource type="Script" path="res://scripts/player/GridNavigatorComponent.cs" id="1_jl5cy"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_sn2b0"]
-[ext_resource type="PackedScene" uid="uid://w4yo8ae27v2r" path="res://scenes/ui/builder_preview_ui.tscn" id="2_fxupq"]
 [ext_resource type="Script" path="res://scripts/player/builder/BuilderCursorComponent.cs" id="2_uskfl"]
 [ext_resource type="PackedScene" uid="uid://cyhcse50i554t" path="res://scenes/ui/builder_inventory_ui.tscn" id="4_2bwas"]
 [ext_resource type="Script" path="res://scripts/player/builder/BuilderInventoryComponent.cs" id="4_scqkw"]
@@ -97,24 +96,27 @@ StateName = &"builder"
 IsDefaultState = true
 Container = NodePath("..")
 UiContainer = NodePath("../CanvasLayer")
-Camera = NodePath("../Camera3D")
+Camera = NodePath("../CameraPivot/TweenTransformSmoother/Camera3D")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BuilderInventoryUi" parent="CanvasLayer" node_paths=PackedStringArray("Inventory") instance=ExtResource("4_2bwas")]
 Inventory = NodePath("../../BuilderInventoryComponent")
 
-[node name="BuilderPreviewUi" parent="CanvasLayer" node_paths=PackedStringArray("Focus") instance=ExtResource("2_fxupq")]
-Focus = NodePath("../..")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 4, 0.5)
+[node name="CameraPivot" type="Node3D" parent="."]
 top_level = true
+
+[node name="TweenTransformSmoother" type="Node3D" parent="CameraPivot"]
+script = ExtResource("11_j81vp")
+SmoothingDuration = 0.33
+EaseType = 1
+TransitionType = 5
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/TweenTransformSmoother"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3, 3)
 cull_mask = 1
 environment = ExtResource("11_0jc5k")
-projection = 1
 size = 8.0
-far = 20.0
 
 [node name="GridNavigatorComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "NextTileChecker", "CurrentTileChecker")]
 script = ExtResource("1_jl5cy")
@@ -123,12 +125,12 @@ NextTileChecker = NodePath("../NextTileChecker")
 CurrentTileChecker = NodePath("../CurrentTileChecker")
 
 [node name="NextTileChecker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 target_position = Vector3(0, 0, -1)
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="CurrentTileChecker" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -167,13 +169,15 @@ one_shot = true
 wait_time = 0.125
 one_shot = true
 
-[node name="BuilderCursorInputComponent" type="Node" parent="." node_paths=PackedStringArray("Navigator", "NavigationCooldown", "Cursor", "BuildCooldown", "Inventory", "MouseNavigationRay")]
+[node name="BuilderCursorInputComponent" type="Node" parent="." node_paths=PackedStringArray("Navigator", "NavigationCooldown", "Cursor", "BuildCooldown", "Inventory", "CameraPivot", "ViewCooldown", "MouseNavigationRay")]
 script = ExtResource("6_i4gly")
 Navigator = NodePath("../GridNavigatorComponent")
 NavigationCooldown = NodePath("NavigationCooldown")
 Cursor = NodePath("../BuilderCursorComponent")
 BuildCooldown = NodePath("BuildCooldown")
 Inventory = NodePath("../BuilderInventoryComponent")
+CameraPivot = NodePath("../CameraPivot")
+ViewCooldown = NodePath("ViewCooldown")
 MouseNavigationRay = NodePath("../MouseNavigationRay")
 
 [node name="NavigationCooldown" type="Timer" parent="BuilderCursorInputComponent"]
@@ -184,8 +188,13 @@ one_shot = true
 wait_time = 0.25
 one_shot = true
 
+[node name="ViewCooldown" type="Timer" parent="BuilderCursorInputComponent"]
+wait_time = 0.33
+one_shot = true
+
 [node name="MouseNavigationRay" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 0)
+collision_mask = 5
 collide_with_areas = true
 collide_with_bodies = false
 debug_shape_custom_color = Color(1, 0, 0, 1)
