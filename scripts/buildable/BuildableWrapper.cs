@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 namespace CookingGame
 {
@@ -11,6 +12,8 @@ namespace CookingGame
 		private Node3D Meshes = null;
 		[Export]
 		private HighlighterComponent Highlighter = null;
+		[Export]
+		private HighlighterComponent Downlighter = null;
 
 		[Signal]
 		public delegate void PlacedEventHandler();
@@ -32,6 +35,8 @@ namespace CookingGame
 		public override void _Ready()
 		{
 			base._Ready();
+
+			Downlighter?.AddToGroup("BuildableDownlighters");
 			EmitSignal(SignalName.Placed);
 		}
 
@@ -104,6 +109,23 @@ namespace CookingGame
 				if (Highlighter != null)
 				{
 					Highlighter.Enabled = value;
+				}
+
+				Array<Node> downlighters = GetTree().GetNodesInGroup("BuildableDownlighters");
+				foreach (Node other in downlighters)
+				{
+					if (other != Downlighter && other is HighlighterComponent otherDownlighter)
+					{
+						otherDownlighter.Enabled = value;
+					}
+				}
+
+				if (value)
+				{
+					if (Downlighter != null)
+					{
+						Downlighter.Enabled = false;
+					}
 				}
 
 				_Selected = value;

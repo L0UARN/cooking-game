@@ -10,6 +10,8 @@ namespace CookingGame
 		private Array<MeshInstance3D> Highlightables = new();
 		[Export]
 		private Material HighlightMaterial = null;
+		[Export]
+		private bool Override = false;
 
 		private bool _Enabled = false;
 		public bool Enabled
@@ -19,13 +21,13 @@ namespace CookingGame
 			{
 				foreach (MeshInstance3D highlightable in Highlightables)
 				{
-					if (value)
+					if (Override)
 					{
-						highlightable.MaterialOverlay = HighlightMaterial;
+						highlightable.MaterialOverride = value ? HighlightMaterial : null;
 					}
 					else
 					{
-						highlightable.MaterialOverlay = null;
+						highlightable.MaterialOverlay = value ? HighlightMaterial : null;
 					}
 				}
 
