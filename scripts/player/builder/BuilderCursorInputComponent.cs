@@ -50,23 +50,24 @@ namespace CookingGame
 
 			Array<Vector2> possibleDirections = new() { Vector2.Up, Vector2.Left, Vector2.Down, Vector2.Right };
 			Vector2 closestDirection = possibleDirections.MaxBy((Vector2 vector) => vector.Dot(inputDirection));
+			Vector2 adjustedDirection = closestDirection.Rotated(-CameraPivot.Rotation.Y);
 
-			if (closestDirection.IsEqualApprox(Vector2.Up))
+			if (adjustedDirection.IsEqualApprox(Vector2.Up))
 			{
 				Navigator.NavigateUp();
 				NavigationCooldown.Start();
 			}
-			else if (closestDirection.IsEqualApprox(Vector2.Left))
+			else if (adjustedDirection.IsEqualApprox(Vector2.Left))
 			{
 				Navigator.NavigateLeft();
 				NavigationCooldown.Start();
 			}
-			else if (closestDirection.IsEqualApprox(Vector2.Down))
+			else if (adjustedDirection.IsEqualApprox(Vector2.Down))
 			{
 				Navigator.NavigateDown();
 				NavigationCooldown.Start();
 			}
-			else if (closestDirection.IsEqualApprox(Vector2.Right))
+			else if (adjustedDirection.IsEqualApprox(Vector2.Right))
 			{
 				Navigator.NavigateRight();
 				NavigationCooldown.Start();
