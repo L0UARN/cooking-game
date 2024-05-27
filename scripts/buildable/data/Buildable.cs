@@ -13,6 +13,9 @@ namespace CookingGame
 		public Texture2D Icon { get; set; } = null;
 		[Export]
 		public PackedScene Scene { get; set; } = null;
+
+		[Export]
+		public BuildablePlacementStrategy PlacementStrategy { get; set; } = null;
 		[Export]
 		public PackedScene AdjascentWall { get; set; } = null;
 		[Export]

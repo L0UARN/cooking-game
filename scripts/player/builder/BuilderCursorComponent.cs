@@ -6,26 +6,69 @@ namespace CookingGame
 	public partial class BuilderCursorComponent : Node
 	{
 		[Export]
-		private BuilderInventoryComponent Inventory = null;
+		public BuilderInventoryComponent Inventory { get; set; } = null;
 		[Export]
 		private GridNavigatorComponent Navigator = null;
+
 		[Export]
-		private RayCast3D ExistingChecker = null;
+		private RayCast3D BuildableChecker = null;
+		[Export]
+		private RayCast3D WallChecker = null;
 
 		private BuildableDb Buildables = null;
-		private BuildableWrapper SelectedBuildable = null;
+		private BuildableComponent SelectedBuildable = null;
 
-		public void Build()
+		public BuildableComponent GetHoveredBuildable()
 		{
-			ExistingChecker.ProcessMode = ProcessModeEnum.Inherit;
-			ExistingChecker.ForceRaycastUpdate();
-			ExistingChecker.ProcessMode = ProcessModeEnum.Disabled;
+			BuildableChecker.ProcessMode = ProcessModeEnum.Inherit;
+			BuildableChecker.ForceRaycastUpdate();
+			BuildableChecker.ProcessMode = ProcessModeEnum.Disabled;
 
-			if (ExistingChecker.IsColliding())
+			if (BuildableChecker.GetCollider() is BuildableComponent buildable)
+			{
+				return buildable;
+			}
+
+			return null;
+		}
+
+		public bool CheckForWall(Vector3 direction)
+		{
+			WallChecker.ProcessMode = ProcessModeEnum.Inherit;
+			WallChecker.TargetPosition = direction;
+			WallChecker.ForceRaycastUpdate();
+			WallChecker.ProcessMode = ProcessModeEnum.Disabled;
+
+			return WallChecker.IsColliding();
+		}
+
+		private void HandleSelectHoveredBuildable()
+		{
+			BuildableComponent hoveredBuildable = GetHoveredBuildable();
+
+			if (SelectedBuildable == hoveredBuildable)
 			{
 				return;
 			}
 
+			if (hoveredBuildable == null && SelectedBuildable != null)
+			{
+				SelectedBuildable.Selected = false;
+				SelectedBuildable = null;
+				return;
+			}
+
+			if (SelectedBuildable != null)
+			{
+				SelectedBuildable.Selected = false;
+			}
+
+			SelectedBuildable = hoveredBuildable;
+			SelectedBuildable.Selected = true;
+		}
+
+		public void Build()
+		{
 			if (Inventory.SelectedSlot.Quantity <= 0)
 			{
 				return;
@@ -37,20 +80,28 @@ namespace CookingGame
 				return;
 			}
 
+			BuildableComponent hoveredBuildable = GetHoveredBuildable();
+			if (hoveredBuildable != null)
+			{
+				return;
+			}
+
 			GridTile currentTile = Navigator.GetTile();
 			if (currentTile == null)
 			{
 				return;
 			}
 
-			BuildableWrapper buildableInstance = buildable.Scene.Instantiate<BuildableWrapper>();
-			buildableInstance.SuccessfullyPlaced += () => {
-				Inventory.Remove(Inventory.SelectedBuildableId, 1);
-				HandleSelect();
-			};
+			if (buildable.PlacementStrategy != null && !buildable.PlacementStrategy.Place(buildable, this))
+			{
+				return;
+			}
 
+			Inventory.Remove(Inventory.SelectedBuildableId, 1);
+			BuildableWrapper buildableInstance = buildable.Scene.Instantiate<BuildableWrapper>();
 			buildableInstance.GlobalTransform = currentTile.GlobalTransform;
 			GetTree().Root.AddChild(buildableInstance);
+			HandleSelectHoveredBuildable();
 		}
 
 		public void Destroy()
@@ -60,13 +111,21 @@ namespace CookingGame
 				return;
 			}
 
-			SelectedBuildable.SuccessfullyDestroyed += () => {
-				Inventory.Add(SelectedBuildable.BuildableId, 1);
-				SelectedBuildable.Selected = false;
-				SelectedBuildable = null;
-			};
+			Buildable buildable = Buildables.GetById(SelectedBuildable.BuildableId);
+			if (buildable == null)
+			{
+				return;
+			}
 
+			if (buildable.PlacementStrategy != null && !buildable.PlacementStrategy.Destroy(buildable, this))
+			{
+				return;
+			}
+
+			SelectedBuildable.Selected = false;
+			SelectedBuildable = null;
 			SelectedBuildable.Destroy();
+			Inventory.Add(SelectedBuildable.BuildableId, 1);
 		}
 
 		public void Rotate()
@@ -76,44 +135,23 @@ namespace CookingGame
 				return;
 			}
 
-			SelectedBuildable.Rotate();
-		}
-
-		private void HandleSelect()
-		{
-			ExistingChecker.ProcessMode = ProcessModeEnum.Inherit;
-			ExistingChecker.ForceRaycastUpdate();
-			ExistingChecker.ProcessMode = ProcessModeEnum.Disabled;
-
-			if (ExistingChecker.GetCollider() is BuildableWrapper buildable)
+			Buildable buildable = Buildables.GetById(SelectedBuildable.BuildableId);
+			if (buildable == null)
 			{
-				if (SelectedBuildable == buildable)
-				{
-					return;
-				}
-
-				if (SelectedBuildable != null)
-				{
-					SelectedBuildable.Selected = false;
-				}
-
-				SelectedBuildable = buildable;
-				SelectedBuildable.Selected = true;
+				return;
 			}
-			else if (SelectedBuildable != null)
-			{
-				SelectedBuildable.Selected = false;
-				SelectedBuildable = null;
-			}
+
+			float nextRotation = buildable.PlacementStrategy?.Rotate(buildable, SelectedBuildable.Rotation.Y, this) ?? SelectedBuildable.Rotation.Y;
+			SelectedBuildable.Rotate(nextRotation);
 		}
 
 		public override void _Ready()
 		{
 			base._Ready();
 
-			ExistingChecker.ProcessMode = ProcessModeEnum.Disabled;
+			BuildableChecker.ProcessMode = ProcessModeEnum.Disabled;
 			Buildables = GetNode<BuildableDb>("/root/Buildables");
-			Navigator.Navigated += HandleSelect;
+			Navigator.Navigated += HandleSelectHoveredBuildable;
 		}
 	}
 }
