@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="BuildablePlacementEdgeStrategy" load_steps=2 format=3 uid="uid://cb4map1vlahay"]
+
+[ext_resource type="Script" path="res://scripts/buildable/data/BuildablePlacementEdgeStrategy.cs" id="1_im5vg"]
+
+[resource]
+script = ExtResource("1_im5vg")

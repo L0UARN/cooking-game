@@ -13,7 +13,7 @@ namespace CookingGame
 		private Node3D WallContainer = null;
 
 		private BuildableDb Buildables = null;
-		private BuildableWrapper CurrentBuildable = null;
+		private BuildableComponent CurrentBuildable = null;
 		private Node3D CurrentBuildableWall = null;
 
 		private void EnableDefaultWall(bool enable)
@@ -28,7 +28,7 @@ namespace CookingGame
 			}
 		}
 
-		private void HandleChangeBuildable(BuildableWrapper buildable)
+		private void HandleChangeBuildable(BuildableComponent buildable)
 		{
 			CurrentBuildableWall?.QueueFree();
 			CurrentBuildable = buildable;
@@ -70,7 +70,7 @@ namespace CookingGame
 		{
 			base._PhysicsProcess(delta);
 
-			if (BuildableChecker.GetCollider() is BuildableWrapper buildable)
+			if (BuildableChecker.GetCollider() is BuildableComponent buildable)
 			{
 				Vector3 buildableForward = buildable.GlobalBasis.Z.Normalized();
 				Vector3 checkerForward = BuildableChecker.TargetPosition.Normalized().Rotated(Vector3.Up, BuildableChecker.GlobalRotation.Y);

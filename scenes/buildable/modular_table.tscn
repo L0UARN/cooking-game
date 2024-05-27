@@ -1,8 +1,6 @@
-[gd_scene load_steps=55 format=3 uid="uid://p5afmpn3r2g5"]
+[gd_scene load_steps=55 format=3 uid="uid://c5i27arbnjuwm"]
 
 [ext_resource type="Script" path="res://scripts/buildable/ModularTableComponent.cs" id="1_7l20r"]
-[ext_resource type="PackedScene" uid="uid://df2vleehiopwt" path="res://scenes/buildable/buildable_wrapper.tscn" id="1_uof4d"]
-[ext_resource type="Script" path="res://scripts/buildable/BuildablePlacementComponent.cs" id="2_23j0t"]
 [ext_resource type="Script" path="res://scripts/environment/HighlighterComponent.cs" id="4_7i2ah"]
 [ext_resource type="Material" uid="uid://cbvqokkpsmqhw" path="res://resources/ui/highlight.tres" id="5_cjukg"]
 [ext_resource type="Material" uid="uid://n6y7an47vi2q" path="res://resources/ui/downlight.tres" id="6_3f2l0"]
@@ -22,10 +20,13 @@
 [ext_resource type="Texture2D" uid="uid://cddvuivxcysyb" path="res://assets/new_models/general_CountertopUMetallicMap-CountertopURoughnessMap.png" id="23_3l6ed"]
 [ext_resource type="Texture2D" uid="uid://d21wbm3jyna14" path="res://assets/new_models/general_CountertopLColorAoMap.png" id="24_egdn3"]
 [ext_resource type="Texture2D" uid="uid://bob44w82miwqp" path="res://assets/new_models/general_CountertopLMetallicMap-CountertopLRoughnessMap.png" id="25_fdml6"]
+[ext_resource type="Script" path="res://scripts/buildable/BuildableComponent.cs" id="25_pmdyl"]
 [ext_resource type="Texture2D" uid="uid://cdbwg5vsx36ry" path="res://assets/new_models/general_CountertopTColorAoMap.png" id="26_4fe16"]
 [ext_resource type="Texture2D" uid="uid://b5b2v5h85u1sx" path="res://assets/new_models/general_CountertopTMetallicMap-CountertopTRoughnessMap.png" id="27_4cdmi"]
 [ext_resource type="Script" path="res://scripts/environment/PointOfView.cs" id="28_cc4ik"]
 [ext_resource type="PackedScene" uid="uid://cqwd3ea0symqi" path="res://scenes/items/item_interactable.tscn" id="29_73jb1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xlvxt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_old6c"]
 resource_name = "CountertopXMapped"
@@ -52,7 +53,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_r80bk"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_x8rgg"]
 resource_name = "general_Cube_015"
 _surfaces = [{
 "aabb": AABB(-0.5, 0.35, -0.5, 1, 0.15001, 1),
@@ -96,7 +97,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_mvxc7"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_dawuv"]
 resource_name = "general_Cube_021"
 _surfaces = [{
 "aabb": AABB(-0.475, 0.35, -0.475, 0.95, 0.15001, 0.95),
@@ -139,7 +140,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8thh6"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_wguux"]
 resource_name = "general_Cube_022"
 _surfaces = [{
 "aabb": AABB(-0.475, 0.35, -0.5, 0.95, 0.15, 1.00001),
@@ -182,7 +183,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_5tpv6"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_spyfw"]
 resource_name = "general_Cube_014"
 _surfaces = [{
 "aabb": AABB(-0.475, 0.35, -0.5, 0.95, 0.15001, 0.975),
@@ -226,7 +227,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_w36hq"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_7w8vu"]
 resource_name = "general_Cube_016"
 _surfaces = [{
 "aabb": AABB(-0.475, 0.35, -0.5, 0.975, 0.15001, 0.975),
@@ -270,7 +271,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_u64o5"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0da5n"]
 resource_name = "general_Cube_023"
 _surfaces = [{
 "aabb": AABB(-0.475, 0.35, -0.5, 0.975, 0.15, 1.00001),
@@ -314,7 +315,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_rfl21"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_g0e65"]
 resource_name = "general_Cube_010"
 _surfaces = [{
 "aabb": AABB(-0.4, -0.5, -0.4, 0.8, 0.85, 0.898284),
@@ -358,7 +359,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_lxbbl"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_334wh"]
 resource_name = "general_Cube_013"
 _surfaces = [{
 "aabb": AABB(-0.4, -0.5, -0.4, 0.8, 0.85, 0.908284),
@@ -401,7 +402,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_xld7q"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_oupq6"]
 resource_name = "general_Cube_019"
 _surfaces = [{
 "aabb": AABB(-0.4, -0.5, -0.4, 0.8, 0.85, 0.825),
@@ -419,186 +420,178 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ptbvt")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rooqe"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_c7prx"]
 size = Vector3(0.8, 1, 0.1)
 
-[node name="ModularTable" node_paths=PackedStringArray("Meshes", "Highlighter", "Downlighter") instance=ExtResource("1_uof4d")]
+[node name="ModularTable" type="Node3D"]
+
+[node name="BuildableComponent" type="Area3D" parent="." node_paths=PackedStringArray("Body", "Highlighter", "Downlighter")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("25_pmdyl")
 BuildableId = &"modular_table"
-Meshes = NodePath("Meshes")
-Highlighter = NodePath("HighlighterComponent")
-Downlighter = NodePath("DownlighterComponent")
+Body = NodePath("..")
+Highlighter = NodePath("../HighlighterComponent")
+Downlighter = NodePath("../DownlighterComponent")
 
-[node name="BuildablePlacementComponent" type="Node" parent="." index="1" node_paths=PackedStringArray("Buildable")]
-script = ExtResource("2_23j0t")
-Buildable = NodePath("..")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildableComponent"]
+shape = SubResource("BoxShape3D_xlvxt")
 
-[node name="ModularTableComponent" type="Node" parent="." index="2" node_paths=PackedStringArray("UpDetector", "DownDetector", "LeftDetector", "RightDetector", "TopContainer", "XTop", "TTop", "LTop", "ITop", "UTop", "OTop", "BaseContainer", "Bases")]
+[node name="ModularTableComponent" type="Node" parent="." node_paths=PackedStringArray("UpDetector", "DownDetector", "LeftDetector", "RightDetector", "TopContainer", "XTop", "TTop", "LTop", "ITop", "UTop", "OTop", "BaseContainer", "Bases")]
 script = ExtResource("1_7l20r")
 UpDetector = NodePath("../Detectors/UpDetector")
 DownDetector = NodePath("../Detectors/DownDetector")
 LeftDetector = NodePath("../Detectors/LeftDetector")
 RightDetector = NodePath("../Detectors/RightDetector")
-TopContainer = NodePath("../Meshes/Countertops")
-XTop = NodePath("../Meshes/Countertops/CountertopX")
-TTop = NodePath("../Meshes/Countertops/CountertopT")
-LTop = NodePath("../Meshes/Countertops/CountertopL")
-ITop = NodePath("../Meshes/Countertops/CountertopI")
-UTop = NodePath("../Meshes/Countertops/CountertopU")
-OTop = NodePath("../Meshes/Countertops/CountertopO")
-BaseContainer = NodePath("../Meshes/Bases")
-Bases = [NodePath("../Meshes/Bases/BaseCabinet"), NodePath("../Meshes/Bases/BaseDrawers"), NodePath("../Meshes/Bases/BaseShelf")]
+TopContainer = NodePath("../Countertops")
+XTop = NodePath("../Countertops/CountertopX")
+TTop = NodePath("../Countertops/CountertopT")
+LTop = NodePath("../Countertops/CountertopL")
+ITop = NodePath("../Countertops/CountertopI")
+UTop = NodePath("../Countertops/CountertopU")
+OTop = NodePath("../Countertops/CountertopO")
+BaseContainer = NodePath("../Bases")
+Bases = [NodePath("../Bases/BaseCabinet"), NodePath("../Bases/BaseDrawers"), NodePath("../Bases/BaseShelf")]
 
-[node name="HighlighterComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("Highlightables")]
+[node name="HighlighterComponent" type="Node" parent="." node_paths=PackedStringArray("Highlightables")]
 script = ExtResource("4_7i2ah")
-Highlightables = [NodePath("../Meshes/Countertops/CountertopX"), NodePath("../Meshes/Countertops/CountertopO"), NodePath("../Meshes/Countertops/CountertopI"), NodePath("../Meshes/Countertops/CountertopU"), NodePath("../Meshes/Countertops/CountertopL"), NodePath("../Meshes/Countertops/CountertopT"), NodePath("../Meshes/Bases/BaseCabinet"), NodePath("../Meshes/Bases/BaseDrawers"), NodePath("../Meshes/Bases/BaseShelf")]
+Highlightables = [NodePath("../Countertops/CountertopX"), NodePath("../Countertops/CountertopO"), NodePath("../Countertops/CountertopI"), NodePath("../Countertops/CountertopU"), NodePath("../Countertops/CountertopL"), NodePath("../Countertops/CountertopT"), NodePath("../Bases/BaseCabinet"), NodePath("../Bases/BaseDrawers"), NodePath("../Bases/BaseShelf")]
 HighlightMaterial = ExtResource("5_cjukg")
 
-[node name="DownlighterComponent" type="Node" parent="." index="4" node_paths=PackedStringArray("Highlightables")]
+[node name="DownlighterComponent" type="Node" parent="." node_paths=PackedStringArray("Highlightables")]
 script = ExtResource("4_7i2ah")
-Highlightables = [NodePath("../Meshes/Countertops/CountertopX"), NodePath("../Meshes/Countertops/CountertopO"), NodePath("../Meshes/Countertops/CountertopI"), NodePath("../Meshes/Countertops/CountertopU"), NodePath("../Meshes/Countertops/CountertopL"), NodePath("../Meshes/Countertops/CountertopT"), NodePath("../Meshes/Bases/BaseCabinet"), NodePath("../Meshes/Bases/BaseDrawers"), NodePath("../Meshes/Bases/BaseShelf")]
+Highlightables = [NodePath("../Countertops/CountertopX"), NodePath("../Countertops/CountertopO"), NodePath("../Countertops/CountertopI"), NodePath("../Countertops/CountertopU"), NodePath("../Countertops/CountertopL"), NodePath("../Countertops/CountertopT"), NodePath("../Bases/BaseCabinet"), NodePath("../Bases/BaseDrawers"), NodePath("../Bases/BaseShelf")]
 HighlightMaterial = ExtResource("6_3f2l0")
 Override = true
 
-[node name="Meshes" type="Node3D" parent="." index="5"]
+[node name="Countertops" type="Node3D" parent="."]
 
-[node name="Countertops" type="Node3D" parent="Meshes" index="0"]
-
-[node name="CountertopX" type="MeshInstance3D" parent="Meshes/Countertops" index="0"]
+[node name="CountertopX" type="MeshInstance3D" parent="Countertops"]
 layers = 3
-mesh = SubResource("ArrayMesh_r80bk")
+mesh = SubResource("ArrayMesh_x8rgg")
 skeleton = NodePath("")
 
-[node name="CountertopO" type="MeshInstance3D" parent="Meshes/Countertops" index="1"]
+[node name="CountertopO" type="MeshInstance3D" parent="Countertops"]
 layers = 3
-mesh = SubResource("ArrayMesh_mvxc7")
+mesh = SubResource("ArrayMesh_dawuv")
 skeleton = NodePath("")
 
-[node name="CountertopI" type="MeshInstance3D" parent="Meshes/Countertops" index="2"]
+[node name="CountertopI" type="MeshInstance3D" parent="Countertops"]
 layers = 3
-mesh = SubResource("ArrayMesh_8thh6")
+mesh = SubResource("ArrayMesh_wguux")
 skeleton = NodePath("")
 
-[node name="CountertopU" type="MeshInstance3D" parent="Meshes/Countertops" index="3"]
+[node name="CountertopU" type="MeshInstance3D" parent="Countertops"]
 layers = 3
-mesh = SubResource("ArrayMesh_5tpv6")
+mesh = SubResource("ArrayMesh_spyfw")
 skeleton = NodePath("")
 
-[node name="CountertopL" type="MeshInstance3D" parent="Meshes/Countertops" index="4"]
+[node name="CountertopL" type="MeshInstance3D" parent="Countertops"]
 layers = 3
-mesh = SubResource("ArrayMesh_w36hq")
+mesh = SubResource("ArrayMesh_7w8vu")
 skeleton = NodePath("")
 
-[node name="CountertopT" type="MeshInstance3D" parent="Meshes/Countertops" index="5"]
+[node name="CountertopT" type="MeshInstance3D" parent="Countertops"]
 layers = 3
-mesh = SubResource("ArrayMesh_u64o5")
+mesh = SubResource("ArrayMesh_0da5n")
 skeleton = NodePath("")
 
-[node name="Bases" type="Node3D" parent="Meshes" index="1"]
+[node name="Bases" type="Node3D" parent="."]
 
-[node name="BaseCabinet" type="MeshInstance3D" parent="Meshes/Bases" index="0"]
+[node name="BaseCabinet" type="MeshInstance3D" parent="Bases"]
 layers = 3
-mesh = SubResource("ArrayMesh_rfl21")
+mesh = SubResource("ArrayMesh_g0e65")
 skeleton = NodePath("")
 
-[node name="BaseDrawers" type="MeshInstance3D" parent="Meshes/Bases" index="1"]
+[node name="BaseDrawers" type="MeshInstance3D" parent="Bases"]
 layers = 3
-mesh = SubResource("ArrayMesh_lxbbl")
+mesh = SubResource("ArrayMesh_334wh")
 skeleton = NodePath("")
 
-[node name="BaseShelf" type="MeshInstance3D" parent="Meshes/Bases" index="2"]
+[node name="BaseShelf" type="MeshInstance3D" parent="Bases"]
 layers = 3
-mesh = SubResource("ArrayMesh_xld7q")
+mesh = SubResource("ArrayMesh_oupq6")
 skeleton = NodePath("")
 
-[node name="Detectors" type="Node3D" parent="." index="6"]
+[node name="Detectors" type="Node3D" parent="."]
 
-[node name="UpDetector" type="RayCast3D" parent="Detectors" index="0"]
+[node name="UpDetector" type="RayCast3D" parent="Detectors"]
 target_position = Vector3(0, 0, -1)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="DownDetector" type="RayCast3D" parent="Detectors" index="1"]
+[node name="DownDetector" type="RayCast3D" parent="Detectors"]
 target_position = Vector3(0, 0, 1)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="LeftDetector" type="RayCast3D" parent="Detectors" index="2"]
+[node name="LeftDetector" type="RayCast3D" parent="Detectors"]
 target_position = Vector3(-1, 0, 0)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="RightDetector" type="RayCast3D" parent="Detectors" index="3"]
+[node name="RightDetector" type="RayCast3D" parent="Detectors"]
 target_position = Vector3(1, 0, 0)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="PointOfViewFront" type="Area3D" parent="." index="7" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
+[node name="PointOfViewFront" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.45)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("28_cc4ik")
-Placement = NodePath("Marker3D")
-DefaultInteractable = NodePath("../TempInteractables/Left")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewFront" index="0"]
-shape = SubResource("BoxShape3D_rooqe")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewFront"]
+shape = SubResource("BoxShape3D_c7prx")
 
-[node name="Marker3D" type="Marker3D" parent="PointOfViewFront" index="1"]
+[node name="Marker3D" type="Marker3D" parent="PointOfViewFront"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
 
-[node name="PointOfViewLeft" type="Area3D" parent="." index="8" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
+[node name="PointOfViewLeft" type="Area3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.45, 1, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("28_cc4ik")
-Placement = NodePath("Marker3D")
-DefaultInteractable = NodePath("../TempInteractables/Left")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewLeft" index="0"]
-shape = SubResource("BoxShape3D_rooqe")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewLeft"]
+shape = SubResource("BoxShape3D_c7prx")
 
-[node name="Marker3D" type="Marker3D" parent="PointOfViewLeft" index="1"]
+[node name="Marker3D" type="Marker3D" parent="PointOfViewLeft"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
 
-[node name="PointOfViewBack" type="Area3D" parent="." index="9" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
+[node name="PointOfViewBack" type="Area3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, -0.45)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("28_cc4ik")
-Placement = NodePath("Marker3D")
-DefaultInteractable = NodePath("../TempInteractables/Left")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewBack" index="0"]
-shape = SubResource("BoxShape3D_rooqe")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewBack"]
+shape = SubResource("BoxShape3D_c7prx")
 
-[node name="Marker3D" type="Marker3D" parent="PointOfViewBack" index="1"]
+[node name="Marker3D" type="Marker3D" parent="PointOfViewBack"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
 
-[node name="PointOfViewRight" type="Area3D" parent="." index="10" node_paths=PackedStringArray("Placement", "DefaultInteractable")]
+[node name="PointOfViewRight" type="Area3D" parent="."]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0.45, 1, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("28_cc4ik")
-Placement = NodePath("Marker3D")
-DefaultInteractable = NodePath("../TempInteractables/Left")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewRight" index="0"]
-shape = SubResource("BoxShape3D_rooqe")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PointOfViewRight"]
+shape = SubResource("BoxShape3D_c7prx")
 
-[node name="Marker3D" type="Marker3D" parent="PointOfViewRight" index="1"]
+[node name="Marker3D" type="Marker3D" parent="PointOfViewRight"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0.15)
 
-[node name="TempInteractables" type="Node3D" parent="." index="11"]
+[node name="TempInteractables" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Left" parent="TempInteractables" index="0" node_paths=PackedStringArray("Right") instance=ExtResource("29_73jb1")]
+[node name="Left" parent="TempInteractables" instance=ExtResource("29_73jb1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.05, 0)
-Right = NodePath("../Right")
 
-[node name="Right" parent="TempInteractables" index="1" node_paths=PackedStringArray("Left") instance=ExtResource("29_73jb1")]
+[node name="Right" parent="TempInteractables" instance=ExtResource("29_73jb1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.05, 0)
-Left = NodePath("../Left")

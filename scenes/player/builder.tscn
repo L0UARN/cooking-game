@@ -1,6 +1,5 @@
-[gd_scene load_steps=17 format=3 uid="uid://c2xnwv21wnqtp"]
+[gd_scene load_steps=16 format=3 uid="uid://c2xnwv21wnqtp"]
 
-[ext_resource type="Script" path="res://scripts/player/GridNavigatorComponent.cs" id="1_jl5cy"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateComponent.cs" id="1_sn2b0"]
 [ext_resource type="Script" path="res://scripts/player/builder/BuilderCursorComponent.cs" id="2_uskfl"]
 [ext_resource type="PackedScene" uid="uid://cyhcse50i554t" path="res://scenes/ui/builder_inventory_ui.tscn" id="4_2bwas"]
@@ -50,7 +49,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_yya52")
 
-[sub_resource type="Animation" id="Animation_7fakg"]
+[sub_resource type="Animation" id="Animation_2ga2l"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -65,7 +64,7 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_l5i6e"]
+[sub_resource type="Animation" id="Animation_46r5g"]
 resource_name = "cursor"
 length = 2.0
 loop_mode = 1
@@ -82,10 +81,10 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_blkbf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5m04p"]
 _data = {
-"RESET": SubResource("Animation_7fakg"),
-"cursor": SubResource("Animation_l5i6e")
+"RESET": SubResource("Animation_2ga2l"),
+"cursor": SubResource("Animation_46r5g")
 }
 
 [node name="Builder" type="Node3D"]
@@ -118,8 +117,25 @@ cull_mask = 1
 environment = ExtResource("11_0jc5k")
 size = 8.0
 
-[node name="GridNavigatorComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "NextTileChecker", "CurrentTileChecker")]
-script = ExtResource("1_jl5cy")
+[node name="TweenTransformSmoother" type="Node3D" parent="."]
+script = ExtResource("11_j81vp")
+EaseType = 1
+TransitionType = 5
+
+[node name="Cursor" type="MeshInstance3D" parent="TweenTransformSmoother"]
+mesh = SubResource("ArrayMesh_8qjv8")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TweenTransformSmoother/Cursor"]
+libraries = {
+"": SubResource("AnimationLibrary_5m04p")
+}
+autoplay = "cursor"
+
+[node name="BuilderCursorComponent" type="Node" parent="." node_paths=PackedStringArray("Inventory", "BuildableChecker", "Body", "NextTileChecker", "CurrentTileChecker")]
+script = ExtResource("2_uskfl")
+Inventory = NodePath("../BuilderInventoryComponent")
+BuildableChecker = NodePath("../BuildableChecker")
 Body = NodePath("..")
 NextTileChecker = NodePath("../NextTileChecker")
 CurrentTileChecker = NodePath("../CurrentTileChecker")
@@ -134,82 +150,58 @@ collide_with_bodies = false
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="BuilderCursorComponent" type="Node" parent="." node_paths=PackedStringArray("Inventory", "Navigator", "ExistingChecker")]
-script = ExtResource("2_uskfl")
-Inventory = NodePath("../BuilderInventoryComponent")
-Navigator = NodePath("../GridNavigatorComponent")
-ExistingChecker = NodePath("../ExistingBuildableChecker")
+[node name="BuilderInventoryComponent" type="Node" parent="."]
+script = ExtResource("4_scqkw")
+Inventory = ExtResource("5_ep21w")
 
-[node name="ExistingBuildableChecker" type="RayCast3D" parent="."]
+[node name="BuildableChecker" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="BuilderInventoryComponent" type="Node" parent="."]
-script = ExtResource("4_scqkw")
-Inventory = ExtResource("5_ep21w")
-
-[node name="BuilderInventoryInputComponent" type="Node" parent="." node_paths=PackedStringArray("Inventory", "CycleCooldown", "HoldCycleDelay", "FastCycleCooldown")]
-script = ExtResource("7_xbud4")
-Inventory = NodePath("../BuilderInventoryComponent")
-CycleCooldown = NodePath("CycleCooldown")
-HoldCycleDelay = NodePath("HoldCycleDelay")
-FastCycleCooldown = NodePath("FastCycleCooldown")
-
-[node name="CycleCooldown" type="Timer" parent="BuilderInventoryInputComponent"]
-wait_time = 0.25
-one_shot = true
-
-[node name="HoldCycleDelay" type="Timer" parent="BuilderInventoryInputComponent"]
-wait_time = 0.5
-one_shot = true
-
-[node name="FastCycleCooldown" type="Timer" parent="BuilderInventoryInputComponent"]
-wait_time = 0.125
-one_shot = true
-
-[node name="BuilderCursorInputComponent" type="Node" parent="." node_paths=PackedStringArray("Navigator", "NavigationCooldown", "Cursor", "BuildCooldown", "Inventory", "CameraPivot", "ViewCooldown", "MouseNavigationRay")]
+[node name="BuilderCursorInputComponent" type="Node" parent="." node_paths=PackedStringArray("Cursor", "NavigationCooldown", "BuildCooldown", "CameraPivot", "ViewCooldown", "MouseNavigationRay")]
 script = ExtResource("6_i4gly")
-Navigator = NodePath("../GridNavigatorComponent")
-NavigationCooldown = NodePath("NavigationCooldown")
 Cursor = NodePath("../BuilderCursorComponent")
-BuildCooldown = NodePath("BuildCooldown")
-Inventory = NodePath("../BuilderInventoryComponent")
+NavigationCooldown = NodePath("../NavigationCooldown")
+BuildCooldown = NodePath("../BuildCooldown")
 CameraPivot = NodePath("../CameraPivot")
-ViewCooldown = NodePath("ViewCooldown")
+ViewCooldown = NodePath("../ViewCooldown")
 MouseNavigationRay = NodePath("../MouseNavigationRay")
-
-[node name="NavigationCooldown" type="Timer" parent="BuilderCursorInputComponent"]
-wait_time = 0.25
-one_shot = true
-
-[node name="BuildCooldown" type="Timer" parent="BuilderCursorInputComponent"]
-wait_time = 0.25
-one_shot = true
-
-[node name="ViewCooldown" type="Timer" parent="BuilderCursorInputComponent"]
-wait_time = 0.33
-one_shot = true
 
 [node name="MouseNavigationRay" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 0)
 collision_mask = 5
 collide_with_areas = true
 collide_with_bodies = false
-debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="TweenTransformSmoother" type="Node3D" parent="."]
-script = ExtResource("11_j81vp")
-EaseType = 1
-TransitionType = 5
+[node name="NavigationCooldown" type="Timer" parent="."]
+wait_time = 0.33
+one_shot = true
 
-[node name="Cursor" type="MeshInstance3D" parent="TweenTransformSmoother"]
-mesh = SubResource("ArrayMesh_8qjv8")
-skeleton = NodePath("")
+[node name="BuildCooldown" type="Timer" parent="."]
+wait_time = 0.33
+one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TweenTransformSmoother/Cursor"]
-libraries = {
-"": SubResource("AnimationLibrary_blkbf")
-}
-autoplay = "cursor"
+[node name="ViewCooldown" type="Timer" parent="."]
+wait_time = 0.33
+one_shot = true
+
+[node name="BuilderInventoryInputComponent" type="Node" parent="." node_paths=PackedStringArray("Inventory", "CycleCooldown", "HoldCycleDelay", "FastCycleCooldown")]
+script = ExtResource("7_xbud4")
+Inventory = NodePath("../BuilderInventoryComponent")
+CycleCooldown = NodePath("../CycleCooldown")
+HoldCycleDelay = NodePath("../HoldCycleDelay")
+FastCycleCooldown = NodePath("../FastCycleCooldown")
+
+[node name="CycleCooldown" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="HoldCycleDelay" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="FastCycleCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvlp3pr4emqr6"]
+[gd_scene load_steps=13 format=3 uid="uid://mykn6pe1cna"]
 
-[ext_resource type="PackedScene" uid="uid://df2vleehiopwt" path="res://scenes/buildable/buildable_wrapper.tscn" id="1_1u1d4"]
 [ext_resource type="Texture2D" uid="uid://ccled1dgc4rka" path="res://assets/models/Furniture_DoormatColorMap.png" id="1_l5qrx"]
+[ext_resource type="Script" path="res://scripts/buildable/BuildableComponent.cs" id="1_w7y0q"]
 [ext_resource type="Texture2D" uid="uid://bfpaveteeowy3" path="res://assets/models/Furniture_DoormatRoughnessMap.png" id="2_ers2i"]
-[ext_resource type="Script" path="res://scripts/buildable/BuildableEdgePlacementComponent.cs" id="2_le1rg"]
+[ext_resource type="Script" path="res://scripts/environment/HighlighterComponent.cs" id="2_y2t5w"]
 [ext_resource type="Texture2D" uid="uid://gjx74gpv1tsk" path="res://assets/models/Furniture_DoormatNormaMap.png" id="3_16uad"]
+[ext_resource type="Material" uid="uid://cbvqokkpsmqhw" path="res://resources/ui/highlight.tres" id="3_uel4y"]
+[ext_resource type="Material" uid="uid://n6y7an47vi2q" path="res://resources/ui/downlight.tres" id="4_slfvo"]
 [ext_resource type="PackedScene" uid="uid://dq5gkvxy7wth2" path="res://scenes/player/chef.tscn" id="4_v7jn5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hqty5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48tda"]
 resource_name = "DoormatMapped"
@@ -32,7 +36,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_riwxr"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_j0jts"]
 resource_name = "Furniture_Plane"
 _surfaces = [{
 "aabb": AABB(-0.4, -0.5, -0.3, 0.8, 0.03, 0.60001),
@@ -50,27 +54,35 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rbsic")
 
-[node name="Doormat" node_paths=PackedStringArray("Meshes") instance=ExtResource("1_1u1d4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-BuildableId = &"doormat"
-Meshes = NodePath("Doormat")
+[node name="NewDoormat" type="Node3D"]
 
-[node name="Doormat" type="MeshInstance3D" parent="." index="1"]
+[node name="BuildableComponent" type="Area3D" parent="." node_paths=PackedStringArray("Body", "Highlighter", "Downlighter")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_w7y0q")
+BuildableId = &"doormat"
+Body = NodePath("..")
+Highlighter = NodePath("../HighlighterComponent")
+Downlighter = NodePath("../DownlighterComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildableComponent"]
+shape = SubResource("BoxShape3D_hqty5")
+
+[node name="HighlighterComponent" type="Node" parent="." node_paths=PackedStringArray("Highlightables")]
+script = ExtResource("2_y2t5w")
+Highlightables = [NodePath("../Doormat")]
+HighlightMaterial = ExtResource("3_uel4y")
+
+[node name="DownlighterComponent" type="Node" parent="." node_paths=PackedStringArray("Highlightables")]
+script = ExtResource("2_y2t5w")
+Highlightables = [NodePath("../Doormat")]
+HighlightMaterial = ExtResource("4_slfvo")
+
+[node name="Doormat" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 layers = 3
-mesh = SubResource("ArrayMesh_riwxr")
+mesh = SubResource("ArrayMesh_j0jts")
 skeleton = NodePath("")
 
-[node name="BuildableEdgePlacementComponent" type="Node" parent="." index="2" node_paths=PackedStringArray("Buildable", "TileChecker")]
-script = ExtResource("2_le1rg")
-Buildable = NodePath("..")
-TileChecker = NodePath("../TileChecker")
-
-[node name="TileChecker" type="RayCast3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-target_position = Vector3(0, 0, -1)
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="Chef" parent="." index="4" instance=ExtResource("4_v7jn5")]
+[node name="Chef" parent="." instance=ExtResource("4_v7jn5")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

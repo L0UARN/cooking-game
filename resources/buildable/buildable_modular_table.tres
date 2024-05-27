@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Buildable" load_steps=4 format=3 uid="uid://cnhcc6tqklk21"]
+[gd_resource type="Resource" script_class="Buildable" load_steps=5 format=3 uid="uid://cnhcc6tqklk21"]
 
 [ext_resource type="Script" path="res://scripts/buildable/data/Buildable.cs" id="1_1cp3s"]
 [ext_resource type="Texture2D" uid="uid://buq1tg6ban2nc" path="res://assets/icons/build_mode_64.png" id="1_hr1b8"]
-[ext_resource type="PackedScene" uid="uid://p5afmpn3r2g5" path="res://scenes/buildable/modular_table.tscn" id="1_lj2f6"]
+[ext_resource type="PackedScene" uid="uid://c5i27arbnjuwm" path="res://scenes/buildable/modular_table.tscn" id="1_lj2f6"]
+[ext_resource type="Resource" uid="uid://dx4c2hrbm6xjs" path="res://resources/buildable/placement_strategy/normal_placement.tres" id="2_f48t1"]
 
 [resource]
 resource_local_to_scene = true
@@ -11,3 +12,5 @@ Id = &"modular_table"
 Name = "Modular Table"
 Icon = ExtResource("1_hr1b8")
 Scene = ExtResource("1_lj2f6")
+PlacementStrategy = ExtResource("2_f48t1")
+IsSolid = true

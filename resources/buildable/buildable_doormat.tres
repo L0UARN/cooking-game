@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Buildable" load_steps=5 format=3 uid="uid://k2fdhkb45eow"]
+[gd_resource type="Resource" script_class="Buildable" load_steps=6 format=3 uid="uid://k2fdhkb45eow"]
 
 [ext_resource type="PackedScene" uid="uid://b55l5p842tmfb" path="res://scenes/environment/door.tscn" id="1_dxfba"]
 [ext_resource type="Script" path="res://scripts/buildable/data/Buildable.cs" id="1_slbgp"]
 [ext_resource type="Texture2D" uid="uid://buq1tg6ban2nc" path="res://assets/icons/build_mode_64.png" id="1_yhmdd"]
-[ext_resource type="PackedScene" uid="uid://bvlp3pr4emqr6" path="res://scenes/buildable/doormat.tscn" id="2_xhsqx"]
+[ext_resource type="PackedScene" uid="uid://mykn6pe1cna" path="res://scenes/buildable/doormat.tscn" id="2_xhsqx"]
+[ext_resource type="Resource" uid="uid://cb4map1vlahay" path="res://resources/buildable/placement_strategy/edge_placement.tres" id="3_4pq2o"]
 
 [resource]
 script = ExtResource("1_slbgp")
@@ -11,5 +12,6 @@ Id = &"doormat"
 Name = "Doormat"
 Icon = ExtResource("1_yhmdd")
 Scene = ExtResource("2_xhsqx")
+PlacementStrategy = ExtResource("3_4pq2o")
 AdjascentWall = ExtResource("1_dxfba")
 IsSolid = false

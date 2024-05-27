@@ -8,6 +8,7 @@ namespace CookingGame
 	{
 		[Export]
 		public StringName BuildableId { get; set; } = "buildable";
+
 		[Export]
 		private Node3D Body = null;
 		[Export]
@@ -15,13 +16,10 @@ namespace CookingGame
 		[Export]
 		private HighlighterComponent Downlighter = null;
 
-		private Tween ScaleTween = null;
-		private Tween RotateTween = null;
-
-		private bool _Selected = false;
-		public bool Selected
+		private bool _Highlited = false;
+		public bool Highlighted
 		{
-			get => _Selected;
+			get => _Highlited;
 			set
 			{
 				if (Highlighter != null)
@@ -46,27 +44,59 @@ namespace CookingGame
 					}
 				}
 
-				_Selected = value;
+				_Highlited = value;
+			}
+		}
+
+		private Tween Tween = null;
+
+		private void ResetTween(bool hard = false)
+		{
+			if (Tween?.IsRunning() == true)
+			{
+				if (hard)
+				{
+					Tween.Pause();
+					Tween.CustomStep(999.9f);
+				}
+
+				Tween.Kill();
 			}
 		}
 
 		public void Destroy()
 		{
-			// TODO: animate the pop-out
-			Body.QueueFree();
+			// Remove collision from this area to avoid the buildable from being detected while it is being destroyed
+			CollisionLayer = 0;
+			CollisionMask = 0;
+
+			ResetTween();
+
+			Tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.InOut);
+			Tween.TweenProperty(Body, "scale", new Vector3(0.01f, 0.01f, 0.01f), .5f);
+			Tween.TweenCallback(Callable.From(Body.QueueFree));
 		}
 
 		public void Rotate(float angle)
 		{
-			// TODO: animate the rotation
-			Body.Rotate(Vector3.Up, angle);
+			ResetTween(true);
+
+			Body.GlobalBasis = Basis.Identity;
+			Body.Rotate(Vector3.Up, angle - Mathf.Pi * 0.5f);
+			Tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
+			Tween.TweenProperty(Body, "rotation:y", angle, .5f);
 		}
 
 		public override void _Ready()
 		{
 			base._Ready();
-			// TODO: animate the pop-in
+
 			Downlighter?.AddToGroup("BuildableDownlighters");
+			Body.Scale = new Vector3(0.01f, 0.01f, 0.01f);
+
+			ResetTween();
+			Tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
+			Tween.TweenProperty(Body, "scale", Vector3.One, .5f);
 		}
 	}
 }

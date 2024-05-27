@@ -20,80 +20,7 @@ namespace CookingGame
 		private bool ShouldDoInitialCheck = true;
 		private BuildableDb Buildables = null;
 
-		public override void _Ready()
-		{
-			NextTileChecker.ProcessMode = ProcessModeEnum.Disabled;
-			CurrentTileChecker.ProcessMode = ProcessModeEnum.Disabled;
-
-			if (NextCollisionChecker != null)
-			{
-				NextCollisionChecker.ProcessMode = ProcessModeEnum.Disabled;
-				Buildables = GetNode<BuildableDb>("/root/Buildables");
-			}
-		}
-
-		public override void _PhysicsProcess(double delta)
-		{
-			base._PhysicsProcess(delta);
-
-			if (!ShouldDoInitialCheck)
-			{
-				return;
-			}
-
-			GridTile currentTile = GetTile();
-			if (currentTile != null)
-			{
-				Body.GlobalPosition = currentTile.Placement.GlobalPosition;
-			}
-
-			ShouldDoInitialCheck = false;
-		}
-
-		private GridTile GetTarget()
-		{
-			if (NextCollisionChecker != null)
-			{
-				NextCollisionChecker.ProcessMode = ProcessModeEnum.Inherit;
-				NextCollisionChecker.ForceRaycastUpdate();
-				NextCollisionChecker.ProcessMode = ProcessModeEnum.Disabled;
-
-				if (NextCollisionChecker.GetCollider() is BuildableWrapper buildable)
-				{
-					Buildable targetBuildable = Buildables.GetById(buildable.BuildableId);
-					if (targetBuildable != null && targetBuildable.IsSolid)
-					{
-						return null;
-					}
-				}
-			}
-
-			NextTileChecker.ProcessMode = ProcessModeEnum.Inherit;
-			NextTileChecker.ForceRaycastUpdate();
-			NextTileChecker.ProcessMode = ProcessModeEnum.Disabled;
-
-			if (NextTileChecker.GetCollider() is GridTile area)
-			{
-				return area;
-			}
-
-			return null;
-		}
-
-		private bool MoveToTarget()
-		{
-			GridTile target = GetTarget();
-			if (target == null)
-			{
-				return false;
-			}
-
-			Body.GlobalPosition = target.Placement.GlobalPosition;
-			EmitSignal(SignalName.Navigated);
-			return true;
-		}
-
-		public GridTile GetTile()
+		public GridTile GetHoveredTile()
 		{
 			CurrentTileChecker.ProcessMode = ProcessModeEnum.Inherit;
 			CurrentTileChecker.ForceRaycastUpdate();
@@ -107,60 +34,129 @@ namespace CookingGame
 			return null;
 		}
 
-		public bool NavigateUp()
+		public GridTile GetTileInDirection(float angle)
 		{
 			if (NextCollisionChecker != null)
 			{
 				NextCollisionChecker.Basis = Basis.Identity;
+				NextCollisionChecker.Rotate(Vector3.Up, angle);
+
+				NextCollisionChecker.ProcessMode = ProcessModeEnum.Inherit;
+				NextCollisionChecker.ForceRaycastUpdate();
+				NextCollisionChecker.ProcessMode = ProcessModeEnum.Disabled;
+
+				if (NextCollisionChecker.GetCollider() is BuildableComponent buildable)
+				{
+					Buildable targetBuildable = Buildables.GetById(buildable.BuildableId);
+					if (targetBuildable != null && targetBuildable.IsSolid)
+					{
+						return null;
+					}
+				}
 			}
 
 			NextTileChecker.Basis = Basis.Identity;
-			return MoveToTarget();
+			NextTileChecker.Rotate(Vector3.Up, angle);
+
+			NextTileChecker.ProcessMode = ProcessModeEnum.Inherit;
+			NextTileChecker.ForceRaycastUpdate();
+			NextTileChecker.ProcessMode = ProcessModeEnum.Disabled;
+
+			if (NextTileChecker.GetCollider() is GridTile area)
+			{
+				return area;
+			}
+
+			return null;
+		}
+
+		public void NavigateToTile(GridTile tile)
+		{
+			if (tile.Placement.GlobalPosition.IsEqualApprox(Body.GlobalPosition))
+			{
+				return;
+			}
+
+			Body.GlobalPosition = tile.Placement.GlobalPosition;
+			EmitSignal(SignalName.Navigated);
+		}
+
+		public bool NavigateUp()
+		{
+			GridTile target = GetTileInDirection(0.0f);
+			if (target == null)
+			{
+				return false;
+			}
+
+			NavigateToTile(target);
+			return true;
 		}
 
 		public bool NavigateDown()
 		{
-			if (NextCollisionChecker != null)
+			GridTile target = GetTileInDirection(Mathf.Pi);
+			if (target == null)
 			{
-				NextCollisionChecker.Basis = Basis.Identity;
-				NextCollisionChecker.RotateY(Mathf.Pi);
+				return false;
 			}
 
-			NextTileChecker.Basis = Basis.Identity;
-			NextTileChecker.RotateY(Mathf.Pi);
-			return MoveToTarget();
+			NavigateToTile(target);
+			return true;
 		}
 
 		public bool NavigateLeft()
 		{
-			if (NextCollisionChecker != null)
+			GridTile target = GetTileInDirection(Mathf.Pi * 0.5f);
+			if (target == null)
 			{
-				NextCollisionChecker.Basis = Basis.Identity;
-				NextCollisionChecker.RotateY(Mathf.Pi / 2);
+				return false;
 			}
 
-			NextTileChecker.Basis = Basis.Identity;
-			NextTileChecker.RotateY(Mathf.Pi / 2);
-			return MoveToTarget();
+			NavigateToTile(target);
+			return true;
 		}
 
 		public bool NavigateRight()
 		{
-			if (NextCollisionChecker != null)
+			GridTile target = GetTileInDirection(Mathf.Pi * 1.5f);
+			if (target == null)
 			{
-				NextCollisionChecker.Basis = Basis.Identity;
-				NextCollisionChecker.RotateY(-Mathf.Pi / 2);
+				return false;
 			}
 
-			NextTileChecker.Basis = Basis.Identity;
-			NextTileChecker.RotateY(-Mathf.Pi / 2);
-			return MoveToTarget();
+			NavigateToTile(target);
+			return true;
 		}
 
-		public void MoveTo(GridTile tile)
+		public override void _PhysicsProcess(double delta)
 		{
-			Body.GlobalPosition = tile.Placement.GlobalPosition;
-			EmitSignal(SignalName.Navigated);
+			base._PhysicsProcess(delta);
+
+			if (!ShouldDoInitialCheck)
+			{
+				return;
+			}
+
+			GridTile hoveredTile = GetHoveredTile();
+			if (hoveredTile != null)
+			{
+				NavigateToTile(hoveredTile);
+			}
+
+			ShouldDoInitialCheck = false;
+		}
+
+		public override void _Ready()
+		{
+			NextTileChecker.ProcessMode = ProcessModeEnum.Disabled;
+			CurrentTileChecker.ProcessMode = ProcessModeEnum.Disabled;
+
+			if (NextCollisionChecker != null)
+			{
+				NextCollisionChecker.ProcessMode = ProcessModeEnum.Disabled;
+				Buildables = GetNode<BuildableDb>("/root/Buildables");
+			}
 		}
 	}
 }

@@ -8,15 +8,11 @@ namespace CookingGame
 	public partial class BuilderCursorInputComponent : Node
 	{
 		[Export]
-		private GridNavigatorComponent Navigator = null;
+		private BuilderCursorComponent Cursor = null;
 		[Export]
 		private Timer NavigationCooldown = null;
 		[Export]
-		private BuilderCursorComponent Cursor = null;
-		[Export]
 		private Timer BuildCooldown = null;
-		[Export]
-		private BuilderInventoryComponent Inventory = null;
 		[Export]
 		private Node3D CameraPivot = null;
 		[Export]
@@ -54,22 +50,22 @@ namespace CookingGame
 
 			if (adjustedDirection.IsEqualApprox(Vector2.Up))
 			{
-				Navigator.NavigateUp();
+				Cursor.NavigateUp();
 				NavigationCooldown.Start();
 			}
 			else if (adjustedDirection.IsEqualApprox(Vector2.Left))
 			{
-				Navigator.NavigateLeft();
+				Cursor.NavigateLeft();
 				NavigationCooldown.Start();
 			}
 			else if (adjustedDirection.IsEqualApprox(Vector2.Down))
 			{
-				Navigator.NavigateDown();
+				Cursor.NavigateDown();
 				NavigationCooldown.Start();
 			}
 			else if (adjustedDirection.IsEqualApprox(Vector2.Right))
 			{
-				Navigator.NavigateRight();
+				Cursor.NavigateRight();
 				NavigationCooldown.Start();
 			}
 		}
@@ -94,9 +90,9 @@ namespace CookingGame
 
 			if (MouseNavigationRay.GetCollider() is GridTile tile)
 			{
-				Navigator.MoveTo(tile);
+				Cursor.NavigateToTile(tile);
 			}
-			else if (MouseNavigationRay.GetCollider() is BuildableWrapper buildable)
+			else if (MouseNavigationRay.GetCollider() is BuildableComponent buildable)
 			{
 				from = buildable.GlobalPosition;
 				to = from + Vector3.Down * 2.0f;
@@ -109,7 +105,7 @@ namespace CookingGame
 
 				if (MouseNavigationRay.GetCollider() is GridTile tileUnderBuildable)
 				{
-					Navigator.MoveTo(tileUnderBuildable);
+					Cursor.NavigateToTile(tileUnderBuildable);
 				}
 			}
 

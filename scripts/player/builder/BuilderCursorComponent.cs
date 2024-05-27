@@ -3,20 +3,34 @@ using Godot;
 namespace CookingGame
 {
 	[GlobalClass]
-	public partial class BuilderCursorComponent : Node
+	public partial class BuilderCursorComponent : GridNavigatorComponent
 	{
 		[Export]
 		public BuilderInventoryComponent Inventory { get; set; } = null;
 		[Export]
-		private GridNavigatorComponent Navigator = null;
-
-		[Export]
 		private RayCast3D BuildableChecker = null;
-		[Export]
-		private RayCast3D WallChecker = null;
 
 		private BuildableDb Buildables = null;
-		private BuildableComponent SelectedBuildable = null;
+
+		private BuildableComponent _SelectedBuildable = null;
+		public BuildableComponent SelectedBuildable
+		{
+			get => _SelectedBuildable;
+			set
+			{
+				if (_SelectedBuildable != null)
+				{
+					_SelectedBuildable.Highlighted = false;
+				}
+
+				if (value != null)
+				{
+					value.Highlighted = true;
+				}
+
+				_SelectedBuildable = value;
+			}
+		}
 
 		public BuildableComponent GetHoveredBuildable()
 		{
@@ -32,18 +46,10 @@ namespace CookingGame
 			return null;
 		}
 
-		public bool CheckForWall(Vector3 direction)
+		private void SelectHoveredBuildable()
 		{
-			WallChecker.ProcessMode = ProcessModeEnum.Inherit;
-			WallChecker.TargetPosition = direction;
-			WallChecker.ForceRaycastUpdate();
-			WallChecker.ProcessMode = ProcessModeEnum.Disabled;
+			GD.Print(Time.GetTicksMsec());
 
-			return WallChecker.IsColliding();
-		}
-
-		private void HandleSelectHoveredBuildable()
-		{
 			BuildableComponent hoveredBuildable = GetHoveredBuildable();
 
 			if (SelectedBuildable == hoveredBuildable)
@@ -53,18 +59,15 @@ namespace CookingGame
 
 			if (hoveredBuildable == null && SelectedBuildable != null)
 			{
-				SelectedBuildable.Selected = false;
-				SelectedBuildable = null;
+				if (SelectedBuildable != null)
+				{
+					SelectedBuildable = null;
+				}
+
 				return;
 			}
 
-			if (SelectedBuildable != null)
-			{
-				SelectedBuildable.Selected = false;
-			}
-
 			SelectedBuildable = hoveredBuildable;
-			SelectedBuildable.Selected = true;
 		}
 
 		public void Build()
@@ -86,7 +89,7 @@ namespace CookingGame
 				return;
 			}
 
-			GridTile currentTile = Navigator.GetTile();
+			GridTile currentTile = GetHoveredTile();
 			if (currentTile == null)
 			{
 				return;
@@ -98,10 +101,10 @@ namespace CookingGame
 			}
 
 			Inventory.Remove(Inventory.SelectedBuildableId, 1);
-			BuildableWrapper buildableInstance = buildable.Scene.Instantiate<BuildableWrapper>();
+			Node3D buildableInstance = buildable.Scene.Instantiate<Node3D>();
 			buildableInstance.GlobalTransform = currentTile.GlobalTransform;
 			GetTree().Root.AddChild(buildableInstance);
-			HandleSelectHoveredBuildable();
+			SelectHoveredBuildable();
 		}
 
 		public void Destroy()
@@ -122,10 +125,10 @@ namespace CookingGame
 				return;
 			}
 
-			SelectedBuildable.Selected = false;
+			BuildableComponent toDestroy = SelectedBuildable;
 			SelectedBuildable = null;
-			SelectedBuildable.Destroy();
-			Inventory.Add(SelectedBuildable.BuildableId, 1);
+			Inventory.Add(toDestroy.BuildableId, 1);
+			toDestroy.Destroy();
 		}
 
 		public void Rotate()
@@ -141,7 +144,7 @@ namespace CookingGame
 				return;
 			}
 
-			float nextRotation = buildable.PlacementStrategy?.Rotate(buildable, SelectedBuildable.Rotation.Y, this) ?? SelectedBuildable.Rotation.Y;
+			float nextRotation = buildable.PlacementStrategy?.Rotate(buildable, SelectedBuildable.GlobalRotation.Y, this) ?? SelectedBuildable.GlobalRotation.Y;
 			SelectedBuildable.Rotate(nextRotation);
 		}
 
@@ -151,7 +154,7 @@ namespace CookingGame
 
 			BuildableChecker.ProcessMode = ProcessModeEnum.Disabled;
 			Buildables = GetNode<BuildableDb>("/root/Buildables");
-			Navigator.Navigated += HandleSelectHoveredBuildable;
+			Navigated += SelectHoveredBuildable;
 		}
 	}
 }

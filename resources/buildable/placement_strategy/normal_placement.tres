@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="BuildablePlacementStrategy" load_steps=2 format=3 uid="uid://dx4c2hrbm6xjs"]
+
+[ext_resource type="Script" path="res://scripts/buildable/data/BuildablePlacementStrategy.cs" id="1_7prau"]
+
+[resource]
+script = ExtResource("1_7prau")
