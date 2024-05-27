@@ -79,6 +79,9 @@ namespace CookingGame
 
 		public void Rotate(float angle)
 		{
+			// FIXME: find a way to make the rotation always be 90 degrees (so the animation isn't a full spin)
+			// FIXME: sometimes the rotation isn't complete when it's spammed
+
 			ResetTween(true);
 
 			Body.GlobalBasis = Basis.Identity;
