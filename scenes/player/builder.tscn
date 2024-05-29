@@ -180,7 +180,7 @@ wait_time = 0.33
 one_shot = true
 
 [node name="BuildCooldown" type="Timer" parent="."]
-wait_time = 0.33
+wait_time = 0.25
 one_shot = true
 
 [node name="ViewCooldown" type="Timer" parent="."]

@@ -13,9 +13,10 @@ namespace CookingGame
 			return wallAngles;
 		}
 
-		public override bool Place(Buildable buildable, BuilderCursorComponent cursor)
+		public override float Place(Buildable buildable, BuilderCursorComponent cursor)
 		{
-			return GetWallAngles(cursor).Length > 0;
+			float[] wallAngles = GetWallAngles(cursor);
+			return wallAngles.Length > 0 ? wallAngles[0] : float.NaN;
 		}
 
 		public override bool Destroy(Buildable buildable, BuilderCursorComponent cursor)
@@ -26,7 +27,8 @@ namespace CookingGame
 		public override float Rotate(Buildable buildable, float currentRotation, BuilderCursorComponent cursor)
 		{
 			float[] wallAngles = GetWallAngles(cursor);
-			int currentRotationIndex = wallAngles.ToList().FindIndex(direction => direction == currentRotation);
+			float closestToCurrentRotation = wallAngles.MinBy(angle => Mathf.Abs(Mathf.AngleDifference(angle, currentRotation)));
+			int currentRotationIndex = wallAngles.ToList().FindIndex(direction => Mathf.IsEqualApprox(direction, closestToCurrentRotation));
 			float nextRotation = wallAngles[(currentRotationIndex + 1) % wallAngles.Length];
 			return nextRotation;
 		}

@@ -48,8 +48,6 @@ namespace CookingGame
 
 		private void SelectHoveredBuildable()
 		{
-			GD.Print(Time.GetTicksMsec());
-
 			BuildableComponent hoveredBuildable = GetHoveredBuildable();
 
 			if (SelectedBuildable == hoveredBuildable)
@@ -95,7 +93,8 @@ namespace CookingGame
 				return;
 			}
 
-			if (buildable.PlacementStrategy != null && !buildable.PlacementStrategy.Place(buildable, this))
+			float initialRotation = buildable.PlacementStrategy?.Place(buildable, this) ?? float.NaN;
+			if (float.IsNaN(initialRotation))
 			{
 				return;
 			}
@@ -103,7 +102,8 @@ namespace CookingGame
 			Inventory.Remove(Inventory.SelectedBuildableId, 1);
 			Node3D buildableInstance = buildable.Scene.Instantiate<Node3D>();
 			buildableInstance.GlobalTransform = currentTile.GlobalTransform;
-			GetTree().Root.AddChild(buildableInstance);
+			currentTile.GetParent().AddChild(buildableInstance);
+			buildableInstance.GlobalRotate(Vector3.Up, initialRotation);
 			SelectHoveredBuildable();
 		}
 
@@ -125,10 +125,9 @@ namespace CookingGame
 				return;
 			}
 
-			BuildableComponent toDestroy = SelectedBuildable;
+			Inventory.Add(SelectedBuildable.BuildableId, 1);
+			SelectedBuildable.Destroy();
 			SelectedBuildable = null;
-			Inventory.Add(toDestroy.BuildableId, 1);
-			toDestroy.Destroy();
 		}
 
 		public void Rotate()
@@ -144,7 +143,12 @@ namespace CookingGame
 				return;
 			}
 
-			float nextRotation = buildable.PlacementStrategy?.Rotate(buildable, SelectedBuildable.GlobalRotation.Y, this) ?? SelectedBuildable.GlobalRotation.Y;
+			float nextRotation = buildable.PlacementStrategy?.Rotate(buildable, SelectedBuildable.GlobalRotation.Y, this) ?? float.NaN;
+			if (float.IsNaN(nextRotation))
+			{
+				return;
+			}
+
 			SelectedBuildable.Rotate(nextRotation);
 		}
 

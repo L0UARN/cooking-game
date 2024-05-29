@@ -71,23 +71,16 @@ namespace CookingGame
 			CollisionMask = 0;
 
 			ResetTween();
-
 			Tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.InOut);
-			Tween.TweenProperty(Body, "scale", new Vector3(0.01f, 0.01f, 0.01f), .5f);
+			Tween.TweenProperty(Body, "scale", new Vector3(0.001f, 0.001f, 0.001f), .5f);
 			Tween.TweenCallback(Callable.From(Body.QueueFree));
 		}
 
 		public void Rotate(float angle)
 		{
-			// FIXME: find a way to make the rotation always be 90 degrees (so the animation isn't a full spin)
-			// FIXME: sometimes the rotation isn't complete when it's spammed
-
-			ResetTween(true);
-
-			Body.GlobalBasis = Basis.Identity;
-			Body.Rotate(Vector3.Up, angle - Mathf.Pi * 0.5f);
+			ResetTween();
 			Tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
-			Tween.TweenProperty(Body, "rotation:y", angle, .5f);
+			Tween.TweenProperty(Body, "global_rotation:y", angle, .5f);
 		}
 
 		public override void _Ready()
@@ -95,7 +88,7 @@ namespace CookingGame
 			base._Ready();
 
 			Downlighter?.AddToGroup("BuildableDownlighters");
-			Body.Scale = new Vector3(0.01f, 0.01f, 0.01f);
+			Body.Scale = new Vector3(0.001f, 0.001f, 0.001f);
 
 			ResetTween();
 			Tween = GetTree().CreateTween().SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
