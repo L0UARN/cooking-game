@@ -1,13 +1,25 @@
-[gd_resource type="Environment" load_steps=5 format=3 uid="uid://noglaxpngdp2"]
+[gd_resource type="Environment" load_steps=7 format=3 uid="uid://noglaxpngdp2"]
 
 [ext_resource type="Shader" path="res://resources/ui/builder_environment.gdshader" id="1_y8isq"]
-[ext_resource type="Texture2D" uid="uid://3yo1o5qmi6og" path="res://assets/icons/grid_1024.png" id="2_6tlj5"]
+
+[sub_resource type="Gradient" id="Gradient_f27n4"]
+offsets = PackedFloat32Array(0.25, 0.5, 0.75)
+colors = PackedColorArray(0.482353, 0.780392, 0.796078, 1, 1, 1, 1, 1, 0.364706, 0.588235, 0.6, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vvkcs"]
+frequency = 0.0025
+fractal_type = 0
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_xemmk"]
+width = 1920
+height = 1080
+depth = 128
+color_ramp = SubResource("Gradient_f27n4")
+noise = SubResource("FastNoiseLite_vvkcs")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y8yih"]
 shader = ExtResource("1_y8isq")
-shader_parameter/background_color = Color(0.215686, 0.439216, 0.521569, 1)
-shader_parameter/foreground_color = Color(0.282353, 0.580392, 0.690196, 1)
-shader_parameter/pattern = ExtResource("2_6tlj5")
+shader_parameter/noise_texture = SubResource("NoiseTexture3D_xemmk")
 
 [sub_resource type="Sky" id="Sky_gs58f"]
 sky_material = SubResource("ShaderMaterial_y8yih")
